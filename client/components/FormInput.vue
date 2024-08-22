@@ -63,7 +63,7 @@
             </g>
           </svg>
         <div>
-          <p class="text-[#07d884] text-md first-letter:uppercase">{{users.name}}</p>
+          <p class="text-[#07d884] text-md first-letter:uppercase font-medium">{{users.name}}</p>
         <span class="text-gray-300">{{users.email}}</span>
         </div>
       </div>
