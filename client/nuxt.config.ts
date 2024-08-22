@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "nuxt-icon",
     "@vesp/nuxt-fontawesome",
+    "@nuxtjs/google-fonts"
   ],
 
   css: ["~/assets/css/main.css"],
@@ -14,7 +15,17 @@ export default defineNuxtConfig({
   // header
   app: {
     head: {
-      title: "Authentication with Express And MongoDB",
+      title: "Nuxt Express And MongoDB",
+    },
+  },
+  googleFonts: {
+    families: {
+      Roboto: true,
+      Inter: [400, 700],
+      Raleway: {
+        wght: [100, 400],
+        ital: [100],
+      },
     },
   },
 

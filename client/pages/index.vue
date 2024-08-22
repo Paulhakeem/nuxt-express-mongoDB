@@ -7,9 +7,9 @@
     >
       <div class="relative flex h-80 w-2/5 items-center justify-center">
         <div class="text-pretty">
-          <h2 class="text-2xl text-white font-semibold">Track Your Users</h2>
+          <h2 class="text-2xl text-white font-semibold font-Roboto">Track Your Users</h2>
           <div class="text-white pt-8 text-md">
-            <p>
+            <p class="">
               We provide services for mojar cargo distributors, corporates
               shippers and individuals, includes transportations of animals. We
               have specialist for cargo handling terminals in all major airpots.

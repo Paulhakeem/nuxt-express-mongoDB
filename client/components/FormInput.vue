@@ -3,6 +3,7 @@
     <div class="flex justify-center text-center mt-14">
       <form
         @submit.prevent="getUser"
+        @keyup.enter="getUser"
         class="flex items-center max-w-sm mx-auto"
       >
         <label for="simple-search" class="sr-only">Search</label>
@@ -46,7 +47,8 @@
     <!-- search user -->
     <div class="max-w-md m-auto">
       <div class="pt-4 flex space-x-4">
-         <svg
+        <div>
+          <svg
             xmlns="http://www.w3.org/2000/svg"
             width="48"
             height="48"
@@ -62,9 +64,28 @@
               />
             </g>
           </svg>
+        </div>
         <div>
-          <p class="text-[#07d884] text-md first-letter:uppercase font-medium">{{users.name}}</p>
-        <span class="text-gray-300">{{users.email}}</span>
+          <p class="text-[#07d884] text-md first-letter:uppercase font-medium">
+            {{ users.name }}
+          </p>
+          <span class="text-gray-300">{{ users.email }}</span>
+        </div>
+
+        <!-- message -->
+        <div class="tooltip pl-6 cursor-pointer">
+          <span class="tooltiptext">send message</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="26"
+            height="26"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="#858485"
+              d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2M6 9h12v2H6zm8 5H6v-2h8zm4-6H6V6h12z"
+            />
+          </svg>
         </div>
       </div>
     </div>
@@ -77,11 +98,18 @@ const { findUserByName } = findUser();
 const search = useState("search", () => "");
 
 const users = useState("user", () => []);
+const message = useState("message", () => "User Not Found!!😥");
 
 const getUser = async () => {
   try {
     const searchUser = await findUserByName(search.value);
+    if (!searchUser) {
+      return message;
+    }
     users.value = searchUser.data.user;
-  } catch (error) {}
+  } catch (error) {
+    alert("Error Occurs while search user!!");
+  }
 };
 </script>
+
