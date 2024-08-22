@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Authentication</title>
+  </head>
+  <body>
+    <div
+      class="w-80 h-auto bg-black opacity-70 justify-center items-center max-w-md m-auto mt-16"
+    >
+      <div class="pt-8 mb-4">
+        <div class="text-center">
+          <h4 class="text-center text-white font-semibold">Signup</h4>
+        </div>
+        <div class="flex flex-col justify-center items-center pt-6">
+          <form id="formData" class="mb-10">
+            <label class="font-semibold text-xs text-white" for="usernameField"
+              >Your Name</label
+            >
+            <input
+              id="name"
+              name="name"
+              class="flex items-center h-9 px-4 w-72 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
+              type="name"
+            />
+            <label class="font-semibold text-xs text-white" for="usernameField"
+              >Your Email</label
+            >
+            <input
+              id="email"
+              name="email"
+              class="flex items-center h-9 px-4 w-72 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
+              type="email"
+            />
+            <label class="font-semibold text-xs text-white" for="usernameField"
+              >Create Password</label
+            >
+            <input
+              id="password"
+              name="password"
+              class="flex items-center h-9 px-4 w-72 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
+              type="password"
+            />
+            <div class="text-center">
+              <button
+                type="submit"
+                class="h-10 px-6 w-64 bg-[#07d884] mt-8 rounded font-semibold text-sm text-blue-100"
+              >
+                Signup
+              </button>
+            </div>
+          </form>
+          <!-- Component End  -->
+        </div>
+      </div>
+    </div>
+    <script src="./signup.js"></script>
+  </body>
+</html>
