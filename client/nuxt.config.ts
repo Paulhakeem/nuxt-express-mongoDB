@@ -7,10 +7,13 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "nuxt-icon",
     "@vesp/nuxt-fontawesome",
-    "@nuxtjs/google-fonts"
+    "@nuxtjs/google-fonts",
   ],
 
-  css: ["~/assets/css/main.css"],
+  css: [
+    "~/assets/css/main.css",
+    "@fortawesome/fontawesome-svg-core/styles.css",
+  ],
 
   // header
   app: {
