@@ -1,5 +1,6 @@
 <template>
   <main>
+   
     <div class="flex justify-center text-center mt-14">
       <form
         @submit.prevent="getUser"
@@ -44,7 +45,7 @@
         </button>
       </form>
     </div>
-    <!-- search user -->
+   
     <div class="max-w-md m-auto">
       <div class="pt-4 flex space-x-4">
         <div>
@@ -72,7 +73,7 @@
           <span class="text-gray-300">{{ users.email }}</span>
         </div>
 
-        <!-- message -->
+       
         <div class="tooltip pl-6 cursor-pointer">
           <span class="tooltiptext">send message</span>
           <svg
@@ -112,4 +113,3 @@ const getUser = async () => {
   }
 };
 </script>
-

@@ -1,10 +1,10 @@
 <template>
-  <div class="bg-[#090c28] h-screen">
+  <div>
     <!-- ========== HEADER ========== -->
-    <main-header />
+    <!-- <main-header /> -->
     <!-- ========== END HEADER ========== -->
     <!-- SEARCH -->
-    <form-input />
+    <!-- <form-input /> -->
     <!-- SEARCH -->
 
     <!-- ========== MAIN BODY ========== -->
