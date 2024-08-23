@@ -5,12 +5,14 @@ const env = require("dotenv");
 const mongoose = require("mongoose");
 const usersRouter = require("./../router/userRouter")
 const session = require("express-session")
+const helmet = require("helmet")
 const MongoStore = require('connect-mongo')
 
 const app = express();
 
 env.config({ path: "./config.env" });
 app.use(cors());
+app.use(helmet())
 app.use(bodyParser.json())
 app.use(session({
   secret: "Hakeem Paul",
