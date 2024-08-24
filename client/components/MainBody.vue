@@ -202,7 +202,7 @@
                 </p>
               </li>
             </ul>
-             <div class="flex space-x-4 pt-20">
+            <div class="flex space-x-4 pt-20">
               <div>
                 <img
                   class="rounded-full"
@@ -224,11 +224,13 @@
         <!-- Sidebar ends -->
 
         <!-- CONTENT -->
-        <div class="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">
-          <div
-            class="w-full h-full"
-          >
-           <form-input/>
+        <div class="container mx-auto py-10 md:w-4/5 w-11/12 px-6">
+          <div class="w-full h-full">
+            <form-input />
+
+            <div>
+              <user-home />
+            </div>
           </div>
         </div>
       </div>

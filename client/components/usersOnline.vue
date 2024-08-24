@@ -16,7 +16,7 @@
 
     <!--  -->
     <div class="pt-6">
-      <div class="flex flex-wrap gap-4 justify-center">
+      <div class="gap-4 justify-center">
         <div
           v-for="user in allUsers"
           :key="user.id"
