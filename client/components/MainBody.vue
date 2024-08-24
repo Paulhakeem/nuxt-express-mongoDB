@@ -1,6 +1,6 @@
 <template>
   <!-- component -->
-  <div class="w-full h-full">
+  <div class="w-full h-screen">
     <dh-component>
       <div class="flex flex-no-wrap">
         <div
@@ -123,7 +123,9 @@
           >
             <font-awesome-icon :icon="['fas', 'xmark']" class="text-gray-300" />
           </button>
-          <!-- OPEN CLOSE MENU -->
+          <!-- OPEN CLOSE MENU ENDS-->
+
+          <!-- MOBILE VIEW -->
           <div class="px-8">
             <div class="h-16 w-full flex items-center space-x-4">
               <font-awesome-icon
@@ -220,12 +222,13 @@
           </div>
         </div>
         <!-- Sidebar ends -->
+
+        <!-- CONTENT -->
         <div class="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">
-          <!-- Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border -->
           <div
-            class="w-full h-full rounded border-dashed border-2 border-gray-300"
+            class="w-full h-full"
           >
-            <!-- Place your content here -->
+           <form-input/>
           </div>
         </div>
       </div>

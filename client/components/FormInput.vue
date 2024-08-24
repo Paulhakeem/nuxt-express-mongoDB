@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="flex justify-center text-center mt-14 float-center">
+    <div class="flex justify-center text-center mt-4">
       <form
         @submit.prevent="getUser"
         @keyup.enter="getUser"
@@ -24,7 +24,7 @@
         </div>
         <button
           type="submit"
-          class="text-center p-2.5 w-32 ms-2 text-sm font-medium text-white bg-[#07d884] rounded-lg"
+          class="text-center p-2.5 w-32 ms-2 text-sm font-medium text-[#07d884] bg-gray-800 rounded-lg"
         >
           <span>Search</span>
         </button>
