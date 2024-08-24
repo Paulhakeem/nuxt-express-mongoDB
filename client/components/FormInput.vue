@@ -1,7 +1,6 @@
 <template>
   <main>
-   
-    <div class="flex justify-center text-center mt-14">
+    <div class="flex justify-center text-center mt-14 float-center">
       <form
         @submit.prevent="getUser"
         @keyup.enter="getUser"
@@ -12,21 +11,7 @@
           <div
             class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
           >
-            <svg
-              class="w-4 h-4 text-gray-500 dark:text-gray-400"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 18 20"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"
-              />
-            </svg>
+          <font-awesome-icon :icon="['fas', 'magnifying-glass']" class="text-gray-500"/>
           </div>
           <input
             v-model="search"
@@ -74,20 +59,10 @@
         </div>
 
        
-        <div class="tooltip pl-6 cursor-pointer">
+        <p class="tooltip pl-6 cursor-pointer">
           <span class="tooltiptext">send message</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="26"
-            height="26"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="#858485"
-              d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2M6 9h12v2H6zm8 5H6v-2h8zm4-6H6V6h12z"
-            />
-          </svg>
-        </div>
+          <font-awesome-icon :icon="['fas', 'message']" class="pt-2"/>
+        </p>
       </div>
     </div>
   </main>
