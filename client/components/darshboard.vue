@@ -1,6 +1,6 @@
 <template>
     <div>
-
+    <pie-chart/>
     </div>
 </template>
 
