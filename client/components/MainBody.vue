@@ -27,7 +27,8 @@
                   <span class="text-sm ml-2">Dashboard</span>
                 </a>
               </li>
-              <li
+           <nuxt-link to="/users">
+               <li
                 class="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center mb-6"
               >
                 <p
@@ -42,6 +43,7 @@
                   8
                 </div>
               </li>
+           </nuxt-link>
               <li
                 class="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center mb-6"
               >
