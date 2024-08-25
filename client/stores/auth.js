@@ -11,7 +11,7 @@ export const useAuthStore = defineStore("auth", () => {
     if (user) {
       useNuxtApp().$toast.success("Google login successfull");
     }
-    await navigateTo({ path: "/darshboard" });
+    await navigateTo({ path: "/home" });
   };
 
   const signUpWithGithub = async () => {
@@ -19,7 +19,7 @@ export const useAuthStore = defineStore("auth", () => {
     if (user) {
       useNuxtApp().$toast.success("Done!!👍");
     }
-    await navigateTo("/darshboard");
+    await navigateTo("/home");
   };
 
   return {

@@ -116,7 +116,7 @@ const submitLogin = async () => {
   await loginUser(email.value, password.value)
     .then((result) => {
       useNuxtApp().$toast.success("Login Successfully");
-      return navigateTo("/darshboard");
+      return navigateTo("/home");
     })
     .catch((err) => {
       useNuxtApp().$toast.error("Something went Wrong!!");

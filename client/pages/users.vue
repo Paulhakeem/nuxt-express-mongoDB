@@ -4,7 +4,7 @@
       <loading />
     </div>
     <div v-for="user in allUsers" :key="user.id" class="border-b-2">
-      <ul class="flex justify-between space-x-6 border-gray-300 p-2">
+      <ul class="flex flex-wrap justify-between space-x-6 border-gray-300 p-2">
         <li class="flex space-x-3">
             <font-awesome-icon :icon="['fas', 'user']" class="text-3xl pt-2"/>
           <div>

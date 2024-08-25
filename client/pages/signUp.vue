@@ -120,7 +120,7 @@ const createUsers = async () => {
   await regesterUser(name.value, email.value, password.value)
     .then((result) => {
       useNuxtApp().$toast.success("Successfully signup!");
-      return navigateTo("/darshboard");
+      return navigateTo("/home");
     })
     .catch((err) => {
       useNuxtApp().$toast.error("Something Went Wrong!!");

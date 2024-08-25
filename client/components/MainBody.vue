@@ -118,7 +118,7 @@
           <button
             aria-label="Close sidebar"
             id="closeSideBar"
-            class="hidden h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer text-white"
+            class="hidden h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 items-center shadow rounded-tr rounded-br justify-center cursor-pointer text-white"
             onclick=""
           >
             <font-awesome-icon :icon="['fas', 'xmark']" class="text-gray-300" />
@@ -148,12 +148,12 @@
               <li
                 class="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center mb-6"
               >
-                <p
+                <NuxtLink to="users"
                   class="flex items-center focus:outline-none focus:ring-2 focus:ring-white"
                 >
                   <font-awesome-icon :icon="['fas', 'user']" />
                   <span class="text-sm ml-2">Users</span>
-                </p>
+                </NuxtLink>
                 <div
                   class="py-1 px-3 bg-gray-600 rounded text-gray-300 flex items-center justify-center text-xs"
                 >
@@ -202,6 +202,8 @@
                 </p>
               </li>
             </ul>
+
+            <!-- profile -->
             <div class="flex space-x-4 pt-20">
               <div>
                 <img
@@ -229,7 +231,7 @@
             <form-input />
 
             <div>
-              <user-home />
+              <darshboard/>
             </div>
           </div>
         </div>
