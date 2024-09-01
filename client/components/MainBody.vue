@@ -27,23 +27,23 @@
                   <span class="text-sm ml-2">Dashboard</span>
                 </a>
               </li>
-           <nuxt-link to="/users">
-               <li
-                class="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center mb-6"
-              >
-                <p
-                  class="flex items-center focus:outline-none focus:ring-2 focus:ring-white"
+              <nuxt-link to="/users">
+                <li
+                  class="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center mb-6"
                 >
-                  <font-awesome-icon :icon="['fas', 'user']" />
-                  <span class="text-sm ml-2">Users</span>
-                </p>
-                <div
-                  class="py-1 px-3 bg-gray-600 rounded text-gray-300 flex items-center justify-center text-xs"
-                >
-                  8
-                </div>
-              </li>
-           </nuxt-link>
+                  <p
+                    class="flex items-center focus:outline-none focus:ring-2 focus:ring-white"
+                  >
+                    <font-awesome-icon :icon="['fas', 'user']" />
+                    <span class="text-sm ml-2">Users</span>
+                  </p>
+                  <div
+                    class="py-1 px-3 bg-gray-600 rounded text-gray-300 flex items-center justify-center text-xs"
+                  >
+                    8
+                  </div>
+                </li>
+              </nuxt-link>
               <li
                 class="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center mb-6"
               >
@@ -88,8 +88,8 @@
             <div class="flex space-x-4 pt-20">
               <div>
                 <img
-                  class="rounded-full"
-                  src="https://i.ibb.co/L1LQtBm/Ellipse-1.png"
+                  class="rounded-full size-10 object-cover"
+                  src="../assets/img/user.jpg"
                   alt="avatar"
                 />
               </div>
@@ -111,8 +111,9 @@
           id="mobile-nav"
         >
           <button
-            class="hidden h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 items-center shadow rounded-tr rounded-br justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 rounded focus:ring-gray-800"
-           @click="toggleMenu"
+            v-if="showMenu.value == false"
+            class="h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 items-center shadow rounded-tr rounded-br justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 rounded focus:ring-gray-800"
+            @click="toggleMenu"
           >
             <font-awesome-icon :icon="['fas', 'bars']" class="text-gray-300" />
           </button>
@@ -148,7 +149,8 @@
               <li
                 class="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center mb-6"
               >
-                <NuxtLink to="users"
+                <NuxtLink
+                  to="users"
                   class="flex items-center focus:outline-none focus:ring-2 focus:ring-white"
                 >
                   <font-awesome-icon :icon="['fas', 'user']" />
@@ -207,9 +209,9 @@
             <div class="flex space-x-4 pt-20">
               <div>
                 <img
-                  class="rounded-full"
-                  src="https://i.ibb.co/L1LQtBm/Ellipse-1.png"
-                  alt="avatar"
+                  class="rounded-full size-14"
+                  src="../assets/img/user.jpg"
+                  alt="avatar" 
                 />
               </div>
               <div class="flex justify-start flex-col items-start">
@@ -231,7 +233,7 @@
             <form-input />
 
             <div>
-              <darshboard/>
+              <darshboard />
             </div>
           </div>
         </div>
@@ -245,5 +247,5 @@ const showMenu = ref(true);
 
 const toggleMenu = () => {
   showMenu.value = !showMenu.value;
-}
+};
 </script>
