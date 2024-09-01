@@ -211,7 +211,7 @@
                 <img
                   class="rounded-full size-14"
                   src="../assets/img/user.jpg"
-                  alt="avatar" 
+                  alt="avatar"
                 />
               </div>
               <div class="flex justify-start flex-col items-start">
@@ -231,7 +231,39 @@
         <div class="container mx-auto py-10 md:w-4/5 w-11/12 px-6">
           <div class="w-full h-full">
             <form-input />
+            <!-- Modal -->
+            <user-profile-modal>
+              <div>
+                <div class="flex justify-center">
+                  <img
+                    src="../assets/img/user.jpg"
+                    alt=""
+                    class="rounded-full size-32 object-cover"
+                  />
+                </div>
 
+                <div class="text-center pt-3">
+                  <h3 class="text-lg font-semibold text-gray-800">
+                    Hakeem Paul
+                    <span
+                      ><font-awesome-icon
+                        :icon="['fas', 'pen']"
+                        class="text-sm text-[#07d884]"
+                    /></span>
+                  </h3>
+                  <p class="text-sm text-gray-500">
+                    hakeempaul@gmail.com
+                    <span
+                      ><font-awesome-icon
+                        :icon="['fas', 'pen']"
+                        class="text-sm text-[#07d884]"
+                    /></span>
+                  </p>
+                </div>
+              </div>
+            </user-profile-modal>
+
+            <!-- Modal -->
             <div>
               <darshboard />
             </div>
