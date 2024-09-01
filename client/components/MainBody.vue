@@ -106,21 +106,19 @@
         </div>
         <!-- OPEN CLOSE MENU -->
         <div
+          v-if="showMenu"
           class="w-64 z-40 absolute bg-gray-800 shadow md:h-full flex-col justify-between sm:hidden transition duration-150 ease-in-out"
           id="mobile-nav"
         >
           <button
-            aria-label="toggle sidebar"
-            id="openSideBar"
-            class="h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 rounded focus:ring-gray-800"
+            class="hidden h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 items-center shadow rounded-tr rounded-br justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 rounded focus:ring-gray-800"
             onclick=""
           >
             <font-awesome-icon :icon="['fas', 'bars']" class="text-gray-300" />
           </button>
           <button
-            aria-label="Close sidebar"
-            id="closeSideBar"
-            class="hidden h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 items-center shadow rounded-tr rounded-br justify-center cursor-pointer text-white"
+            @click="toggleMenu"
+            class="h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 items-center shadow rounded-tr rounded-br justify-center cursor-pointer text-white"
             onclick=""
           >
             <font-awesome-icon :icon="['fas', 'xmark']" class="text-gray-300" />
@@ -243,9 +241,9 @@
 </template>
 
 <script setup>
-const showMenu1 = ref(false);
+const showMenu = ref(true);
 
 const toggleMenu = () => {
-  showMenu1.value = !showMenu1.value;
-};
+  showMenu.value = !showMenu.value;
+}
 </script>
