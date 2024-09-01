@@ -112,7 +112,7 @@
         >
           <button
             class="hidden h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 items-center shadow rounded-tr rounded-br justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 rounded focus:ring-gray-800"
-            onclick=""
+           @click="toggleMenu"
           >
             <font-awesome-icon :icon="['fas', 'bars']" class="text-gray-300" />
           </button>
