@@ -43,7 +43,7 @@
               80%
             </span>
           </div>
-          <p class="ml-10 font-medium text-gray-600 sm:text-xl">Performance</p>
+          <p class="ml-10 text-gray-600 sm:text-xl">Performance</p>
 
           <span
             class="ml-auto text-xl font-medium text-[#07d884] hidden sm:block"
@@ -73,7 +73,7 @@
                 cy="60"
               />
               <circle
-                class="text-red-600"
+                class="text-gray-800"
                 stroke-width="10"
                 :stroke-dasharray="circumference"
                 :stroke-dashoffset="(90 / 100) * circumference"
@@ -85,13 +85,13 @@
                 cy="60"
               />
             </svg>
-            <span class="absolute text-2xl text-red-700" x-text="${percent}%"
+            <span class="absolute text-2xl text-gray-800" x-text="${percent}%"
               >60%</span
             >
           </div>
-          <p class="ml-10 font-medium text-gray-600 sm:text-xl">Messages</p>
+          <p class="ml-10 text-gray-600 sm:text-xl">Messages</p>
 
-          <span class="ml-auto text-xl font-medium text-red-600 hidden sm:block"
+          <span class="ml-auto text-xl font-medium text-gray-800 hidden sm:block"
             >+10%</span
           >
         </div>

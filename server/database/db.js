@@ -21,12 +21,12 @@ app.use(session({
   cookie: {
     maxAge: 24 * 60 * 60 * 1000
   },
-  // store: MongoStore.create({
-  //   client: mongoose.connection.getClient()
-  // })
 }))
 app.use(express.static("./front"))
 app.set('view engine', 'pug')
+
+
+
 
 mongoose.connect(process.env.MONGO_CONN, {}).then((conn) => {
   console.log("connection successful!!");
@@ -34,6 +34,7 @@ mongoose.connect(process.env.MONGO_CONN, {}).then((conn) => {
 
 // Router
 app.use("/api", usersRouter);
+
 
 const server = app.listen(5000, () => {
   console.log("Server is running");
