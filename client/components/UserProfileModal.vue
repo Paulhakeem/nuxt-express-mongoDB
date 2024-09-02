@@ -1,10 +1,16 @@
 <template>
   <transition name="modal-outer">
     <div
+      v-show="showMenu"
       class="bg-black z-50 bg-opacity-25 top-0 left-0 w-full h-screen absolute flex justify-center"
     >
       <transition name="modal-inner">
-        <div class="w-[20em] bg-white self-start mt-28 p-4 rounded-md">
+        <div v-if="showMenu" class="w-[20em] bg-white self-start mt-28 p-4 rounded-md">
+          <font-awesome-icon
+           @click="$emit('close-modal')"
+            :icon="['fas', 'xmark']"
+            class="float-right cursor-pointer"
+          />
           <slot />
         </div>
       </transition>
@@ -12,7 +18,15 @@
   </transition>
 </template>
 
-<script setup></script>
+<script setup>
+defineEmits(["close-modal"]);
+defineProps({
+  showMenu: {
+    type: Boolean,
+    default: false,
+  },
+});
+</script>
 
 <style>
 .modal-outer-enter-active,

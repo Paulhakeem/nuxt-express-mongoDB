@@ -206,7 +206,7 @@
             </ul>
 
             <!-- profile -->
-            <div class="flex space-x-4 pt-20">
+            <div @click="toggleMenu" class="flex space-x-4 pt-20">
               <div>
                 <img
                   class="rounded-full size-14"
@@ -232,7 +232,7 @@
           <div class="w-full h-full">
             <form-input />
             <!-- Modal -->
-            <user-profile-modal>
+            <user-profile-modal :showMenu="showMenu" @close-modal="toggleMenu">
               <div>
                 <div class="flex justify-center">
                   <img
@@ -299,7 +299,7 @@
 </template>
 
 <script setup>
-const showMenu = ref(true);
+const showMenu = ref(false);
 
 const toggleMenu = () => {
   showMenu.value = !showMenu.value;
