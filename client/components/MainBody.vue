@@ -1,7 +1,7 @@
 <template>
   <!-- component -->
   <div class="w-full h-screen">
-    <dh-component>
+    <main>
       <div class="flex flex-no-wrap">
         <div
           style="min-height: 716px"
@@ -85,42 +85,23 @@
                 </p>
               </li>
             </ul>
-            <div class="flex space-x-4 pt-20">
-              <div>
-                <img
-                  class="rounded-full size-10 object-cover"
-                  src="../assets/img/user.jpg"
-                  alt="avatar"
-                />
-              </div>
-              <div class="flex justify-start flex-col items-start">
-                <p class="cursor-pointer text-sm leading-5 text-white">
-                  Alexis Enache
-                </p>
-                <p class="cursor-pointer text-xs leading-3 text-gray-300">
-                  alexis81@gmail.com
-                </p>
-              </div>
-            </div>
           </div>
         </div>
         <!-- OPEN CLOSE MENU -->
         <div
           v-if="showMenu"
-          class="w-64 z-40 absolute bg-gray-800 shadow md:h-full flex-col justify-between sm:hidden transition duration-150 ease-in-out"
+          class="w-64 z-40 absolute h-screen bg-gray-800 shadow md:h-full flex-col justify-between sm:hidden transition duration-150 ease-in-out"
           id="mobile-nav"
         >
           <button
-            v-if="showMenu.value == false"
-            class="h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 items-center shadow rounded-tr rounded-br justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 rounded focus:ring-gray-800"
             @click="toggleMenu"
+            class="h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 items-center shadow rounded-tr rounded-br justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 rounded focus:ring-gray-800"
           >
             <font-awesome-icon :icon="['fas', 'bars']" class="text-gray-300" />
           </button>
           <button
             @click="toggleMenu"
             class="h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 items-center shadow rounded-tr rounded-br justify-center cursor-pointer text-white"
-            onclick=""
           >
             <font-awesome-icon :icon="['fas', 'xmark']" class="text-gray-300" />
           </button>
@@ -204,102 +185,27 @@
                 </p>
               </li>
             </ul>
-
-            <!-- profile -->
-            <div @click="toggleMenu" class="flex space-x-4 pt-20">
-              <div>
-                <img
-                  class="rounded-full size-14"
-                  src="../assets/img/user.jpg"
-                  alt="avatar"
-                />
-              </div>
-              <div class="flex justify-start flex-col items-start">
-                <p class="cursor-pointer text-sm leading-5 text-white">
-                  Alexis Enache
-                </p>
-                <p class="cursor-pointer text-xs leading-3 text-gray-300">
-                  alexis81@gmail.com
-                </p>
-              </div>
-            </div>
           </div>
         </div>
         <!-- Sidebar ends -->
 
         <!-- CONTENT -->
         <div class="container mx-auto py-10 md:w-4/5 w-11/12 px-6">
+          <profile />
           <div class="w-full h-full">
             <form-input />
-            <!-- Modal -->
-            <user-profile-modal :showMenu="showMenu" @close-modal="toggleMenu">
-              <div>
-                <div class="flex justify-center">
-                  <img
-                    src="../assets/img/user.jpg"
-                    alt=""
-                    class="rounded-full size-32 object-cover"
-                  />
-                </div>
-
-                <div class="text-center pt-3">
-                  <h3 class="text-lg font-semibold text-gray-800">
-                    Hakeem Paul
-                    <span
-                      ><font-awesome-icon
-                        :icon="['fas', 'pen']"
-                        class="text-sm text-[#07d884] cursor-pointer"
-                    /></span>
-                  </h3>
-                  <p class="text-sm text-gray-500">
-                    hakeempaul@gmail.com
-                    <span
-                      ><font-awesome-icon
-                        :icon="['fas', 'pen']"
-                        class="text-sm text-[#07d884] cursor-pointer"
-                    /></span>
-                  </p>
-                </div>
-
-                <div class="pt-5">
-                  <div class="flex gap-2 items-center pb-2 cursor-pointer">
-                    <font-awesome-icon
-                      :icon="['fas', 'message']"
-                      class="text-[#07d884]"
-                    />
-                    <p class="text-gray-800">Messages</p>
-                    <div class="items-center font-medium">0</div>
-                  </div>
-
-                  <div class="flex gap-2 items-center pb-2 cursor-pointer">
-                    <font-awesome-icon
-                      :icon="['fas', 'bell']"
-                      class="text-[#07d884]"
-                    />
-                    <p class="text-gray-800">Notifications</p>
-                    <div class="items-center font-medium">0</div>
-                  </div>
-
-                  <div class="text-center pt-6">
-                    <button class="p-2 w-32 bg-gray-800 text-[#07d884] rounded-md">Save</button>
-                  </div>
-                </div>
-              </div>
-            </user-profile-modal>
-
-            <!-- Modal -->
             <div>
               <darshboard />
             </div>
           </div>
         </div>
       </div>
-    </dh-component>
+    </main>
   </div>
 </template>
 
 <script setup>
-const showMenu = ref(false);
+const showMenu = ref(true);
 
 const toggleMenu = () => {
   showMenu.value = !showMenu.value;

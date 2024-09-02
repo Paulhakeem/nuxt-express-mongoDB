@@ -1,0 +1,77 @@
+<template>
+  <div>
+    <div class="float-right">
+      <button @click="toggleModal">
+        <img
+          class="rounded-full size-10 object-cover"
+          src="../assets/img/user.jpg"
+          alt="avatar"
+        />
+      </button>
+    </div>
+
+    <user-profile-modal :modalActive="modalActive" @close-modal="toggleModal">
+      <div>
+        <div class="flex justify-center">
+          <img
+            src="../assets/img/user.jpg"
+            alt=""
+            class="rounded-full size-32 object-cover"
+          />
+        </div>
+
+        <div class="text-center pt-3">
+          <h3 class="text-lg font-semibold text-gray-800">
+            Hakeem Paul
+            <span
+              ><font-awesome-icon
+                :icon="['fas', 'pen']"
+                class="text-sm text-[#07d884] cursor-pointer"
+            /></span>
+          </h3>
+          <p class="text-sm text-gray-500">
+            hakeempaul@gmail.com
+            <span
+              ><font-awesome-icon
+                :icon="['fas', 'pen']"
+                class="text-sm text-[#07d884] cursor-pointer"
+            /></span>
+          </p>
+        </div>
+
+        <div class="pt-5">
+          <div class="flex gap-2 items-center pb-2 cursor-pointer">
+            <font-awesome-icon
+              :icon="['fas', 'message']"
+              class="text-[#07d884]"
+            />
+            <p class="text-gray-800">Messages</p>
+            <div class="items-center font-medium">0</div>
+          </div>
+
+          <div class="flex gap-2 items-center pb-2 cursor-pointer">
+            <font-awesome-icon :icon="['fas', 'bell']" class="text-[#07d884]" />
+            <p class="text-gray-800">Notifications</p>
+            <div class="items-center font-medium">0</div>
+          </div>
+
+          <div class="text-center pt-6">
+            <button class="p-2 w-32 bg-gray-800 text-[#07d884] rounded-md">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </user-profile-modal>
+  </div>
+</template>
+
+<script setup>
+const modalActive = ref(null)
+
+const toggleModal = () => {
+  modalActive.value = !modalActive.value;
+};
+</script>
+
+<style lang="scss" scoped></style>
