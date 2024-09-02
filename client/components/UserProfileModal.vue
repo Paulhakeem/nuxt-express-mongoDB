@@ -4,7 +4,7 @@
       class="bg-black z-50 bg-opacity-25 top-0 left-0 w-full h-screen absolute flex justify-center"
     >
       <transition name="modal-inner">
-        <div class="w-[20em] bg-white self-start mt-32 p-4 rounded-md">
+        <div class="w-[20em] bg-white self-start mt-28 p-4 rounded-md">
           <slot />
         </div>
       </transition>

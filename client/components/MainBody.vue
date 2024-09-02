@@ -248,7 +248,7 @@
                     <span
                       ><font-awesome-icon
                         :icon="['fas', 'pen']"
-                        class="text-sm text-[#07d884]"
+                        class="text-sm text-[#07d884] cursor-pointer"
                     /></span>
                   </h3>
                   <p class="text-sm text-gray-500">
@@ -256,9 +256,33 @@
                     <span
                       ><font-awesome-icon
                         :icon="['fas', 'pen']"
-                        class="text-sm text-[#07d884]"
+                        class="text-sm text-[#07d884] cursor-pointer"
                     /></span>
                   </p>
+                </div>
+
+                <div class="pt-5">
+                  <div class="flex gap-2 items-center pb-2 cursor-pointer">
+                    <font-awesome-icon
+                      :icon="['fas', 'message']"
+                      class="text-[#07d884]"
+                    />
+                    <p class="text-gray-800">Messages</p>
+                    <div class="items-center font-medium">0</div>
+                  </div>
+
+                  <div class="flex gap-2 items-center pb-2 cursor-pointer">
+                    <font-awesome-icon
+                      :icon="['fas', 'bell']"
+                      class="text-[#07d884]"
+                    />
+                    <p class="text-gray-800">Notifications</p>
+                    <div class="items-center font-medium">0</div>
+                  </div>
+
+                  <div class="text-center pt-6">
+                    <button class="p-2 w-32 bg-gray-800 text-[#07d884] rounded-md">Save</button>
+                  </div>
                 </div>
               </div>
             </user-profile-modal>
