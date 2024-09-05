@@ -39,10 +39,11 @@
     >
       <h1 class="text-md font-medium text-gray-200 pl-4">Search:</h1>
       <!-- user search response -->
-      <div class="py-4 pl-4 text-sm cursor-pointer">
+      <div v-if="users" class="py-4 pl-4 text-sm cursor-pointer">
         <h4 class="text-gray-200 font-medium">{{ users.name }}</h4>
         <p class="text-xs text-gray-400">{{ users.email }}</p>
       </div>
+      <p>{{errorMessage}}</p>
     </div>
   </main>
 </template>
@@ -52,6 +53,8 @@ const { findUserByName } = findUser();
 
 const search = useState("search", () => "");
 
+const errorMessage = useState("errorMessage", () => "User Not Found")
+
 const users = useState("user", () => []);
 const message = useState("message", () => "User Not Found!!😥");
 
@@ -59,7 +62,7 @@ const getUser = async () => {
   try {
     const searchUser = await findUserByName(search.value);
     if (!searchUser) {
-      return message;
+      return errorMessage;
     }
     users.value = searchUser.data.user;
   } catch (error) {
