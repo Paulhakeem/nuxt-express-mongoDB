@@ -11,7 +11,10 @@
           <div
             class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
           >
-          <font-awesome-icon :icon="['fas', 'magnifying-glass']" class="text-gray-500"/>
+            <font-awesome-icon
+              :icon="['fas', 'magnifying-glass']"
+              class="text-gray-500"
+            />
           </div>
           <input
             v-model="search"
@@ -30,9 +33,16 @@
         </button>
       </form>
     </div>
-   
-    <div class="max-w-md m-auto">
+
+    <div
+      class="justify-center max-w-md m-auto bg-gray-800 h-auto mt-3 rounded-md"
+    >
+      <h1 class="text-md font-medium text-gray-200 pl-4">Search:</h1>
       <!-- user search response -->
+      <div class="py-4 pl-4 text-sm cursor-pointer">
+        <h4 class="text-gray-200 font-medium">{{ users.name }}</h4>
+        <p class="text-xs text-gray-400">{{ users.email }}</p>
+      </div>
     </div>
   </main>
 </template>
