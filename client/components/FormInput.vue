@@ -43,7 +43,7 @@
         <h4 class="text-gray-200 font-medium">{{ users.name }}</h4>
         <p class="text-xs text-gray-400">{{ users.email }}</p>
       </div>
-      <p class="text-red-400 italic pl-4">{{errorMessage}}</p>
+      <p class="text-red-400 italic pl-4 pb-2">{{errorMessage}}</p>
     </div>
   </main>
 </template>
@@ -66,7 +66,8 @@ const getUser = async () => {
     }
     users.value = searchUser.data.user;
   } catch (error) {
-    alert("Error Occurs while search user!!");
+    console.log(error.message);
+    
   }
 };
 </script>
