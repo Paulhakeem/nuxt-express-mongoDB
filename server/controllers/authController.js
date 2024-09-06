@@ -81,3 +81,19 @@ exports.loginUser = async (req, res, next) => {
   } catch (error) {}
   next();
 };
+
+exports.userProfile = async (req, res, next) => {
+const userToken = req.headers.authorization
+let token
+ if(userToken && userToken.startWith("Bearer")){
+  token= userToken.split('')[1]
+ }
+
+ if(!token){
+  const error = new error("Invalid token")
+  next(error)
+ }
+
+ 
+
+};

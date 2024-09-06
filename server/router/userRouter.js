@@ -11,6 +11,7 @@ router.route("/users").get(userController.getAllUsers)
 router.route("/user/:name").get(userController.findUser)
 router.route("/update/:id").patch(userController.updateUser)
 router.route("/delete/:id").delete(userController.deleteUser)
+router.route("/profile").get(authController.userProfile)
 
 
 module.exports = router
