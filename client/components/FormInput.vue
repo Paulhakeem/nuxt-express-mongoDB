@@ -43,7 +43,7 @@
         <h4 class="text-gray-200 font-medium">{{ users.name }}</h4>
         <p class="text-xs text-gray-400">{{ users.email }}</p>
       </div>
-      <p>{{errorMessage}}</p>
+      <p class="text-red-400 italic pl-4">{{errorMessage}}</p>
     </div>
   </main>
 </template>
@@ -53,16 +53,16 @@ const { findUserByName } = findUser();
 
 const search = useState("search", () => "");
 
-const errorMessage = useState("errorMessage", () => "User Not Found")
+const errorMessage = useState("errorMessage", () => "")
 
 const users = useState("user", () => []);
-const message = useState("message", () => "User Not Found!!😥");
 
 const getUser = async () => {
   try {
     const searchUser = await findUserByName(search.value);
     if (!searchUser) {
-      return errorMessage;
+      const error = new Error("User Not Found!!😥")
+      errorMessage.value = error
     }
     users.value = searchUser.data.user;
   } catch (error) {
