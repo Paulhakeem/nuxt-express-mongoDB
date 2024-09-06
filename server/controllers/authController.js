@@ -1,6 +1,7 @@
 const Users = require("../model/user");
 const bcrypt = require("bcrypt");
 const jwtToken = require("jsonwebtoken");
+const util = require("util");
 
 // jwtToken
 const userToken = (id) => {
@@ -83,17 +84,25 @@ exports.loginUser = async (req, res, next) => {
 };
 
 exports.userProfile = async (req, res, next) => {
-const userToken = req.headers.authorization
-let token
- if(userToken && userToken.startWith("Bearer")){
-  token= userToken.split('')[1]
- }
+  const userToken = req.headers.authorization;
+  let token;
+  if (userToken && userToken.startsWith("Bearer")) {
+    token = userToken.split(" ")[1];
+  }
 
- if(!token){
-  const error = new error("Invalid token")
-  next(error)
- }
+  if (!token) {
+    const error = new error("Invalid token");
+    next(error);
+  }
 
- 
+  //  validate token
+  const validatetoken = await util.promisify(
+    jwtToken.verify()(token, process.env.SECRET_STR)
+  );
+  // userexist
+  const user = await Users.findById(validatetoken.id)
 
+  if(user){
+    sendResponse(user, 200, res);
+  }
 };

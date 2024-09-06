@@ -103,7 +103,7 @@
           </li>
           <div class="flex gap-2 pt-2">
             <span class="text-sm text-gray-500">Joined:</span>
-            <p class="text-[#2c2e32] text-sm">4/7/2024</p>
+            <p class="text-[#2c2e32] text-sm">{{user.date}}</p>
           </div>
           <button
             class="bg-gray-800 p-2 w-42 uppercase text-[#07d884] text-sm rounded-md hover:bg-[#f4f5f7] hover:border-2 hover:border-gray-800 hover:text-gray-800"

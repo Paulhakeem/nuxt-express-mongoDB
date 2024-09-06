@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema({
     miniLength: [8, "Password shuld be of 8 characters"],
     select: false,
   },
+  date: { type: Date, default: Date.now },
 });
 
 // encrypt
