@@ -83,26 +83,4 @@ exports.loginUser = async (req, res, next) => {
   next();
 };
 
-exports.userProfile = async (req, res, next) => {
-  const userToken = req.headers.authorization;
-  let token;
-  if (userToken && userToken.startsWith("Bearer")) {
-    token = userToken.split(" ")[1];
-  }
-
-  if (!token) {
-    const error = new error("Invalid token");
-    next(error);
-  }
-
-  //  validate token
-  const validatetoken = await util.promisify(
-    jwtToken.verify()(token, process.env.SECRET_STR)
-  );
-  // userexist
-  const user = await Users.findById(validatetoken.id)
-
-  if(user){
-    sendResponse(user, 200, res);
-  }
-};
+exports.userProfile = async (req, res, next) => {};
