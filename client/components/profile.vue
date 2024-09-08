@@ -45,7 +45,7 @@
               :icon="['fas', 'message']"
               class="text-[#07d884]"
             />
-            <p class="text-gray-800">Messages</p>
+            <p class="text-gray-800">Inbox</p>
             <div class="items-center font-medium">0</div>
           </div>
 

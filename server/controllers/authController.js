@@ -83,4 +83,11 @@ exports.loginUser = async (req, res, next) => {
   next();
 };
 
-exports.userProfile = async (req, res, next) => {};
+exports.userProfile = async (req, res, next) => {
+  try {
+    const profile = await Users.findOne({})
+    
+  } catch (error) {
+    
+  }
+};
