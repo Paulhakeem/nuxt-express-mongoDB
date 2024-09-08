@@ -60,7 +60,7 @@
                 <span class="flex-1 ms-3 whitespace-nowrap">Users</span>
                 <span
                   class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full"
-                  >10</span
+                  >{{users.length}}</span
                 >
               </a>
             </li>
@@ -139,9 +139,30 @@
 <script setup>
 const showMenu = ref(true);
 
+
+
 const toggleMenu = () => {
   showMenu.value = !showMenu.value;
-  console.log('hello');
-  
+  console.log('hello'); 
+};
+
+const users = useState("users", () => []);
+
+onMounted(async () => {
+  try {
+    const data = await $fetch("/api/users");
+    const users = await data.res.data.users;
+    if (users) {
+      allUsers.value = users;
+    }
+  } catch (error) {
+    console.log(error.message);
+  } finally {
+    isLoading.value = false;
+  }
+});
+
+const taggleMenu = () => {
+  menu.value = !menu.value;
 };
 </script>
