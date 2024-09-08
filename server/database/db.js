@@ -4,9 +4,9 @@ const bodyParser = require('body-parser')
 const env = require("dotenv");
 const mongoose = require("mongoose");
 const usersRouter = require("./../router/userRouter")
+const messageRouter = require('../router/messageRouter')
 const session = require("express-session")
 const helmet = require("helmet")
-const MongoStore = require('connect-mongo')
 
 const app = express();
 
@@ -34,6 +34,7 @@ mongoose.connect(process.env.MONGO_CONN, {}).then((conn) => {
 
 // Router
 app.use("/api", usersRouter);
+app.use("/api", messageRouter);
 
 
 const server = app.listen(5000, () => {

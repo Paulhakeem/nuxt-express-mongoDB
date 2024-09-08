@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="float-right">
+    <div class="float-right mr-3 my-2">
       <button @click="toggleModal">
         <img
           class="rounded-full size-10 object-cover"

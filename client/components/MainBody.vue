@@ -1,20 +1,24 @@
 <template>
   <!-- component -->
-  <div class="w-full h-screen">
-    <button
-      @click="toggleMenu"
-      data-drawer-target="default-sidebar"
-      data-drawer-toggle="default-sidebar"
-      aria-controls="default-sidebar"
-      type="button"
-      class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-    >
-      <span class="sr-only">Open sidebar</span>
-      <font-awesome-icon
-        :icon="['fas', 'bars']"
-        class="text-gray-800 text-2xl"
-      />
-    </button>
+  <main>
+    <div>
+      <button
+        @click="toggleMenu"
+        data-drawer-target="default-sidebar"
+        data-drawer-toggle="default-sidebar"
+        aria-controls="default-sidebar"
+        type="button"
+        class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      >
+        <span class="sr-only">Open sidebar</span>
+        <font-awesome-icon
+          :icon="['fas', 'bars']"
+          class="text-gray-800 text-2xl"
+        />
+      </button>
+      <!-- profile -->
+      <profile />
+    </div>
 
     <aside
       v-if="showMenu"
@@ -61,7 +65,6 @@
               </a>
             </li>
           </nuxt-link>
-
           <li>
             <a
               href="#"
@@ -71,7 +74,7 @@
                 :icon="['fas', 'message']"
                 class="flex-shrink-0 text-gray-300 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white"
               />
-              <span class="flex-1 ms-3 whitespace-nowrap">Inbox</span>
+              <span class="flex-1 ms-3 whitespace-nowrap">Messages</span>
               <span
                 class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-gray-800 bg-blue-100 rounded-full"
                 >3</span
@@ -124,14 +127,13 @@
       </div>
     </aside>
 
-    <div class="p-4 sm:ml-64">
+    <div class="p-4 sm:ml-64 bg-gray-100 h-screen">
       <div class="p-4 rounded-lg">
-        <profile />
         <form-input />
         <pie-chart />
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script setup>
@@ -139,5 +141,7 @@ const showMenu = ref(true);
 
 const toggleMenu = () => {
   showMenu.value = !showMenu.value;
+  console.log('hello');
+  
 };
 </script>
