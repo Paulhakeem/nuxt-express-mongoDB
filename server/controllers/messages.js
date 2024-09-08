@@ -1,36 +1,43 @@
-const Messages = require('../model/messages')
+const Messages = require("../model/messages");
 
+exports.sendMessage = async (req, res) => {
+  const { text } = req.body;
+  if (!text) {
+    return res.status(400).json({
+      status: "fail",
+      message: "Please enter the message",
+    });
+  }
 
-exports.sendMessage = async(req,res)=> {
-    const {text} = req.body
-    if(!text){
-        return res.status(400).json({
-            status: "fail",
-            message: 'Please enter the message'
-        })
-    }
+  const newMessage = await Messages.create(req.body);
 
-    const newMessage = await Messages.create(req.body)
+  if (newMessage) {
+    return res.status(201).json({
+      status: "success",
+      newMessage,
+    });
+  }
+};
 
-    if(newMessage){
-        return res.status(201).json({
-            status: "success",
-            newMessage
-        })
-    }
-}
+exports.getMessages = async (req, res) => {
+  const messages = await Messages.find();
+  if (messages) {
+    return res.status(200).json({
+      status: "success",
+      messages,
+    });
+  }
+};
 
-exports.getMessages = async(req,res)=> {
-    const messages = await Messages.find()
-    if(messages){
-        return res.status(200).json({
-            status: "success",
-            messages
-        })
-    }
-}
+exports.deleteMessage = async (req, res) => {
+  const id = req.params.id;
 
+  const deleteText = await Messages.findByIdAndDelete(id);
 
-exports.deleteMessage = async(req,res)=> {
-    
-}
+  if (deleteText) {
+    return res.status(200).json({
+      status: "success",
+      message: "message deleted",
+    });
+  }
+};
