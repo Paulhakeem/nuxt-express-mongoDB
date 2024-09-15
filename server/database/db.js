@@ -5,7 +5,6 @@ const env = require("dotenv");
 const mongoose = require("mongoose");
 const usersRouter = require("./../router/userRouter")
 const messageRouter = require('../router/messageRouter')
-const session = require("express-session")
 const helmet = require("helmet")
 
 const app = express();
@@ -14,16 +13,7 @@ env.config({ path: "./config.env" });
 app.use(cors());
 app.use(helmet())
 app.use(bodyParser.json())
-app.use(session({
-  secret: "Hakeem Paul",
-  saveUninitialized: false,
-  resave: false,
-  cookie: {
-    maxAge: 24 * 60 * 60 * 1000
-  },
-}))
 app.use(express.static("./front"))
-app.set('view engine', 'pug')
 
 
 

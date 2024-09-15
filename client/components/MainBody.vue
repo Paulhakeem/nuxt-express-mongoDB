@@ -60,14 +60,14 @@
                 <span class="flex-1 ms-3 whitespace-nowrap">Users</span>
                 <span
                   class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full"
-                  >{{users.length}}</span
+                  >{{ users.length }}</span
                 >
               </a>
             </li>
           </nuxt-link>
           <li>
-            <a
-              href="#"
+            <nuxt-link
+              to="/messages"
               class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-800 group"
             >
               <font-awesome-icon
@@ -79,7 +79,7 @@
                 class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-gray-800 bg-blue-100 rounded-full"
                 >3</span
               >
-            </a>
+            </nuxt-link>
           </li>
           <li>
             <a
@@ -139,11 +139,9 @@
 <script setup>
 const showMenu = ref(true);
 
-
-
 const toggleMenu = () => {
   showMenu.value = !showMenu.value;
-  console.log('hello'); 
+  console.log("hello");
 };
 
 const users = useState("users", () => []);
