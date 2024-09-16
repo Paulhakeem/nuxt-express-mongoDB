@@ -1,96 +1,69 @@
 <template>
-  <div
-    class="flex flex-col items-center justify-center w-screen min-h-screen p-10"
-  >
-    <div
-      class="flex flex-col flex-grow w-full max-w-4xl bg-white shadow-xl rounded-lg"
-    >
-      <div class="flex flex-col flex-grow h-0 p-4">
-        <div class="flex w-full mt-2 space-x-3 max-w-xs">
-          <img
-            src="../assets/img/user.jpg"
-            class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 object-cover"
-          />
-          <div>
-            <div class="bg-gray-800 p-3 rounded-r-lg rounded-bl-lg">
-              <p class="text-sm text-gray-200 text-pretty">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
+  <main class="bg-gray-200 h-screen">
+    <div>
+      <!-- Second Layer -->
+      <div>
+        <!-- Chatbox-header -->
+        <div class="flex gap-3 flex-wrap py-3 px-4 bg-gray-800">
+          <!--Group of Images -->
+          <div class="flex space-x-10 justify-evenly">
+            <div class="h-16 w-full flex items-center space-x-4">
+              <font-awesome-icon
+                :icon="['fas', 'comment']"
+                class="text-3xl text-[#07d884]"
+              />
+              <p class="text-2xl leading-6 text-[#07d884]">LetsChat</p>
             </div>
-            <span class="text-xs text-gray-500 leading-none">2 min ago</span>
-          </div>
-        </div>
-
-        <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-          <div>
-            <div class="bg-[#07d884] text-white p-3 rounded-l-lg rounded-br-lg">
-              <p class="text-sm text-gray-200 text-pretty">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod.
-              </p>
+            <div
+              class="flex items-center [&>*]:w-[2.7rem] [&>*]:h-[2.7rem] [&>*]:rounded-full [&>*]:bg-[#07d884] [&>*]:p-0.5 [&>*]:-ml-2 [&>*:hover]:z-20 [&>*:hover]:scale-105 [&>*>img]:h-full [&>*>img]:w-full [&>*>img]:rounded-full [&>*>img]:object-cover transition-all duration-300"
+            >
+              <div>
+                <img src="../assets//img/user.jpg" alt="" />
+              </div>
+              <div>
+                <img src="../assets//img/user.jpg" alt="" />
+              </div>
+              <div>
+                <img src="../assets//img/user.jpg" alt="" />
+              </div>
+              <div>
+                <img src="../assets//img/user.jpg" alt="" />
+              </div>
+              <div>
+                <img src="../assets//img/user.jpg" alt="" />
+              </div>
             </div>
-            <span class="text-xs text-gray-500 leading-none">2 min ago</span>
           </div>
-          <img
-            src="../assets/img/user.jpg"
-            class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 object-cover"
-          />
+        </div>
+
+        <!-- Chatbox-body -->
+        <div class="bg-white-800 h-[29rem] relative">
+          <!-- Chatbox-body message-box-->
+          <div class="px-4 py-8">
+            <div class="flex gap-3">
+              <!-- Icon image -->
+              <div class="w-12 h-12 rounded-full bg-[#07d884] p-0.5">
+                <img
+                  src="../assets/img/user.jpg"
+                  alt=""
+                  class="h-full w-full object-cover rounded-full"
+                />
+              </div>
+              <div
+                class="text-sm p-5 w-[75%] bg-slate-600 text-slate-100 rounded-lg relative before:absolute before:content-[''] before:w-3 before:h-3 before:bg-slate-600 before:rotate-45 before: before:-left-1 before:top-4"
+              >
+                <p>Hi There!</p>
+                <p>
+                  Looking to get Started? I can help answer to your personal
+                  questions!
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="flex w-full mt-2 space-x-3 max-w-xs">
-        <img
-          src="../assets/img/user.jpg"
-          class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 object-cover"
-        />
-        <div>
-          <div class="bg-gray-800 p-3 rounded-r-lg rounded-bl-lg">
-            <p class="text-sm text-gray-200 text-pretty">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-          </div>
-          <span class="text-xs text-gray-500 leading-none">2 min ago</span>
-        </div>
-      </div>
-
-      <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-        <div>
-          <div class="bg-[#07d884] text-white p-3 rounded-l-lg rounded-br-lg">
-            <p class="text-sm text-gray-200 text-pretty">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-          </div>
-          <span class="text-xs text-gray-500 leading-none">2 min ago</span>
-        </div>
-        <img
-          src="../assets/img/user.jpg"
-          class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 object-cover"
-        />
-      </div>
-
-      <form class="w-full mx-auto pt-4 bg-gray-600">
-        <div class="relative mx-4 mb-3">
-          <div
-            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
-          >
-          </div>
-          <input
-            type="text"
-            class=" w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 outline-none"
-            required
-          />
-          <button
-            type="submit"
-            class="text-white absolute end-2.5 bottom-2.5 bg-gray-800 hover:bg-[#07d884] focus:ring-4 font-medium rounded-lg text-sm px-4 py-2"
-          >
-            Send
-          </button>
-        </div>
-      </form>
     </div>
-  </div>
+  </main>
 </template>
 
 <script setup></script>
