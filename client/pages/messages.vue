@@ -35,19 +35,24 @@
             </div>
           </div>
         </div>
-
+     
+       <div class="text-center pt-4 capitalize text-gray-800 font-semibold text-xl">
+        <h4>group chat</h4>
+       </div>
         <!-- Chatbox-body -->
-        <div class="bg-white-800 h-full">
+        <div class="bg-white h-full">
           <div class="flex h-screen antialiased text-gray-800">
             <div class="flex flex-row h-full w-full overflow-x-hidden">
-              <div class="flex flex-col flex-auto h-full p-6">
+              <div class="flex flex-col flex-auto h-full p-6 ">
                 <div
+                  id="chat-body"
                   class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4"
                 >
                   <div class="flex flex-col h-full overflow-x-auto mb-4">
                     <div class="flex flex-col h-full">
                       <div class="grid grid-cols-12 gap-y-2">
-                        <div class="col-start-1 col-end-8 p-3 rounded-lg">
+                
+                        <div  id="message" class="col-start-1 col-end-8 p-3 rounded-lg">
                           <div class="flex flex-row items-center">
                             <div
                               class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
@@ -55,27 +60,12 @@
                               A
                             </div>
                             <div
-                              class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
-                            >
-                              <div>Hey How are you today?</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-start-1 col-end-8 p-3 rounded-lg">
-                          <div class="flex flex-row items-center">
-                            <div
-                              class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                            >
-                              A
-                            </div>
-                            <div
+                              id="text"
                               class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
                             >
                               <div>
                                 Lorem ipsum dolor sit amet, consectetur
-                                adipisicing elit. Vel ipsa commodi illum saepe
-                                numquam maxime asperiores voluptate sit, minima
-                                perspiciatis.
+                                adipisicing elit. .
                               </div>
                             </div>
                           </div>
@@ -96,64 +86,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-start-6 col-end-13 p-3 rounded-lg">
-                          <div
-                            class="flex items-center justify-start flex-row-reverse"
-                          >
-                            <div
-                              class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                            >
-                              A
-                            </div>
-                            <div
-                              class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
-                            >
-                              <div>
-                                Lorem ipsum dolor sit, amet consectetur
-                                adipisicing. ?
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-start-1 col-end-8 p-3 rounded-lg">
-                          <div class="flex flex-row items-center">
-                            <div
-                              class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                            >
-                              A
-                            </div>
-                            <div
-                              class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
-                            >
-                              <div>Lorem ipsum dolor sit amet !</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-start-6 col-end-13 p-3 rounded-lg">
-                          <div
-                            class="flex items-center justify-start flex-row-reverse"
-                          >
-                            <div
-                              class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                            >
-                              A
-                            </div>
-                            <div
-                              class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
-                            >
-                              <div>
-                                Lorem ipsum dolor sit, amet consectetur
-                                adipisicing. ?
-                              </div>
-                              <div
-                                class="absolute text-xs bottom-0 right-0 -mb-5 mr-2 text-gray-500"
-                              >
-                                Seen
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-start-1 col-end-8 p-3 rounded-lg">
+                        <div id="message" class="col-start-1 col-end-8 p-3 rounded-lg">
                           <div class="flex flex-row items-center">
                             <div
                               class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
@@ -164,8 +97,7 @@
                               class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
                             >
                               <div>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Perspiciatis, in.
+                                Lorem ipsum dolor sit amet consectetur.
                               </div>
                             </div>
                           </div>
@@ -174,13 +106,13 @@
                     </div>
                   </div>
                   <div
-                    class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4"
+                    class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4 bottom-0 sticky"
                   >
                     <div>
                       <button
                         class="flex items-center justify-center text-gray-400 hover:text-gray-600"
                       >
-                      <font-awesome-icon :icon="['fas', 'paperclip']" />
+                        <font-awesome-icon :icon="['fas', 'paperclip']" />
                       </button>
                     </div>
                     <div class="flex-grow ml-4">
@@ -192,7 +124,7 @@
                         <button
                           class="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600"
                         >
-                        <font-awesome-icon :icon="['fas', 'link']" />
+                          <font-awesome-icon :icon="['fas', 'link']" />
                         </button>
                       </div>
                     </div>
@@ -220,4 +152,22 @@
 
 <script setup></script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+@media only screen and (max-width: 768px) {
+  #chat-body {
+    width: 100%;
+  }
+  #message {
+    width: 180%;
+  }
+  #text{
+    padding: 1.3em;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+}
+
+@media only screen and (min-width: 992px) {
+}
+</style>
