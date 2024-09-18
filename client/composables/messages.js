@@ -1,6 +1,6 @@
 export default function () {
   // send message
-  const createMessage = async () => {
+  const createMessage = async (text) => {
     try {
       const data = await $fetch("http://localhost:5000/api/message", {
         method: "POST",
@@ -21,7 +21,7 @@ export default function () {
     try {
       const data = await $fetch("http://localhost:5000/api/messages");
       if (data) {
-        console.log(data);
+       return data.messages
       }
     } catch (error) {
       console.log(error.message);
