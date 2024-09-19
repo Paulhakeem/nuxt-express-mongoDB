@@ -41,3 +41,13 @@ exports.deleteMessage = async (req, res) => {
     });
   }
 };
+
+exports.joinCollection = async (req, res) => {
+  const respond = await Messages.find().populate("text").exec();
+  if (respond) {
+    res.status(200).json({
+      status: "success",
+      respond,
+    });
+  }
+};

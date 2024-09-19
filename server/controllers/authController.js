@@ -83,15 +83,4 @@ exports.loginUser = async (req, res, next) => {
   next();
 };
 
-exports.userProfile = async (req, res) => {
-  try {
-    const usertoken = req.headers["authorization"];
 
-    const verified = jwtToken.verify(usertoken, "Hakeem Paul");
-    if (verified) {
-      return res.status(200).json({ status: "sucess", name: verified.name });
-    }
-  } catch (error) {
-    return res.status(500).json({ status: "fail", message: error.message });
-  }
-};

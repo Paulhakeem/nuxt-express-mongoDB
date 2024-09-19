@@ -151,7 +151,7 @@ onMounted(async () => {
     const data = await $fetch("/api/users");
     const users = await data.res.data.users;
     if (users) {
-      allUsers.value = users;
+      users.value = users;
     }
   } catch (error) {
     console.log(error.message);
