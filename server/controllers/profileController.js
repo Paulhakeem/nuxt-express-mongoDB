@@ -1,17 +1,27 @@
 const Users = require("../model/user");
-const util = require("util");
 const jwt = require("jsonwebtoken");
+const env = require("dotenv");
+
+env.config({ path: "./config.env" });
 
 exports.userProfile = async (req, res, next) => {
   const userToken = req.headers.authorization;
-  if (!userToken) {
-    return res.status(401).json({ message: "Authentication required" });
-  }
-  const promisifyToken = jwt.verify(userToken, "secret_key");
 
-  if (promisifyToken) {
-    const userExist = await Users.findById(promisifyToken.id);
-    console.log("hello");
-    
+  if (userToken) {
+    const token = userToken.split(" ")[1];
+    try {
+      const promisifyToken = jwt.verify(token, process.env.SECRET_STR);
+
+      const userExist = await Users.findById(promisifyToken.id);
+
+      if (userExist) {
+        res.status(200).json({ status: "sucess", userExist });
+      }
+      console.log(userExist);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ status: "failed", message: "something went wrong!" });
+    }
   }
 };
