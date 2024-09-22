@@ -8,7 +8,9 @@ export default defineNuxtConfig({
     "nuxt-icon",
     "@vesp/nuxt-fontawesome",
     "@nuxtjs/google-fonts",
+    'shadcn-nuxt'
   ],
+
 
   css: [
     "~/assets/css/main.css",

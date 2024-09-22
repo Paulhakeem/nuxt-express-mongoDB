@@ -67,11 +67,19 @@
 </template>
 
 <script setup>
+const {getProfile} = profile()
+
 const modalActive = ref(null)
 
 const toggleModal = () => {
   modalActive.value = !modalActive.value;
 };
+
+onMounted(() => {
+console.log('hello');
+getProfile()
+})
+
 </script>
 
 <style lang="scss" scoped></style>

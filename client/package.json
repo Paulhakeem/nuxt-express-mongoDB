@@ -33,6 +33,19 @@
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.6",
     "@vesp/nuxt-fontawesome": "^1.0.4",
-    "nuxt-icon": "^0.6.10"
-  }
+    "nuxt-icon": "^0.6.10",
+    "shadcn-nuxt": "^0.10.4"
+  },
+  "description": "Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "badluk"
+  },
+  "keywords": [
+    "chat-app"
+  ],
+  "author": "paul",
+  "license": "ISC"
 }

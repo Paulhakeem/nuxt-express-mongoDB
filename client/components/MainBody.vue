@@ -155,9 +155,7 @@ onMounted(async () => {
     }
   } catch (error) {
     console.log(error.message);
-  } finally {
-    isLoading.value = false;
-  }
+  } 
 });
 
 const taggleMenu = () => {

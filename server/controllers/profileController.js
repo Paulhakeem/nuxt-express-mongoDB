@@ -17,11 +17,11 @@ exports.userProfile = async (req, res, next) => {
       if (userExist) {
         res.status(200).json({ status: "sucess", userExist });
       }
-      console.log(userExist);
     } catch (error) {
       res
         .status(500)
         .json({ status: "failed", message: "something went wrong!" });
     }
   }
+  next()
 };
