@@ -93,7 +93,11 @@
           class="flex flex-wrap justify-between space-x-6 border-gray-300 p-2"
         >
           <li class="flex space-x-3">
-            <img src="../assets/img/user.jpg" alt="user" class="size-12 rounded-full object-cover">
+            <img
+              src="../assets/img/user.jpg"
+              alt="user"
+              class="size-12 rounded-full object-cover"
+            />
             <div>
               <h1 class="text-[#2c2e32] font-medium first-letter:uppercase">
                 {{ user.name }}
@@ -103,7 +107,7 @@
           </li>
           <div class="flex gap-2 pt-2">
             <span class="text-sm text-gray-500">Joined:</span>
-            <p class="text-[#2c2e32] text-sm">{{user.date}}</p>
+            <p class="text-[#2c2e32] text-sm">{{ user.date }}</p>
           </div>
           <button
             class="bg-gray-800 p-2 w-42 uppercase text-[#07d884] text-sm rounded-md hover:bg-[#f4f5f7] hover:border-2 hover:border-gray-800 hover:text-gray-800"

@@ -5,6 +5,7 @@ const env = require("dotenv");
 const mongoose = require("mongoose");
 const usersRouter = require("./../router/userRouter");
 const messageRouter = require("../router/messageRouter");
+const user = require("../router/profile")
 const helmet = require("helmet");
 
 const app = express();
@@ -23,6 +24,7 @@ mongoose.connect(process.env.MONGO_CONN, {}).then((conn) => {
 // Router
 app.use("/api", usersRouter);
 app.use("/api", messageRouter);
+app.use("/api", user);
 
 const server = app.listen(5000, () => {
   console.log("Server is running");

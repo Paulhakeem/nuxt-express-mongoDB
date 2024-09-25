@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="float-right mr-3 my-2">
+    <div  class="float-right mr-3 my-2">
       <button @click="toggleModal">
         <img
           class="rounded-full size-10 object-cover"
@@ -20,9 +20,9 @@
           />
         </div>
 
-        <div class="text-center pt-3">
+        <div  class="text-center pt-3">
           <h3 class="text-lg font-semibold text-gray-800">
-            Hakeem Paul
+           {{ person }}
             <span
               ><font-awesome-icon
                 :icon="['fas', 'pen']"
@@ -30,7 +30,7 @@
             /></span>
           </h3>
           <p class="text-sm text-gray-500">
-            hakeempaul@gmail.com
+            email
             <span
               ><font-awesome-icon
                 :icon="['fas', 'pen']"
@@ -67,19 +67,23 @@
 </template>
 
 <script setup>
-const {getProfile} = profile()
+const { getProfile } = postService();
 
-const modalActive = ref(null)
+const person = useState("person", () => null);
+
+const modalActive = ref(null);
 
 const toggleModal = () => {
   modalActive.value = !modalActive.value;
 };
 
-onMounted(() => {
-console.log('hello');
-getProfile()
-})
-
+onMounted(async () => {
+  const res = await getProfile();
+  if (res) {
+    console.log(res.userExist);
+    person.value = res
+  }
+});
 </script>
 
 <style lang="scss" scoped></style>

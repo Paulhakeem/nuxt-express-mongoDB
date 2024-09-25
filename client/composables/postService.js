@@ -11,15 +11,37 @@ export default function () {
         },
       });
 
-       if(data){
-          return data.data  
-        }
-      
+      if (data) {
+        const token = data.token;
+        localStorage.setItem("token", token);
+       console.log(data);
+       
+      }
     } catch (error) {
       console.log(error);
     }
   };
+
+
+  // geting user profile
+  const getProfile = async () => {
+    await $fetch("http://localhost:5000/api/profile", {
+      headers: {
+        Authorization:  `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then((result) => {
+        console.log(result.userExist);
+        return result
+        
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   return {
     regesterUser,
+    getProfile
   };
 }
