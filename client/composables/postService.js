@@ -1,5 +1,6 @@
 export default function () {
   const regesterUser = async (name, email, password) => {
+    
     try {
       const data = await $fetch("http://localhost:5000/api/signUp", {
         method: "POST",
@@ -24,6 +25,7 @@ export default function () {
 
 
   // geting user profile
+  const user = ref(null)
   const getProfile = async () => {
     await $fetch("http://localhost:5000/api/profile", {
       headers: {
@@ -31,7 +33,7 @@ export default function () {
       }
     })
       .then((result) => {
-        console.log(result.userExist);
+        user.value = result.userExist
         return result
         
       })
@@ -42,6 +44,7 @@ export default function () {
 
   return {
     regesterUser,
-    getProfile
+    getProfile,
+    user
   };
 }
