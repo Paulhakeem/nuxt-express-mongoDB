@@ -19,14 +19,19 @@ exports.sendMessage = async (req, res) => {
   }
 };
 
-exports.getMessages = async (req, res) => {
-  const messages = await Messages.find();
-  if (messages) {
-    return res.status(200).json({
-      status: "success",
-      messages,
-    });
+exports.getMessages = async (req, res, next) => {
+  try {
+    const messages = await Messages.find()
+      .populate("sender")
+      .populate("receiver");
+
+    if (messages) {
+      res.status(200).json({ status: "sucess", messages });
+    }
+  } catch (error) {
+    res.status(500).json({ status: "failed", error });
   }
+  next()
 };
 
 exports.deleteMessage = async (req, res) => {

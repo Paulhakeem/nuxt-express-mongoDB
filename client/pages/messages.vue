@@ -3,15 +3,15 @@
     <div class="flex gap-3 flex-wrap py-3 px-4 bg-gray-800 top-0 sticky">
       <!--Group of Images -->
       <div class="flex space-x-10 justify-evenly">
-       <nuxt-link to="/home">
-        <div class="h-16 w-full flex items-center space-x-4">
-          <font-awesome-icon
-            :icon="['fas', 'comment']"
-            class="text-3xl text-[#07d884]"
-          />
-          <p class="text-2xl leading-6 text-[#07d884]">LetsChat</p>
-        </div>
-       </nuxt-link>
+        <nuxt-link to="/home">
+          <div class="h-16 w-full flex items-center space-x-4">
+            <font-awesome-icon
+              :icon="['fas', 'comment']"
+              class="text-3xl text-[#07d884]"
+            />
+            <p class="text-2xl leading-6 text-[#07d884]">LetsChat</p>
+          </div>
+        </nuxt-link>
         <div
           class="flex items-center [&>*]:w-[2.7rem] [&>*]:h-[2.7rem] [&>*]:rounded-full [&>*]:bg-[#07d884] [&>*]:p-0.5 [&>*]:-ml-2 [&>*:hover]:z-20 [&>*:hover]:scale-105 [&>*>img]:h-full [&>*>img]:w-full [&>*>img]:rounded-full [&>*>img]:object-cover transition-all duration-300"
         >
@@ -63,7 +63,11 @@
                         <div
                           class="flex items-center justify-center size-9 rounded-full bg-gray-800 flex-shrink-0"
                         >
-                          <img src="../assets/img/user.jpg" alt="" class="size-8 rounded-full object-cover">
+                          <img
+                            src="../assets/img/user.jpg"
+                            alt=""
+                            class="size-8 rounded-full object-cover"
+                          />
                         </div>
                         <div
                           id="text"
@@ -72,7 +76,7 @@
                           <div>
                             {{ chat.text }}
                           </div>
-                          <p class="text-xs text-gray-400">{{ chat.date }}</p>
+                          <p class="text-xs text-gray-400">{{ new Date(chat.date).toLocaleString()  }}</p>
                         </div>
                       </div>
                     </div>
@@ -80,11 +84,11 @@
                       <div
                         class="flex items-center justify-start flex-row-reverse"
                       >
-                        <div
-                          class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                        >
-                          A
-                        </div>
+                        <img
+                          src="../assets/img/user.jpg"
+                          alt=""
+                          class="size-8 rounded-full object-cover"
+                        />
                         <div
                           class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
                         >
@@ -141,10 +145,10 @@
 </template>
 
 <script setup>
-const { createMessage, showMessages, deleteMessages } = messages();
+const { createMessage, inbox, showMessages, deleteMessages } = messages();
 
 const text = useState("text", () => "");
-const inbox = useState("inbox", () => []);
+// const inbox = useState("inbox", () => []);
 
 const sendMessage = async () => {
   await createMessage(text.value)
@@ -156,7 +160,6 @@ const sendMessage = async () => {
       console.log(err.message);
     });
 };
-
 
 // get messages
 onMounted(() => {

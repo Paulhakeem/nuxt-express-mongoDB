@@ -1,3 +1,5 @@
+import { text } from "@fortawesome/fontawesome-svg-core";
+
 export default function () {
   // send message
   const createMessage = async (text) => {
@@ -16,29 +18,34 @@ export default function () {
     }
   };
 
+  const inbox = ref(null);
   //   get Messages
   const showMessages = async () => {
     try {
       const data = await $fetch("http://localhost:5000/api/messages");
       if (data) {
-       return data.messages
+        inbox.value = data.messages;
+        console.log(data.messages);
+        
+        return data.messages;
+
       }
     } catch (error) {
       console.log(error.message);
     }
   };
 
-//   delete Message
-const deleteMessages = async () => {
+  //   delete Message
+  const deleteMessages = async () => {
     try {
       const data = await $fetch(`http://localhost:5000/api/message/${id}`);
       if (data) {
-        console.log('message deleted');
+        console.log("message deleted");
       }
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  return { createMessage, showMessages, deleteMessages };
+  return { createMessage, showMessages, deleteMessages, inbox };
 }
