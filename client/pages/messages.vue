@@ -76,7 +76,9 @@
                           <div>
                             {{ chat.text }}
                           </div>
-                          <p class="text-xs text-gray-400">{{ new Date(chat.date).toLocaleString()  }}</p>
+                          <p class="text-xs text-gray-400">
+                            {{ new Date(chat.date).toLocaleString() }}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -146,9 +148,9 @@
 
 <script setup>
 const { createMessage, inbox, showMessages, deleteMessages } = messages();
+const { user } = postService();
 
 const text = useState("text", () => "");
-// const inbox = useState("inbox", () => []);
 
 const sendMessage = async () => {
   await createMessage(text.value)

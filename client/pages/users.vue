@@ -94,7 +94,7 @@
         >
           <li class="flex space-x-3">
             <img
-              src="../assets/img/user.jpg"
+              :src="user.imageURL"
               alt="user"
               class="size-12 rounded-full object-cover"
             />

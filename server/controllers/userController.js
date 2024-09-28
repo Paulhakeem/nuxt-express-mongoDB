@@ -57,7 +57,7 @@ exports.updateUser = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const filterData = filterObj(req.body, "name", "email");
+    const filterData = filterObj(req.body, "name", "email", "imageURL");
     const updateUser = await Users.findByIdAndUpdate(user, filterData, {
       runValidators: true,
       new: true,
