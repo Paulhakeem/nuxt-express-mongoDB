@@ -22,20 +22,10 @@
 
         <div class="text-center pt-3">
           <h3 class="text-lg font-semibold text-gray-800 capitalize">
-            {{ user.name}}
-            <span
-              ><font-awesome-icon
-                :icon="['fas', 'pen']"
-                class="text-sm text-[#07d884] cursor-pointer"
-            /></span>
+            {{ user.name }}
           </h3>
           <p class="text-sm text-gray-500">
-           {{ user.email }}
-            <span
-              ><font-awesome-icon
-                :icon="['fas', 'pen']"
-                class="text-sm text-[#07d884] cursor-pointer"
-            /></span>
+            {{ user.email }}
           </p>
         </div>
 
@@ -56,7 +46,9 @@
           </div>
 
           <div class="text-center pt-6">
-            <button class="p-2 w-32 bg-gray-800 text-[#07d884] rounded-md">
+            <button
+              class="rounded-md bg-slate-800 py-2 px-8 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
+            >
               Save
             </button>
           </div>
@@ -75,9 +67,8 @@ const toggleModal = () => {
   modalActive.value = !modalActive.value;
 };
 
-
 onMounted(async () => {
-  await getProfile()
+  await getProfile();
 });
 </script>
 
