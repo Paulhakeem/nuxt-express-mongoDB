@@ -22,9 +22,7 @@ exports.sendMessage = async (req, res) => {
 exports.getMessages = async (req, res, next) => {
   try {
     const messages = await Messages.find()
-      .populate("sender")
-      .populate("receiver");
-
+      .populate("user")
     if (messages) {
       res.status(200).json({ status: "sucess", messages });
     }
