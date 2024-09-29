@@ -12,23 +12,11 @@
             <p class="text-2xl leading-6 text-[#07d884]">LetsChat</p>
           </div>
         </nuxt-link>
-        <div
+        <div v-for="users in allUsers" :key="users.id"
           class="flex items-center [&>*]:w-[2.7rem] [&>*]:h-[2.7rem] [&>*]:rounded-full [&>*]:bg-[#07d884] [&>*]:p-0.5 [&>*]:-ml-2 [&>*:hover]:z-20 [&>*:hover]:scale-105 [&>*>img]:h-full [&>*>img]:w-full [&>*>img]:rounded-full [&>*>img]:object-cover transition-all duration-300"
         >
-          <div>
-            <img src="../assets//img/user.jpg" alt="" />
-          </div>
-          <div>
-            <img src="../assets//img/user.jpg" alt="" />
-          </div>
-          <div>
-            <img src="../assets//img/user.jpg" alt="" />
-          </div>
-          <div>
-            <img src="../assets//img/user.jpg" alt="" />
-          </div>
-          <div>
-            <img src="../assets//img/user.jpg" alt="" />
+          <div class="cursor-pointer">
+            <img :src="users.imageURL" alt="" />
           </div>
         </div>
       </div>
@@ -152,6 +140,7 @@ const { user } = postService();
 
 const text = useState("text", () => "");
 
+
 const sendMessage = async () => {
   await createMessage(text.value)
     .then((result) => {
@@ -179,6 +168,19 @@ onMounted(() => {
     .catch((err) => {
       console.log(err);
     });
+});
+
+const allUsers = useState("users", () => {});
+onMounted(async () => {
+  try {
+    const data = await $fetch("/api/users");
+    const users = await data.res.data.users;
+    if (users) {
+      allUsers.value = users;
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
 });
 </script>
 

@@ -40,10 +40,15 @@
       <h1 class="text-md font-medium text-gray-200 pl-4">Search:</h1>
       <!-- user search response -->
       <div v-if="users" class="py-4 pl-4 text-sm cursor-pointer">
-        <h4 class="text-gray-200 font-medium">{{ users.name }}</h4>
-        <p class="text-xs text-gray-400">{{ users.email }}</p>
+        <div class="flex gap-4 items-center">
+          <img :src="users.imageURL" alt="profile-image" class="size-10 rounded-full object-cover" />
+          <div>
+            <h4 class="text-gray-200 font-medium capitalize">{{ users.name }}</h4>
+            <p class="text-xs text-gray-400">{{ users.email }}</p>
+          </div>
+        </div>
       </div>
-      <p class="text-red-400 italic pl-4 pb-2">{{errorMessage}}</p>
+      <p v-else class="text-red-400 italic pl-4 pb-2">{{ errorMessage }}</p>
     </div>
   </main>
 </template>
@@ -53,7 +58,7 @@ const { findUserByName } = findUser();
 
 const search = useState("search", () => "");
 
-const errorMessage = useState("errorMessage", () => "")
+const errorMessage = useState("errorMessage", () => "");
 
 const users = useState("user", () => []);
 
@@ -61,13 +66,12 @@ const getUser = async () => {
   try {
     const searchUser = await findUserByName(search.value);
     if (!searchUser) {
-      const error = new Error("User Not Found!!😥")
-      errorMessage.value = error
+      const error = new Error("User Not Found!!😥");
+      errorMessage.value = error;
     }
     users.value = searchUser.data.user;
   } catch (error) {
     console.log(error.message);
-    
   }
 };
 </script>

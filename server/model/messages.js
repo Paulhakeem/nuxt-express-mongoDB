@@ -1,12 +1,14 @@
 const mongoose = require("mongoose");
 
 const messageSchema = new mongoose.Schema({
-  sender: {
+  chatroom: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    require: true,
+    ref: "Chatroom",
   },
-  receiver: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
+    require: true,
     ref: "User",
   },
   text: {
@@ -16,6 +18,6 @@ const messageSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now },
 });
 
-const Messages = mongoose.model("messages", messageSchema);
+const Messages = mongoose.model("Messages", messageSchema);
 
 module.exports = Messages;
