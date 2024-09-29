@@ -11,17 +11,35 @@
     </div>
 
     <user-profile-modal :modalActive="modalActive" @close-modal="toggleModal">
-      <div>
-        <div class="flex justify-center">
+      <div class="flex items-center justify-center">
+        <div class="relative">
           <img
+            class="rounded-full size-28 object-cover"
+            id="profileImage"
             :src="user.imageURL"
-            alt=""
-            class="rounded-full size-32 object-cover"
+            alt="Profile Image"
           />
+          <div
+            class="absolute inset-0 bg-gray-500 rounded-full opacity-50"
+          ></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <label for="profileImageInput" class="cursor-pointer">
+              <font-awesome-icon :icon="['fas', 'image']" />
+            </label>
+            <input
+              type="file"
+              id="profileImageInput"
+              class="hidden"
+              accept="image/*"
+              onchange="previewImage(this)"
+            />
+          </div>
         </div>
-
+      </div>
+      <!--  -->
+      <div>
         <div class="text-center pt-3">
-          <h3 class="text-lg font-semibold text-gray-800 capitalize">
+          <h3 class="text-xl font-semibold text-gray-800 capitalize">
             {{ user.name }}
           </h3>
           <p class="text-sm text-gray-500">
