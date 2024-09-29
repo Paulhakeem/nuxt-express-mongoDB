@@ -14,7 +14,7 @@
       <div>
         <div class="flex justify-center">
           <img
-            src="../assets/img/user.jpg"
+            :src="user.imageURL"
             alt=""
             class="rounded-full size-32 object-cover"
           />
