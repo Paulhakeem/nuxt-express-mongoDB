@@ -12,18 +12,15 @@ const socketio = require('socket.io');
 
 const app = express();
 const server = http.createServer(app)
-const io = socketio(server)
+const io = socketio(server, {})
 
 env.config({ path: "./config.env" });
 app.use(cors());
 app.use(helmet());
 app.use(bodyParser.json());
 
-// Run when client connect
-io.on("connection", Socket => {
-  console.log('New connection');
-  
-})
+
+
 
 mongoose.connect(process.env.MONGO_CONN, {}).then((conn) => {
   console.log("connection successful!!");
@@ -41,9 +38,18 @@ app.use("/api", usersRouter);
 app.use("/api", messageRouter);
 app.use("/api", user);
 
+
+
+// Run when client connect
+io.on("connection", (socket) => {
+console.log(socket);
+
+})
+
 server.listen(5000, () => {
   console.log("Server is running");
 });
+
 
 // HUNDLE SERVER ERROR
 process.on("unhandledRejection", (err) => {
