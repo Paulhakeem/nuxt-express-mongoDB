@@ -15,8 +15,10 @@
             class="text-gray-800 text-2xl"
           />
         </button>
+        
         <!-- profile -->
-       <!--  -->
+         <Profile/>
+      
       </div>
   
       <aside
@@ -127,8 +129,8 @@
   
       <div class="p-4 sm:ml-64 bg-gray-100 h-screen">
         <div class="p-4 rounded-lg">
-          <!-- <form-input />
-          <pie-chart /> -->
+          <Search/>
+          <Chart />
         </div>
       </div>
     </main>
@@ -136,8 +138,7 @@
 
 <script setup>
 import { RouterLink } from 'vue-router';
+import Search from '@/components/Search.vue';
+import Chart from '@/components/Chart.vue';
+import Profile from '@/components/Profile.vue';
 </script>
-
-<style lang="scss" scoped>
-
-</style>

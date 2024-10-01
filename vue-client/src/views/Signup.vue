@@ -80,11 +80,14 @@
               </div>
 
               <div class="text-center">
-                <button
+                <RouterLink to="/darshboard">
+                  <button
                   class="h-10 px-6 w-64 bg-[#07d884] mt-8 rounded font-semibold text-sm text-blue-100"
                 >
                   SignUp
                 </button>
+                </RouterLink>
+                
               </div>
 
               <!-- signup with prvider -->
