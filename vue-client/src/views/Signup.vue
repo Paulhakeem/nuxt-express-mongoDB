@@ -35,13 +35,18 @@
         <div class="pt-8 mb-4">
           <h4 class="text-center text-white font-semibold">SignUp</h4>
           <div class="flex flex-col justify-center items-center pt-6">
-            <form method="post">
+            <form
+              @submit.prevent="signupUser"
+              @keyup.enter="signupUser"
+              method="post"
+            >
               <label
                 class="font-semibold text-xs text-white"
                 for="usernameField"
                 >Username</label
               >
               <input
+                v-model="name"
                 class="flex items-center h-9 px-4 w-72 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
                 type="text"
               />
@@ -51,6 +56,7 @@
                 >Email</label
               >
               <input
+                v-model="email"
                 class="flex items-center h-9 px-4 w-72 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
                 type="email"
               />
@@ -60,6 +66,7 @@
                 >Password</label
               >
               <input
+                v-model="password"
                 class="flex items-center h-9 px-4 w-72 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
                 type="password"
               />
@@ -80,18 +87,15 @@
               </div>
 
               <div class="text-center">
-                <RouterLink to="/darshboard">
                   <button
-                  class="h-10 px-6 w-64 bg-[#07d884] mt-8 rounded font-semibold text-sm text-blue-100"
-                >
-                  SignUp
-                </button>
-                </RouterLink>
-                
+                    class="h-10 px-6 w-64 bg-[#07d884] mt-8 rounded font-semibold text-sm text-blue-100"
+                  >
+                    SignUp
+                  </button>
               </div>
 
               <!-- signup with prvider -->
-               <Providers/>
+              <Providers />
               <!--  -->
               <div class="flex justify-center text-xs text-white pt-4">
                 <a>New user</a>
@@ -114,6 +118,26 @@
 <script setup>
 import { RouterLink } from "vue-router";
 import Providers from "@/components/Providers.vue";
+import { useAuthStore } from "@/store/auth";
+import { ref } from "vue";
+
+
+const auth = useAuthStore();
+
+const name = ref("")
+const email = ref("")
+const password = ref("")
+
+const signupUser = async () => {
+  const user = await auth.createUser(
+    name.value,
+    email.value,
+    password.value
+  );
+  if (user) {
+    console.log(user);
+  }
+};
 </script>
 
 <style lang="scss" scoped></style>

@@ -36,12 +36,12 @@ const sendResponse = (user, statusCode, res) => {
 exports.createUser = async (req, res, next) => {
   const { name, email, password } = req.body;
   if (!name || !password || !email) {
-    return res.status(400).json({ msg: "Please enter all fields" });
+    return res.status(401).json({ msg: "Please enter all fields" });
   }
   try {
     const existingUser = await Users.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ msg: "User already exists" });
+      return res.status(401).json({ msg: "User already exists" });
     }
     const newUser = await Users.create(req.body);
     sendResponse(newUser, 201, res);
