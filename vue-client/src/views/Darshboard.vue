@@ -108,6 +108,8 @@
       </div>
     </aside>
 
+    <!-- DASHBOARD -->
+
     <div class="p-4 sm:ml-64 bg-gray-100 h-screen">
       <div class="p-4 rounded-lg">
         <Search />
@@ -162,7 +164,6 @@ onMounted(async () => {
     const user = await axios.get("http://localhost:5000/api/users");
     if (user) {
       users.value = user.data.data.users;
-      console.log(user.data.data.users);
     }
   } catch (error) {
     console.log(error);
