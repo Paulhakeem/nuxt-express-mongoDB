@@ -14,21 +14,5 @@ export const useUsersStore = defineStore("users", () => {
     } catch (error) {
       console.error("Error searching users:", error.message);
     }
-  };
-
-  const getUsers = async () => {
-    await axios
-      .get("http://localhost:5000/api/users")
-      .then((result) => {
-        users.value = result;
-        console.log(users);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  return {
-    findUserByName,
-    getUsers,
-  };
+  }
 });
