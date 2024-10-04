@@ -46,24 +46,6 @@
               <span class="ms-3">Dashboard</span>
             </a>
           </li>
-          <RouterLink to="/">
-            <li>
-              <a
-                href="#"
-                class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-800 group"
-              >
-                <font-awesome-icon
-                  :icon="['fas', 'user']"
-                  class="flex-shrink-0 text-gray-300 transition duration-75 group-hover:text-gray-800"
-                />
-                <span class="flex-1 ms-3 whitespace-nowrap">Users</span>
-                <span
-                  class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full"
-                  >8</span
-                >
-              </a>
-            </li>
-          </RouterLink>
           <li>
             <RouterLink
               to="/"
@@ -132,14 +114,25 @@
         <Chart />
 
         <!-- users -->
-        <div class="flex flex-wrap  gap-6 justify-between bg-white w-full rounded-md mt-6 h-auto p-4">
+        <div
+          class="flex flex-wrap gap-6 justify-between bg-white w-full rounded-md mt-6 h-auto p-4"
+        >
+        <div v-if="loadUsers">
+          <loadUsers/>
+        </div>
           <div v-for="users in users" :key="users.id">
             <div class="flex gap-4 items-center">
-              <img :src="users.imageURL" alt="profile-image" class="size-10 rounded-full object-cover border border-1 border-[#07d884]">
-             <div>
-              <p class="capitalize font-medium text-gray-600">{{ users.name }}</p>
-              <span class="text-sm text-gray-600">{{ users.email }}</span>
-             </div>
+              <img
+                :src="users.imageURL"
+                alt="profile-image"
+                class="size-10 rounded-full object-cover border border-1 border-[#07d884]"
+              />
+              <div>
+                <p class="capitalize font-medium text-gray-600">
+                  {{ users.name }}
+                </p>
+                <span class="text-sm text-gray-600">{{ users.email }}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -153,23 +146,26 @@ import { RouterLink } from "vue-router";
 import Search from "@/components/Search.vue";
 import Chart from "@/components/Chart.vue";
 import Profile from "@/components/Profile.vue";
+import Loading from "@/components/Loading.vue";
 import axios from "axios";
-import { useUsersStore } from "@/store/user";
 import { ref, onMounted } from "vue";
 
-const allUsers = useUsersStore();
 
 const users = ref([]);
 
+const loadUsers = ref(true);
+
 onMounted(async () => {
-  await axios
-    .get("http://localhost:5000/api/users")
-    .then((result) => {
-      users.value = result.data.data.users;
-      console.log(result.data.data.users);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  try {
+    const user = await axios.get("http://localhost:5000/api/users");
+    if (user) {
+      users.value = user.data.data.users;
+      console.log(user.data.data.users);
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loadUsers.value = false;
+  }
 });
 </script>
