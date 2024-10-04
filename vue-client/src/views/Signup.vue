@@ -46,7 +46,7 @@
                 >Username</label
               >
               <input
-                v-model="name"
+                v-model="formDetails.name"
                 class="flex items-center h-9 px-4 w-72 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
                 type="text"
               />
@@ -56,7 +56,7 @@
                 >Email</label
               >
               <input
-                v-model="email"
+                v-model="formDetails.email"
                 class="flex items-center h-9 px-4 w-72 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
                 type="email"
               />
@@ -66,7 +66,7 @@
                 >Password</label
               >
               <input
-                v-model="password"
+                v-model="formDetails.password"
                 class="flex items-center h-9 px-4 w-72 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
                 type="password"
               />
@@ -87,11 +87,11 @@
               </div>
 
               <div class="text-center">
-                  <button
-                    class="h-10 px-6 w-64 bg-[#07d884] mt-8 rounded font-semibold text-sm text-blue-100"
-                  >
-                    SignUp
-                  </button>
+                <button
+                  class="h-10 px-6 w-64 bg-[#07d884] mt-8 rounded font-semibold text-sm text-blue-100"
+                >
+                  SignUp
+                </button>
               </div>
 
               <!-- signup with prvider -->
@@ -122,21 +122,26 @@ import { useAuthStore } from "@/store/auth";
 import { ref } from "vue";
 
 
-const auth = useAuthStore();
+const { createUser } =  useAuthStore();
 
-const name = ref("")
-const email = ref("")
-const password = ref("")
+const formDetails = ref({
+  name: "",
+  email: "",
+  password: "",
+});
 
 const signupUser = async () => {
-  const user = await auth.createUser(
-    name.value,
-    email.value,
-    password.value
+  const user = await createUser(
+    formDetails.name,
+    formDetails.email,
+    formDetails.password
   );
-  if (user) {
-    console.log(user);
+
+  if(user){
+    console.log("user crated");
   }
+  console.log("something went wrong");
+  
 };
 </script>
 
