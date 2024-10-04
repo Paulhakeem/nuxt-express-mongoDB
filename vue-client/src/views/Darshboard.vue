@@ -115,12 +115,13 @@
 
         <!-- users -->
         <div
-          class="flex flex-wrap gap-6 justify-between bg-white w-full rounded-md mt-6 h-auto p-4"
+          class="bg-white w-full rounded-md mt-6 h-auto p-4"
         >
-        <div v-if="loadUsers">
-          <loadUsers/>
+        <div v-if="loadUsers" class="">
+          <Loading/>
         </div>
-          <div v-for="users in users" :key="users.id">
+          <div class="flex flex-wrap gap-6 justify-between">
+            <div v-for="users in users" :key="users.id">
             <div class="flex gap-4 items-center">
               <img
                 :src="users.imageURL"
@@ -134,6 +135,7 @@
                 <span class="text-sm text-gray-600">{{ users.email }}</span>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
