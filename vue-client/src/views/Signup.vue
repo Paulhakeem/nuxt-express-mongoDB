@@ -46,7 +46,7 @@
                 >Username</label
               >
               <input
-                v-model="formDetails.name"
+                v-model="name"
                 class="flex items-center h-9 px-4 w-72 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
                 type="text"
               />
@@ -56,7 +56,7 @@
                 >Email</label
               >
               <input
-                v-model="formDetails.email"
+                v-model="email"
                 class="flex items-center h-9 px-4 w-72 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
                 type="email"
               />
@@ -66,7 +66,7 @@
                 >Password</label
               >
               <input
-                v-model="formDetails.password"
+                v-model="password"
                 class="flex items-center h-9 px-4 w-72 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
                 type="password"
               />
@@ -116,32 +116,27 @@
 </template>
 
 <script setup>
-import { RouterLink } from "vue-router";
+import { RouterLink, useRouter } from "vue-router";
 import Providers from "@/components/Providers.vue";
 import { useAuthStore } from "@/store/auth";
 import { ref } from "vue";
 
+const { createUser } = useAuthStore();
 
-const { createUser } =  useAuthStore();
+const router = useRouter();
 
-const formDetails = ref({
-  name: "",
-  email: "",
-  password: "",
-});
+const name = ref("");
+const email = ref("");
+const password = ref("");
 
 const signupUser = async () => {
-  const user = await createUser(
-    formDetails.name,
-    formDetails.email,
-    formDetails.password
-  );
-
-  if(user){
-    console.log("user crated");
+  const user = await createUser(name.value, email.value, password.value);
+  if (user) {
+    router.push({
+      path: "/dashboard",
+    });
   }
   console.log("something went wrong");
-  
 };
 </script>
 

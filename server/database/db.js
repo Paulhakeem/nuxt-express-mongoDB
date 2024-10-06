@@ -27,11 +27,6 @@ mongoose.connect(process.env.MONGO_CONN, {}).then((conn) => {
 });
 
 
-// models
-require("../model/chatRoom")
-require("../model/user")
-require("../model/messages")
-
 
 // Router
 app.use("/api", usersRouter);
