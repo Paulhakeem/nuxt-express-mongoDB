@@ -15,7 +15,6 @@ export const useUsersStore = defineStore("users", () => {
       .then((result) => {
         localStorage.getItem("token");
         user.value = result.data.userExist
-        console.log(result.data.userExist);
       })
       .catch((err) => {
         console.log(err.message);

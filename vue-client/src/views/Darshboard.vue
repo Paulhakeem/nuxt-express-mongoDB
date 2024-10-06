@@ -48,7 +48,7 @@
           </li>
           <li>
             <RouterLink
-              to="/"
+              to="/chat-body"
               class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-800 group"
             >
               <font-awesome-icon
@@ -142,6 +142,7 @@
         </div>
       </div>
     </div>
+   
   </main>
 </template>
 
@@ -153,6 +154,8 @@ import Profile from "@/components/Profile.vue";
 import Loading from "@/components/Loading.vue";
 import axios from "axios";
 import { ref, onMounted } from "vue";
+
+
 
 
 const users = ref([]);
@@ -170,5 +173,7 @@ onMounted(async () => {
   } finally {
     loadUsers.value = false;
   }
+
+
 });
 </script>
