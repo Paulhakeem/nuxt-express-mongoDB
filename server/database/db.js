@@ -9,6 +9,7 @@ const messageRouter = require("../router/messageRouter");
 const user = require("../router/profile");
 const helmet = require("helmet");
 const socketio = require("socket.io");
+const Message = require("../model/messages")
 
 const app = express();
 const server = http.createServer(app);
@@ -35,6 +36,14 @@ app.use("/api", user);
 // Run when client connect
 io.on("connection", (socket) => {
   console.log("A user with ID: " + socket.id + " connected");
+
+
+  socket.on('chat message', async (msg) => {
+    const message = new Message({ text: msg.text });
+    await message.save();
+    io.emit('chat message', msg);
+  });
+
 
   socket.on("disconnect", () => {
     console.log("User disconnected");
