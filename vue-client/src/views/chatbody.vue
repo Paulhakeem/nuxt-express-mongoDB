@@ -10,7 +10,7 @@
             >
               <font-awesome-icon :icon="['fas', 'message']" class="text-xl" />
             </div>
-            <div class="ml-2 font-bold text-2xl">LetsChat</div>
+            <div class="ml-2 font-bold text-2xl text-gray-700">LetsChat</div>
           </div>
           <div
             class="flex flex-col items-center bg-green-200 border border-gray-200 mt-4 w-full py-6 px-4 rounded-lg"
@@ -22,7 +22,7 @@
                 class="h-full w-full object-cover"
               />
             </div>
-            <div class="text-sm font-semibold mt-2">
+            <div class="text-sm font-semibold mt-2 capitalize">
               {{ profile.user.name }}
             </div>
             <div class="text-xs text-gray-500">Lead UI/UX Designer</div>
@@ -37,70 +37,22 @@
           </div>
           <div class="flex flex-col mt-8">
             <div class="flex flex-row items-center justify-between text-xs">
-              <span class="font-bold">Active Conversations</span>
+              <span class="font-bold text-gray-700">Active Users</span>
               <span
                 class="flex items-center justify-center bg-gray-300 h-4 w-4 rounded-full"
-                >4</span
+                >{{ profile.allUsers.length }}</span
               >
             </div>
-            <div
-              class="flex flex-col space-y-1 mt-4 -mx-2 h-48 overflow-y-auto"
-            >
-              <button
-                class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2"
-              >
-                <div
-                  class="flex items-center justify-center h-8 w-8 bg-indigo-200 rounded-full"
-                >
-                  H
+            <div v-for="users in profile.allUsers" :key="users.id" class="mt-4">
+              <div class="flex gap-4">
+                <div>
+                  <img
+                    :src="users.imageURL"
+                    alt="profile-image"
+                    class="size-8 rounded-full object-cover"
+                  />
                 </div>
-                <div class="ml-2 text-sm font-semibold">Henry Boyd</div>
-              </button>
-              <button
-                class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2"
-              >
-                <div
-                  class="flex items-center justify-center h-8 w-8 bg-gray-200 rounded-full"
-                >
-                  M
-                </div>
-                <div class="ml-2 text-sm font-semibold">Marta Curtis</div>
-                <div
-                  class="flex items-center justify-center ml-auto text-xs text-white bg-red-500 h-4 w-4 rounded leading-none"
-                >
-                  2
-                </div>
-              </button>
-              <button
-                class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2"
-              >
-                <div
-                  class="flex items-center justify-center h-8 w-8 bg-orange-200 rounded-full"
-                >
-                  P
-                </div>
-                <div class="ml-2 text-sm font-semibold">Philip Tucker</div>
-              </button>
-              <button
-                class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2"
-              >
-                <div
-                  class="flex items-center justify-center h-8 w-8 bg-pink-200 rounded-full"
-                >
-                  C
-                </div>
-                <div class="ml-2 text-sm font-semibold">Christine Reid</div>
-              </button>
-              <button
-                class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2"
-              >
-                <div
-                  class="flex items-center justify-center h-8 w-8 bg-purple-200 rounded-full"
-                >
-                  J
-                </div>
-                <div class="ml-2 text-sm font-semibold">Jerry Guzman</div>
-              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -108,38 +60,27 @@
           <div
             class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4"
           >
+            <div class="text-center pt-4 text-[#07d884] font-semibold">
+              <h3 class="capitalize">group Chat🥳🤗</h3>
+            </div>
             <div class="flex flex-col h-full overflow-x-auto mb-4">
               <div class="flex flex-col h-full">
                 <div class="grid grid-cols-12 gap-y-2">
                   <div class="col-start-1 col-end-8 p-3 rounded-lg">
                     <div class="flex flex-row items-center">
                       <div
-                        class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
+                        class="flex items-center justify-center size-10 rounded-full bg-indigo-500 flex-shrink-0"
                       >
-                        A
+                        <img
+                          src="../assets/images/space.jpg"
+                          alt=""
+                          class="size-10 rounded-full"
+                        />
                       </div>
                       <div
                         class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
                       >
                         <div>Hey How are you today?</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-start-1 col-end-8 p-3 rounded-lg">
-                    <div class="flex flex-row items-center">
-                      <div
-                        class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                      >
-                        A
-                      </div>
-                      <div
-                        class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
-                      >
-                        <div>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Vel ipsa commodi illum saepe numquam maxime
-                          asperiores voluptate sit, minima perspiciatis.
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -156,78 +97,6 @@
                         class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
                       >
                         <div>I'm ok what about you?</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-start-6 col-end-13 p-3 rounded-lg">
-                    <div
-                      class="flex items-center justify-start flex-row-reverse"
-                    >
-                      <div
-                        class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                      >
-                        A
-                      </div>
-                      <div
-                        class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
-                      >
-                        <div>
-                          Lorem ipsum dolor sit, amet consectetur adipisicing. ?
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-start-1 col-end-8 p-3 rounded-lg">
-                    <div class="flex flex-row items-center">
-                      <div
-                        class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                      >
-                        A
-                      </div>
-                      <div
-                        class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
-                      >
-                        <div>Lorem ipsum dolor sit amet !</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-start-6 col-end-13 p-3 rounded-lg">
-                    <div
-                      class="flex items-center justify-start flex-row-reverse"
-                    >
-                      <div
-                        class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                      >
-                        A
-                      </div>
-                      <div
-                        class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
-                      >
-                        <div>
-                          Lorem ipsum dolor sit, amet consectetur adipisicing. ?
-                        </div>
-                        <div
-                          class="absolute text-xs bottom-0 right-0 -mb-5 mr-2 text-gray-500"
-                        >
-                          Seen
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-start-1 col-end-8 p-3 rounded-lg">
-                    <div class="flex flex-row items-center">
-                      <div
-                        class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                      >
-                        A
-                      </div>
-                      <div
-                        class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
-                      >
-                        <div>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Perspiciatis, in.
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -279,7 +148,7 @@
       </div>
     </div>
 
-    <!-- <div v-for="msg in messages" :key="msg.date">
+    <!-- <div >
     </div> -->
     <p>State: {{ connected ? "Connected" : "Disconnected" }}</p>
   </div>
@@ -309,6 +178,7 @@ onMounted(() => {
 });
 onMounted(async () => {
   await profile.getProfile();
+  await profile.users();
 });
 
 const sendMessage = async () => {
