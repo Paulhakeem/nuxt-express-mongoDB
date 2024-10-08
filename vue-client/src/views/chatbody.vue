@@ -49,7 +49,7 @@
                   <img
                     :src="users.imageURL"
                     alt="profile-image"
-                    class="size-8 rounded-full object-cover"
+                    class="size-8 rounded-full object-cover hover:size-9 cursor-pointer"
                   />
                 </div>
               </div>
@@ -64,48 +64,16 @@
               <h3 class="capitalize">group Chat🥳🤗</h3>
             </div>
             <div class="flex flex-col h-full overflow-x-auto mb-4">
-              <div class="flex flex-col h-full">
-                <div class="grid grid-cols-12 gap-y-2">
-                  <div class="col-start-1 col-end-8 p-3 rounded-lg">
-                    <div class="flex flex-row items-center">
-                      <div
-                        class="flex items-center justify-center size-10 rounded-full bg-indigo-500 flex-shrink-0"
-                      >
-                        <img
-                          src="../assets/images/space.jpg"
-                          alt=""
-                          class="size-10 rounded-full"
-                        />
-                      </div>
-                      <div
-                        class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
-                      >
-                        <div>Hey How are you today?</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-start-6 col-end-13 p-3 rounded-lg">
-                    <div
-                      class="flex items-center justify-start flex-row-reverse"
-                    >
-                      <div
-                        class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                      >
-                        A
-                      </div>
-                      <div
-                        class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
-                      >
-                        <div>I'm ok what about you?</div>
-                      </div>
-                    </div>
+              <div v-for="chats in messages" :key="chats.id" class="flex flex-col">
+                <div class="grid grid-cols-12">
+                  <div>
+                    <p>{{ chats.text }}</p>
                   </div>
                 </div>
               </div>
             </div>
             <form
               @submit.prevent="sendMessage"
-              @keyup="sendMessage"
               class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4"
             >
               <div>
@@ -155,6 +123,7 @@
 </template>
 
 <script setup>
+import axios from "axios";
 import { state } from "../../socket";
 import { socket } from "../../socket";
 import { useUsersStore } from "@/store/user";
@@ -170,11 +139,10 @@ const text = ref("");
 
 const messages = ref([]);
 
-onMounted(() => {
+onMounted(async() => {
   socket.on("chat message", (msg) => {
     messages.value.push(msg);
   });
-  console.log(messages.value);
 });
 onMounted(async () => {
   await profile.getProfile();
