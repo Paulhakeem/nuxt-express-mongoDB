@@ -12,6 +12,8 @@
             </div>
             <div class="ml-2 font-bold text-2xl text-gray-700">LetsChat</div>
           </div>
+
+          <!-- USER PROFILE -->
           <div
             class="flex flex-col items-center bg-green-200 border border-gray-200 mt-4 w-full py-6 px-4 rounded-lg"
           >
@@ -28,13 +30,17 @@
             <div class="text-xs text-gray-500">Lead UI/UX Designer</div>
             <div class="flex flex-row items-center mt-3">
               <div
-                class="flex flex-col justify-center h-4 w-8 bg-indigo-500 rounded-full"
-              >
-                <div class="h-3 w-3 bg-white rounded-full self-end mr-1"></div>
+                v-if="connected === true"
+                class="size-2 bg-[#07d884] rounded-full mr-1"
+              ></div>
+              <div v-else class="size-2 bg-red-500 rounded-full mr-1"></div>
+              <div class="leading-none ml-1 text-xs font-medium text-gray-600">
+                {{ connected ? "Online" : "Offline" }}
               </div>
-              <div class="leading-none ml-1 text-xs">Active</div>
             </div>
           </div>
+
+          <!-- OTHER USERS -->
           <div class="flex flex-col mt-8">
             <div class="flex flex-row items-center justify-between text-xs">
               <span class="font-bold text-gray-700">Active Users</span>
@@ -56,6 +62,8 @@
             </div>
           </div>
         </div>
+
+        <!-- GROUP CHAT -->
         <div class="flex flex-col flex-auto h-full p-6">
           <div
             class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4"
@@ -64,14 +72,17 @@
               <h3 class="capitalize">group Chat🥳🤗</h3>
             </div>
             <div class="flex flex-col h-full overflow-x-auto mb-4">
-              <div v-for="chats in messages" :key="chats.id" class="flex flex-col">
-                <div class="grid grid-cols-12">
-                  <div>
-                    <p>{{ chats.text }}</p>
+              <div v-for="chats in messages" :key="chats.id" class="pt-10">
+                <div class="w-96 bg-white h-auto rounded-lg">
+                  <div class="p-3">
+                    <p class="first-letter:uppercase text-gray-700">{{ chats.text }}</p>
+                    <span class="text-xs text-gray-400">{{ chats.date }}</span>
                   </div>
                 </div>
               </div>
             </div>
+
+            <!-- FORM INPUT -->
             <form
               @submit.prevent="sendMessage"
               class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4"
@@ -115,10 +126,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <div >
-    </div> -->
-    <p>State: {{ connected ? "Connected" : "Disconnected" }}</p>
   </div>
 </template>
 
@@ -139,18 +146,29 @@ const text = ref("");
 
 const messages = ref([]);
 
-onMounted(async() => {
+onMounted(async () => {
   socket.on("chat message", (msg) => {
     messages.value.push(msg);
   });
-});
-onMounted(async () => {
   await profile.getProfile();
   await profile.users();
+  await getChats();
 });
 
 const sendMessage = async () => {
-  socket.emit("chat message", { text: text.value });
+  socket.emit("chat message", { text: text.value});
   text.value = "";
+};
+
+const getChats = async () => {
+  await axios
+    .get("http://localhost:5000/api/messages")
+    .then((result) => {
+      messages.value = result.data.messages;
+      
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 </script>

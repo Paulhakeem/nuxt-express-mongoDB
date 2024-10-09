@@ -34,17 +34,25 @@ app.use("/api", messageRouter);
 app.use("/api", user);
 
 // RUN WHEN CLIENT CONNECTED
-io.on("connection", (socket) => {
+io.on("connection", (socket) => { 
   console.log("A user with ID: " + socket.id + " connected");
+  socket.broadcast.emit('A user join the chat')
+  
 
+  // SEND CHAT
   socket.on("chat message", async (msg) => {
-    const message = new Message({ text: msg.text });
+    const message = new Message({ text: msg.text});
     await message.save();
     io.emit("chat message", msg);
   });
 
+
+
+
+// DISCONNECTED
   socket.on("disconnect", () => {
     console.log("User disconnected"); 
+    io.emit('A user left the chat')
   });
 });
 
