@@ -175,7 +175,7 @@ socket.on("chats", (messages) => {
 
 // send message
 const sendMessage = async () => {
-  socket.emit("createMessage", {text: text.value });
+  socket.emit("createMessage", {text: text.value, userID: profile.getProfile._id });
   text.value = "";
 };
 </script>
