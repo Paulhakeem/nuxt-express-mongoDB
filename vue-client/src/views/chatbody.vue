@@ -72,10 +72,19 @@
               <h3 class="capitalize">group Chat🥳🤗</h3>
             </div>
             <div class="flex flex-col h-full overflow-x-auto mb-4">
-              <div v-for="chats in messages" :key="chats.id" class="pt-10">
+              <div
+                v-for="chats in inbox"
+                :key="chats.id"
+                class="pt-10 scroll-auto"
+              >
                 <div class="w-96 bg-white h-auto rounded-lg">
                   <div class="p-3">
-                    <p class="first-letter:uppercase text-gray-700">{{ chats.text }}</p>
+                    <h5 class="capitalize font-medium text-[#07d884]">
+                      {{ profile.user.name }}
+                    </h5>
+                    <p class="first-letter:uppercase text-gray-700">
+                      {{ chats.text }}
+                    </p>
                     <span class="text-xs text-gray-400">{{ chats.date }}</span>
                   </div>
                 </div>
@@ -140,35 +149,33 @@ const connected = computed(() => {
   return state.connected;
 });
 
+const userProfiles = computed((id) => {});
+
 const profile = useUsersStore();
 
 const text = ref("");
 
-const messages = ref([]);
+const inbox = ref([]);
 
 onMounted(async () => {
-  socket.on("chat message", (msg) => {
-    messages.value.push(msg);
-  });
   await profile.getProfile();
   await profile.users();
-  await getChats();
 });
 
-const sendMessage = async () => {
-  socket.emit("chat message", { text: text.value});
-  text.value = "";
-};
 
-const getChats = async () => {
-  await axios
-    .get("http://localhost:5000/api/messages")
-    .then((result) => {
-      messages.value = result.data.messages;
-      
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+
+// getting client messages from db
+socket.on("chats", (messages) => {
+  inbox.value = messages;
+
+  socket.on("createMessage", (msg) => {
+    inbox.value.push(msg);
+  });
+});
+
+// send message
+const sendMessage = async () => {
+  socket.emit("createMessage", {text: text.value });
+  text.value = "";
 };
 </script>
