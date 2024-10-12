@@ -155,6 +155,7 @@ const profile = useUsersStore();
 
 const text = ref("");
 
+
 const inbox = ref([]);
 
 onMounted(async () => {
@@ -168,14 +169,15 @@ onMounted(async () => {
 socket.on("chats", (messages) => {
   inbox.value = messages;
 
-  socket.on("createMessage", (msg) => {
-    inbox.value.push(msg);
+  socket.on("createMessage", (text) => {
+    inbox.value.push(text);
   });
 });
 
 // send message
 const sendMessage = async () => {
-  socket.emit("createMessage", {text: text.value, userID: profile.getProfile._id });
+
+  socket.emit("createMessage", {text: text.value });
   text.value = "";
 };
 </script>

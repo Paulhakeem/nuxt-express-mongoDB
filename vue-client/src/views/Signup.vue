@@ -130,14 +130,13 @@ const email = ref("");
 const password = ref("");
 
 const signupUser = async () => {
-  const user = await createUser(name.value, email.value, password.value);
-  if (user) {
+  await createUser(name.value, email.value, password.value).then((result) => {
     router.push({
-      path: "/dashboard",
+      path: "/darshboard",
     });
-  }
-  console.log("something went wrong");
+  }).catch((err) => {
+    console.log(err.message);
+    
+  });
 };
 </script>
-
-<style lang="scss" scoped></style>

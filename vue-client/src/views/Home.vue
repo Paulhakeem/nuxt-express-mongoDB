@@ -37,13 +37,14 @@
         <div class="pt-8 mb-4">
           <h4 class="text-center text-white font-semibold">Login</h4>
           <div class="flex flex-col justify-center items-center pt-6">
-            <form method="post">
+            <form @submit.prevent="signIn" method="post">
               <label
                 class="font-semibold text-xs text-white"
                 for="usernameField"
                 >Email</label
               >
               <input
+                v-model="email"
                 class="flex items-center h-9 px-4 w-72 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
                 type="email"
               />
@@ -53,6 +54,7 @@
                 >Password</label
               >
               <input
+                v-model="password"
                 class="flex items-center h-9 px-4 w-72 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
                 type="password"
               />
@@ -70,37 +72,29 @@
                   />
                   <p>Remember Me</p>
                 </div>
-
-                <nuxt-link to="/forgetpassword">
-                  <span>
-                    <p class="hover:text-[#07d884] cursor-pointer">
-                      Forget Your Password
-                    </p>
-                  </span>
-                </nuxt-link>
+                <span>
+                  <p class="hover:text-[#07d884] cursor-pointer">
+                    Forget Your Password
+                  </p>
+                </span>
               </div>
 
               <div class="text-center">
-                <RouterLink to="/darshboard">
-                  <button
+                <button
                   class="h-10 px-6 w-64 bg-[#07d884] mt-8 rounded font-semibold text-sm text-blue-100"
                 >
                   Login
                 </button>
-                </RouterLink>
-               
               </div>
               <!-- login using providers -->
-               <Providers/>
+              <Providers />
               <!--  -->
               <div class="flex justify-center text-xs text-white pt-4">
                 <a>New user</a>
                 <span class="mx-2 text-gray-300">/</span>
-                <RouterLink to="/signup"
-                  ><a class="font-semibold hover:text-[#07d884]"
-                    >Sign Up</a
-                  ></RouterLink
-                >
+                <RouterLink to="/signup">
+                  <a class="font-semibold hover:text-[#07d884]">Sign Up</a>
+                </RouterLink>
               </div>
             </form>
             <!-- Component End  -->
@@ -112,8 +106,27 @@
 </template>
 
 <script setup>
-import { RouterLink } from "vue-router";
+import { RouterLink, useRouter } from "vue-router";
 import Providers from "@/components/Providers.vue";
-</script>
+import { useAuthStore } from "@/store/auth";
+import { ref } from "vue";
 
-<style lang="scss" scoped></style>
+const router = useRouter();
+
+const email = ref("");
+const password = ref("");
+
+const { loginUser } = useAuthStore();
+
+const signIn = async () => {
+  await loginUser(email.value, password.value)
+    .then((result) => {
+      router.push({
+        path: "/darshboard",
+      });
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+</script>

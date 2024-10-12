@@ -38,7 +38,7 @@ io.on("connection", (socket) => {
   console.log("A user with ID: " + socket.id + " connected");
 
   // Send existing messages to the connected client
-  Message.find().then((messages) => {
+  Message.find().sort({date: 1}).exec().then((messages) => {
     socket.emit("chats", messages);
   });
 
@@ -51,7 +51,7 @@ io.on("connection", (socket) => {
         io.emit("createMessage", msg);
       })
       .catch((err) => {
-        alert(err)
+        return err.message
       });
   });
 
