@@ -10,6 +10,7 @@ const user = require("../router/profile");
 const helmet = require("helmet");
 const socketio = require("socket.io");
 const Message = require("../model/messages");
+const users = require("../model/user")
 
 const app = express();
 const server = http.createServer(app);
@@ -40,6 +41,11 @@ io.on("connection", (socket) => {
   // Send existing messages to the connected client
   Message.find().sort({date: 1}).exec().then((messages) => {
     socket.emit("chats", messages);
+  });
+
+  // geting users
+  users.find().then((joinusers) => {
+    socket.emit("users", joinusers);
   });
 
   // Listen for new messages from the client

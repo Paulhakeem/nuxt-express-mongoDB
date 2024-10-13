@@ -116,33 +116,30 @@
         <Chart />
 
         <!-- users -->
-        <div
-          class="bg-white w-full rounded-md mt-6 h-auto p-4"
-        >
-        <div v-if="loadUsers" class="">
-          <Loading/>
-        </div>
+        <div class="bg-white w-full rounded-md mt-6 h-auto p-4">
+          <div v-if="loadUsers" class="">
+            <Loading />
+          </div>
           <div class="flex flex-wrap gap-6 justify-between">
             <div v-for="users in users" :key="users.id">
-            <div class="flex gap-4 items-center">
-              <img
-                :src="users.imageURL"
-                alt="profile-image"
-                class="size-10 rounded-full object-cover border border-1 border-[#07d884]"
-              />
-              <div>
-                <p class="capitalize font-medium text-gray-600">
-                  {{ users.name }}
-                </p>
-                <span class="text-sm text-gray-600">{{ users.email }}</span>
+              <div class="flex gap-4 items-center">
+                <img
+                  :src="users.imageURL"
+                  alt="profile-image"
+                  class="size-10 rounded-full object-cover border border-1 border-[#07d884]"
+                />
+                <div>
+                  <p class="capitalize font-medium text-gray-600">
+                    {{ users.name }}
+                  </p>
+                  <span class="text-sm text-gray-600">{{ users.email }}</span>
+                </div>
               </div>
             </div>
-          </div>
           </div>
         </div>
       </div>
     </div>
-   
   </main>
 </template>
 
@@ -152,28 +149,23 @@ import Search from "@/components/Search.vue";
 import Chart from "@/components/Chart.vue";
 import Profile from "@/components/Profile.vue";
 import Loading from "@/components/Loading.vue";
-import axios from "axios";
-import { ref, onMounted } from "vue";
-
-
-
+import { ref} from "vue";
+import { socket } from "../../socket";
 
 const users = ref([]);
 
 const loadUsers = ref(true);
 
-onMounted(async () => {
+
+socket.on("users", (joinusers) => {
   try {
-    const user = await axios.get("http://localhost:5000/api/users");
-    if (user) {
-      users.value = user.data.data.users;
-    }
+    console.log(joinusers);
+    users.value = joinusers;
   } catch (error) {
     console.log(error);
-  } finally {
-    loadUsers.value = false;
+    
+  }finally{
+    loadUsers.value = false; 
   }
-
-
 });
 </script>
