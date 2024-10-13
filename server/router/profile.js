@@ -1,10 +1,9 @@
-const express = require("express")
-const profile = require("../controllers/profileController")
+const user = require("../controllers/profileController")
 
-const router = express.Router()
+const express = require('express')
 
+const router = express.Router();
 
-router.route('/profile').get(profile.userProfile)
+router.route('/profile').get(user.userProfile)
 
-
-module.exports = router
+module.exports = router;
