@@ -38,7 +38,9 @@
       <!--  -->
       <div>
         <div class="text-center pt-3">
-          <h3 class="text-xl font-semibold text-gray-800 capitalize">{{ profile.user.name }}</h3>
+          <h3 class="text-xl font-semibold text-gray-800 capitalize">
+            {{ profile.user.name }}
+          </h3>
           <p class="text-sm text-gray-500">{{ profile.user.email }}</p>
         </div>
 
@@ -83,13 +85,13 @@ const toggleModal = () => {
   modalActive.value = !modalActive.value;
 };
 
-const profile = useUsersStore()
+const profile = useUsersStore();
 
 
 onMounted(async () => {
-await profile.getProfile()
-
+  await profile.getProfile();
 });
+
 </script>
 
 <style lang="scss" scoped></style>
