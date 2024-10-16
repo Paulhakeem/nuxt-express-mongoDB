@@ -3,14 +3,11 @@
   <main>
     <div>
       <button
-        data-drawer-target="default-sidebar"
-        data-drawer-toggle="default-sidebar"
-        aria-controls="default-sidebar"
-        type="button"
         class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
       >
         <span class="sr-only">Open sidebar</span>
         <font-awesome-icon
+          @click="openMenu"
           :icon="['fas', 'bars']"
           class="text-gray-800 text-2xl"
         />
@@ -21,6 +18,7 @@
     </div>
 
     <aside
+      v-if="showMenu"
       id="default-sidebar"
       class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
       aria-label="Sidebar"
@@ -149,40 +147,48 @@ import Search from "@/components/Search.vue";
 import Chart from "@/components/Chart.vue";
 import Profile from "@/components/Profile.vue";
 import Loading from "@/components/Loading.vue";
-import { ref} from "vue";
+import { ref } from "vue";
 import { socket } from "../../socket";
+
+const showMenu = ref(true);
+
+const openMenu = () => {
+  showMenu.value = !showMenu.value;
+};
 
 const users = ref([]);
 
 const loadUsers = ref(true);
-
 
 socket.on("users", (joinusers) => {
   try {
     users.value = joinusers;
   } catch (error) {
     console.log(error);
-    
-  }finally{
-    loadUsers.value = false; 
+  } finally {
+    loadUsers.value = false;
   }
 });
 </script>
 
 <style>
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {}
+@media only screen and (max-width: 600px) {
+}
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {}
+@media only screen and (min-width: 600px) {
+}
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {}
+@media only screen and (min-width: 768px) {
+}
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {}
+@media only screen and (min-width: 992px) {
+}
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {}
-
+@media only screen and (min-width: 1200px) {
+}
 </style>
