@@ -17,7 +17,7 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 const corsOptions = {
-  origin: "http://localhost:5173/", // some legacy browsers (IE11, various SmartTVs) choke on 204
+  origin: "http://localhost:5173", // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
 env.config({ path: "./config.env" });

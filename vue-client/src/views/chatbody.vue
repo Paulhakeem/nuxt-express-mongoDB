@@ -46,10 +46,10 @@
               <span class="font-bold text-gray-700">Active Users</span>
               <span
                 class="flex items-center justify-center bg-gray-300 h-4 w-4 rounded-full"
-                >{{ profile.allUsers.length }}</span
+                >{{ users.length }}</span
               >
             </div>
-            <div v-for="users in profile.allUsers" :key="users.id" class="mt-4">
+            <div v-for="users in users" :key="users.id" class="mt-4">
               <div class="flex gap-4">
                 <div>
                   <img
@@ -71,13 +71,17 @@
             <div class="text-center pt-4 text-[#07d884] font-semibold">
               <h3 class="capitalize">group Chat🥳🤗</h3>
             </div>
-            <div class="flex flex-col h-full overflow-x-auto mb-4">
+            <div class="h-full overflow-x-auto mb-4">
               <div
-                v-for="chats in inbox"
-                :key="chats.id"
+                v-for="(chats, index) in inbox"
+                :key="index"
                 class="pt-10 scroll-auto"
               >
-                <div class="w-96 bg-white h-auto rounded-lg">
+                <!-- sender -->
+                <div
+                  v-if="profile.user._id === profile.user._id"
+                  class="w-96 bg-white h-auto rounded-lg"
+                >
                   <div class="p-3">
                     <h5 class="capitalize font-medium text-[#07d884]">
                       {{ profile.user.name }}
@@ -85,7 +89,23 @@
                     <p class="first-letter:uppercase text-gray-700">
                       {{ chats.text }}
                     </p>
-                    <span class="text-xs text-gray-400">{{ chats.date }}</span>
+                    <span class="text-xs text-gray-400">{{
+                      chats.timestamp
+                    }}</span>
+                  </div>
+                </div>
+                <!-- reciver -->
+                <div v-else class="w-96 bg-white h-auto rounded-lg">
+                  <div class="p-3">
+                    <h5 class="capitalize font-medium text-[#07d884]">
+                      {{ profile.user.name }}
+                    </h5>
+                    <p class="first-letter:uppercase text-gray-700">
+                      {{ chats.text }}
+                    </p>
+                    <span class="text-xs text-gray-400">
+                      {{ chats.timestamp }}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -139,31 +159,24 @@
 </template>
 
 <script setup>
-import axios from "axios";
 import { state } from "../../socket";
 import { socket } from "../../socket";
 import { useUsersStore } from "@/store/user";
 import { computed, ref, onMounted } from "vue";
 
+const profile = useUsersStore();
+
 const connected = computed(() => {
   return state.connected;
 });
 
-const userProfiles = computed((id) => {});
-
-const profile = useUsersStore();
-
 const text = ref("");
-
 
 const inbox = ref([]);
 
 onMounted(async () => {
   await profile.getProfile();
-  await profile.users();
 });
-
-
 
 // getting client messages from db
 socket.on("chats", (messages) => {
@@ -176,8 +189,18 @@ socket.on("chats", (messages) => {
 
 // send message
 const sendMessage = async () => {
-
-  socket.emit("createMessage", {text: text.value });
+  if (text.value === "") return;
+  socket.emit("createMessage", { text: text.value });
   text.value = "";
 };
+
+// loading users
+const users = ref([]);
+socket.on("users", (joinusers) => {
+  try {
+    users.value = joinusers;
+  } catch (error) {
+    console.log(error);
+  }
+});
 </script>
