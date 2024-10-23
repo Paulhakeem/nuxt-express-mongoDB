@@ -22,7 +22,8 @@ const userSchema = new mongoose.Schema({
     select: false,
   },
   date: { type: Date, default: Date.now },
-  imageURL: {type: String}
+  imageURL: { type: String },
+  messages:   [{ type: mongoose.Types.ObjectId, ref: 'Messages' }]
 });
 
 // encrypt
@@ -35,9 +36,6 @@ userSchema.pre("save", async function (next) {
 userSchema.methods.comparePassword = async function (pwd, pwdDB) {
   return await bcrypt.compare(pwd, pwdDB);
 };
-
-
-
 
 const User = mongoose.model("User", userSchema);
 

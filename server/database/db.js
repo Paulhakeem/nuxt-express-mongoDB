@@ -43,6 +43,7 @@ io.on("connection", (socket) => {
     socket.emit("chats", messages);
   });
 
+
   // geting users
   users.find().then((joinusers) => {
     socket.emit("users", joinusers);

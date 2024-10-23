@@ -21,15 +21,19 @@ exports.sendMessage = async (req, res) => {
 
 exports.getMessages = async (req, res, next) => {
   try {
-    const messages = await Messages.find()
-      .populate("user")
-    if (messages) {
-      res.status(200).json({ status: "sucess", messages });
+    const data = await Messages.aggregate().lookup({
+      from: "Users",
+      localField: "user",
+      foreignField: "_id",
+      as: "joinedData",
+    });
+    if (data) {
+      res.status(200).json({ status: "sucess", data });
     }
   } catch (error) {
     res.status(500).json({ status: "failed", error });
   }
-  next()
+ 
 };
 
 exports.deleteMessage = async (req, res) => {
