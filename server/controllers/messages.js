@@ -22,7 +22,7 @@ exports.sendMessage = async (req, res) => {
 exports.getMessages = async (req, res, next) => {
   try {
     const data = await Messages.aggregate().lookup({
-      from: "Users",
+      from: "User",
       localField: "user",
       foreignField: "_id",
       as: "joinedData",
