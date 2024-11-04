@@ -23,7 +23,6 @@ const userSchema = new mongoose.Schema({
   },
   date: { type: Date, default: Date.now },
   imageURL: { type: String },
-  messages:   [{ type: mongoose.Types.ObjectId, ref: 'Messages' }]
 });
 
 // encrypt

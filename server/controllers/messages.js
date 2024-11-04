@@ -1,7 +1,7 @@
 const Messages = require("../model/messages");
-
+const User = require("../model/user")
 exports.sendMessage = async (req, res) => {
-  const { text } = req.body;
+  const { text, user } = req.body;
   if (!text) {
     return res.status(400).json({
       status: "fail",
@@ -9,7 +9,7 @@ exports.sendMessage = async (req, res) => {
     });
   }
 
-  const newMessage = await Messages.create(req.body);
+  const newMessage = await Messages.create({user: User._id, text:text});
 
   if (newMessage) {
     return res.status(201).json({
@@ -22,13 +22,16 @@ exports.sendMessage = async (req, res) => {
 exports.getMessages = async (req, res, next) => {
   try {
     const data = await Messages.aggregate().lookup({
-      from: "User",
+      from: "user._id",
       localField: "user",
       foreignField: "_id",
       as: "joinedData",
     });
+    console.log(data);
     if (data) {
       res.status(200).json({ status: "sucess", data });
+     
+      
     }
   } catch (error) {
     res.status(500).json({ status: "failed", error });

@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const messageSchema = new mongoose.Schema({
-  user: [{
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
-  }],
+  },
   text: {
     type: String,
     required: true,
