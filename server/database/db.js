@@ -10,18 +10,19 @@ const user = require("../router/profile");
 const helmet = require("helmet");
 const socketio = require("socket.io");
 const Message = require("../model/messages");
-const users = require("../model/user")
+const users = require("../model/user");
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server);
-
-const corsOptions = {
-  origin: "http://localhost:5173", // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
+const io = socketio(server, {
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ['GET', 'POST', 'PATCH', 'DELETE']
+  },
+});
 
 env.config({ path: "./config.env" });
-app.use(cors(corsOptions));
+app.use(cors);
 app.use(helmet());
 app.use(bodyParser.json());
 
@@ -39,15 +40,17 @@ io.on("connection", (socket) => {
   console.log("A user with ID: " + socket.id + " connected");
 
   // Send existing messages to the connected client
-  Message.find().sort({date: 1}).exec().then((messages) => {
-    socket.emit("chats", messages);
-  });
-
+  Message.find()
+    .sort({ date: 1 })
+    .exec()
+    .then((messages) => {
+      socket.emit("chats", messages);
+    });
 
   // geting users
   users.find().then((joinusers) => {
     socket.emit("users", joinusers);
-  });
+  }); 
 
   // Listen for new messages from the client
   socket.on("createMessage", async (msg) => {
@@ -58,15 +61,13 @@ io.on("connection", (socket) => {
         io.emit("createMessage", msg);
       })
       .catch((err) => {
-        return err.message
+        return err.message;
       });
   });
 
-
-
   // DISCONNECTED
   socket.on("disconnect", () => {
-    console.log("User disconnected");
+    console.log("User with ID: " + socket.id + " disconnected");
     io.emit("A user left the chat");
   });
 });
