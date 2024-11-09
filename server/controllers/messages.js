@@ -1,5 +1,7 @@
 const Messages = require("../model/messages");
-const User = require("../model/user")
+const User = require("../model/user");
+
+// SEND MESSAGE
 exports.sendMessage = async (req, res) => {
   const { text, user } = req.body;
   if (!text) {
@@ -9,7 +11,7 @@ exports.sendMessage = async (req, res) => {
     });
   }
 
-  const newMessage = await Messages.create({user: User._id, text:text});
+  const newMessage = await Messages.create({ user: User._id, text: text });
 
   if (newMessage) {
     return res.status(201).json({
@@ -19,25 +21,20 @@ exports.sendMessage = async (req, res) => {
   }
 };
 
+// GETING MESSAGES
 exports.getMessages = async (req, res, next) => {
   try {
-    const data = await Messages.aggregate().lookup({
-      from: "user._id",
-      localField: "user",
-      foreignField: "_id",
-      as: "joinedData",
-    });
-    console.log(data);
+    const data = await Messages.find().populate('userId')
     if (data) {
       res.status(200).json({ status: "sucess", data });
-     
-      
     }
   } catch (error) {
     res.status(500).json({ status: "failed", error });
   }
- 
+  next()
 };
+
+// DELETING MESSAGE
 
 exports.deleteMessage = async (req, res) => {
   const id = req.params.id;

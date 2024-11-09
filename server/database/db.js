@@ -22,7 +22,7 @@ const io = socketio(server, {
 });
 
 env.config({ path: "./config.env" });
-app.use(cors);
+app.use(cors());
 app.use(helmet());
 app.use(bodyParser.json());
 
