@@ -135,7 +135,7 @@ import Loading from "@/components/Loading.vue";
 import { ref } from "vue";
 import { socket } from "../../socket";
 
-const isMenuOpen = ref(false);
+const isMenuOpen = ref(true);
 
 const openMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;

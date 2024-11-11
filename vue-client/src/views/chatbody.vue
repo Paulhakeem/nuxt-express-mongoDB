@@ -7,15 +7,6 @@
         <aside
           class="flex flex-col py-8 pl-6 pr-2 w-64 bg-white flex-shrink-0"
         >
-          <div class="flex flex-row items-center justify-center h-12 w-full">
-            <div
-              class="flex items-center justify-center rounded-2xl text-[#07d884] bg-indigo-100 h-10 w-10"
-            >
-              <font-awesome-icon :icon="['fas', 'message']" class="text-xl" />
-            </div>
-            <div class="ml-2 font-bold text-2xl text-gray-700">LetsChat</div>
-          </div>
-
           <!-- USER PROFILE -->
           <div
             class="flex flex-col items-center bg-green-200 border border-gray-200 mt-4 w-full py-6 px-4 rounded-lg"
@@ -74,14 +65,15 @@
             <div class="text-center pt-4 text-[#07d884] font-semibold">
               <h3 class="capitalize">group Chat🥳🤗</h3>
             </div>
-            <div class="h-full overflow-x-auto mb-4">
+            <div class="h-full overflow-x-auto">
               <div
                 v-for="(chats, index) in inbox"
                 :key="index"
-                class="pt-10 scroll-auto"
+                class="scroll-auto pt-10"
               >
                 <!-- sender -->
-                <div
+                <transition name="slide-fade" >
+                  <div
                   v-if="profile.user._id === profile.user._id"
                   class="w-96 bg-white h-auto rounded-lg"
                 >
@@ -97,17 +89,18 @@
                     }}</span>
                   </div>
                 </div>
+                </transition>
                 <!-- reciver -->
-                <div v-else class="w-96 bg-white h-auto rounded-lg">
+                <div class="w-96 bg-white h-auto rounded-lg bt-2 float-right">
                   <div class="p-3">
                     <h5 class="capitalize font-medium text-[#07d884]">
-                      {{ profile.user.name }}
+                      Admin
                     </h5>
                     <p class="first-letter:uppercase text-gray-700">
-                      {{ chats.text }}
+                     Sorry! System is under maintainace
                     </p>
                     <span class="text-xs text-gray-400">
-                      {{ chats.timestamp }}
+                      .. : ..
                     </span>
                   </div>
                 </div>
@@ -210,7 +203,18 @@ socket.on("users", (joinusers) => {
 
 <style>
 @media only screen and (max-width: 600px) {
-  aside {
-  }
+
+}
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
 }
 </style>
