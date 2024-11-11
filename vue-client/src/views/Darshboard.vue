@@ -2,110 +2,89 @@
   <!-- component -->
   <main>
     <div>
-      <button
-        class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      <span
+        class="absolute text-white text-4xl top-5 left-4 cursor-pointer"
+        @click="openMenu"
       >
-        <span class="sr-only">Open sidebar</span>
         <font-awesome-icon
-          @click="openMenu"
           :icon="['fas', 'bars']"
-          class="text-gray-800 text-2xl"
+          class="px-2 bg-gray-200 rounded-md"
         />
-      </button>
-
-      <!-- profile -->
+      </span>
       <Profile />
     </div>
 
-    <aside
-      v-if="showMenu"
-      id="default-sidebar"
-      class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
-      aria-label="Sidebar"
+    <!-- SIDEBAR -->
+    <div
+      class="sidebar fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900 transition-transform -translate-x-full sm:translate-x-0"
     >
-      <div class="h-full px-3 py-4 overflow-y-auto bg-gray-800">
-        <div class="h-16 w-full flex items-center space-x-4 ml-4">
+      <div class="text-gray-100 text-xl">
+        <div class="p-2.5 mt-1 flex items-center">
           <font-awesome-icon
             :icon="['fas', 'comment']"
             class="text-3xl text-[#07d884]"
           />
-          <p class="text-2xl leading-6 text-[#07d884]">LetsChat</p>
+          <h1 class="font-bold text-gray-200 text-[15px] ml-3">LetsChat</h1>
+          <font-awesome-icon
+            @click="openMenu"
+            :icon="['fas', 'xmark']"
+            class="text-gray-300 text-2xl cursor-pointer ml-28 lg:hidden"
+          />
         </div>
-        <ul class="space-y-2 ml-4">
-          <li>
-            <a
-              href="#"
-              class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-800 group"
-            >
-              <font-awesome-icon
-                :icon="['fas', 'gauge']"
-                class="flex-shrink-0 text-gray-300 transition duration-75 group-hover:text-gray-900"
-              />
-              <span class="ms-3">Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <RouterLink
-              to="/chat-body"
-              class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-800 group"
-            >
-              <font-awesome-icon
-                :icon="['fas', 'message']"
-                class="flex-shrink-0 text-gray-300 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white"
-              />
-              <span class="flex-1 ms-3 whitespace-nowrap">Messages</span>
-              <span
-                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-gray-800 bg-blue-100 rounded-full"
-                >3</span
-              >
-            </RouterLink>
-          </li>
-          <li>
-            <a
-              href="#"
-              class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-800 group"
-            >
-              <font-awesome-icon
-                :icon="['fas', 'bell']"
-                class="flex-shrink-0 text-gray-300 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white"
-              />
-              <span class="flex-1 ms-3 whitespace-nowrap">Notifications</span>
-              <span
-                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-gray-800 bg-blue-100 rounded-full"
-                >3</span
-              >
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-800 group"
-            >
-              <font-awesome-icon
-                :icon="['fas', 'gear']"
-                class="flex-shrink-0 text-gray-300 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white"
-              />
-              <span class="flex-1 ms-3 whitespace-nowrap">Settings</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-800 group"
-            >
-              <font-awesome-icon
-                :icon="['fas', 'right-from-bracket']"
-                class="flex-shrink-0 text-gray-300 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-              />
-              <span class="flex-1 ms-3 whitespace-nowrap text-gray-300"
-                >Sign Up</span
-              >
-            </a>
-          </li>
-        </ul>
+        <div class="my-2 bg-gray-600 h-[1px]"></div>
       </div>
-    </aside>
+      <div
+        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+      >
+        <font-awesome-icon
+          :icon="['fas', 'gauge']"
+          class="flex-shrink-0 text-gray-300 transition duration-75 group-hover:text-gray-900"
+        />
+        <span class="text-[15px] ml-4 text-gray-200 font-bold">Dashboard</span>
+      </div>
+      <div
+        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+      >
+        <font-awesome-icon
+          :icon="['fas', 'message']"
+          class="flex-shrink-0 text-gray-300 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white"
+        />
+        <span class="text-[15px] ml-4 text-gray-200 font-bold">Messages</span>
+        <span
+          class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-gray-200 bg-[#07d884] rounded-full"
+          >3</span
+        >
+      </div>
 
+      <div
+        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+      >
+        <font-awesome-icon
+          :icon="['fas', 'bell']"
+          class="flex-shrink-0 text-gray-300 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white"
+        />
+        <span class="text-[15px] ml-4 text-gray-200 font-bold"
+          >Notifications</span
+        >
+        <span
+          class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-gray-200 bg-[#07d884] rounded-full"
+          >3</span
+        >
+      </div>
+
+      <div
+        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+      >
+        <font-awesome-icon
+          :icon="['fas', 'right-from-bracket']"
+          class="flex-shrink-0 text-gray-300 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+        />
+        <span class="text-[15px] ml-4 text-gray-200 font-bold"
+          >Logout</span
+        >
+      </div>
+    </div>
+    <!-- END OF SIDEBAR -->
     <!-- DASHBOARD -->
 
     <div class="p-4 sm:ml-64 bg-gray-100 h-screen">
@@ -120,7 +99,9 @@
           </div>
           <div class="flex flex-wrap gap-6 justify-center">
             <div v-for="users in users" :key="users.id">
-              <div class="flex gap-2 items-center bg-white w-full rounded-md mt-6 h-auto p-4 cursor-pointer">
+              <div
+                class="flex gap-2 items-center bg-white w-full rounded-md mt-6 h-auto p-4 cursor-pointer"
+              >
                 <img
                   :src="users.imageURL"
                   alt="profile-image"
@@ -150,10 +131,11 @@ import Loading from "@/components/Loading.vue";
 import { ref } from "vue";
 import { socket } from "../../socket";
 
-const showMenu = ref(true);
+const isMenuOpen = ref(true);
 
 const openMenu = () => {
-  showMenu.value = !showMenu.value;
+  isMenuOpen.value = !isMenuOpen.value;
+  console.log("hello");
 };
 
 const users = ref([]);

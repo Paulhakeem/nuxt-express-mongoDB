@@ -86,7 +86,6 @@ const findUserByName = async () => {
 </script>
 
 <style>
- /* we will explain what these classes do next! */
 .pop-fade-enter-active{
   transition: all 0.3s ease-out;
 }
