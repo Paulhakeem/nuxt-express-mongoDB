@@ -34,21 +34,29 @@
       </form>
     </div>
 
-    <div
+   <transition name="pop-fade">
+    <div v-if="isUserExist" 
       class="justify-center max-w-md m-auto bg-gray-800 h-auto mt-3 rounded-md"
     >
       <h1 class="text-md font-medium text-gray-200 pl-4">Search:</h1>
       <!-- user search response -->
       <div class="py-4 pl-4 text-sm cursor-pointer">
         <div class="flex gap-4 items-center">
-          <img :src="user.imageURL" alt="profile-image" class="size-10 rounded-full object-cover" />
+          <img
+            :src="user.imageURL"
+            alt="profile-image"
+            class="size-10 rounded-full object-cover"
+          />
           <div>
-            <h4 class="text-gray-200 font-medium capitalize">{{ user.name }}</h4>
+            <h4 class="text-gray-200 font-medium capitalize">
+              {{ user.name }}
+            </h4>
             <p class="text-xs text-gray-400">{{ user.email }}</p>
           </div>
         </div>
       </div>
     </div>
+   </transition>
   </main>
 </template>
 
@@ -56,8 +64,9 @@
 import axios from "axios";
 import { ref } from "vue";
 
-const searchName = ref('');
+const searchName = ref("");
 const user = ref([]);
+const isUserExist = ref(false);
 
 const findUserByName = async () => {
   try {
@@ -65,13 +74,29 @@ const findUserByName = async () => {
       `http://localhost:5000/api/user/${searchName.value}`
     );
     if (searchUser) {
-      user.value = searchUser.data.data.user
+      user.value = searchUser.data.data.user;
       console.log(searchUser.data.data.user);
     }
   } catch (error) {
     console.error("Error searching users:", error.message);
+  } finally {
+    isUserExist.value = true;
   }
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style>
+ /* we will explain what these classes do next! */
+.pop-fade-enter-active{
+  transition: all 0.3s ease-out;
+}
+.pop-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1)
+}
+
+.pop-fade-enter-from,
+.pop-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+} 
+</style>

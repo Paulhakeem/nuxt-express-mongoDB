@@ -114,13 +114,13 @@
         <Chart />
 
         <!-- users -->
-        <div class="bg-white w-full rounded-md mt-6 h-auto p-4">
+        <div class="">
           <div v-if="loadUsers" class="">
             <Loading />
           </div>
-          <div class="flex flex-wrap gap-6 justify-between">
+          <div class="flex flex-wrap gap-6 justify-center">
             <div v-for="users in users" :key="users.id">
-              <div class="flex gap-4 items-center">
+              <div class="flex gap-2 items-center bg-white w-full rounded-md mt-6 h-auto p-4 cursor-pointer">
                 <img
                   :src="users.imageURL"
                   alt="profile-image"

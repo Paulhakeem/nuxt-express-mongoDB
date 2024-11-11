@@ -23,15 +23,25 @@ exports.sendMessage = async (req, res) => {
 
 // GETING MESSAGES
 exports.getMessages = async (req, res, next) => {
-  try {
-    const data = await Messages.find().populate('userId')
-    if (data) {
-      res.status(200).json({ status: "sucess", data });
-    }
-  } catch (error) {
-    res.status(500).json({ status: "failed", error });
-  }
-  next()
+  await Messages.aggregate([
+    {
+      $lookup: {
+        from: "users",
+        localField: "userName",
+        foreignField: "name",
+        as: "userInfor",
+      },
+    },
+    {
+      $unwind: "$userInfor",
+    },
+  ])
+    .then((result) => {
+      res.status(200).json({ status: "sucess", result });
+    })
+    .catch((err) => {
+      res.status(500).json({ status: "failed", err });
+    });
 };
 
 // DELETING MESSAGE
