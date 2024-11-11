@@ -1,22 +1,22 @@
 <template>
   <!-- component -->
   <main>
-    <div>
+    <div class="pb-10">
       <span
         class="absolute text-white text-4xl top-5 left-4 cursor-pointer"
         @click="openMenu"
       >
         <font-awesome-icon
           :icon="['fas', 'bars']"
-          class="px-2 bg-gray-200 rounded-md"
+          class="px-2 text-gray-800"
         />
       </span>
       <Profile />
     </div>
 
     <!-- SIDEBAR -->
-    <div
-      class="sidebar fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900 transition-transform -translate-x-full sm:translate-x-0"
+    <div v-if="isMenuOpen"
+      class="fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900 transition-transform -translate-x-full sm:translate-x-0"
     >
       <div class="text-gray-100 text-xl">
         <div class="p-2.5 mt-1 flex items-center">
@@ -34,7 +34,7 @@
         <div class="my-2 bg-gray-600 h-[1px]"></div>
       </div>
       <div
-        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-green-600 text-white"
       >
         <font-awesome-icon
           :icon="['fas', 'gauge']"
@@ -42,8 +42,10 @@
         />
         <span class="text-[15px] ml-4 text-gray-200 font-bold">Dashboard</span>
       </div>
+
+     <RouterLink to="/chat-body">
       <div
-        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-green-600 text-white"
       >
         <font-awesome-icon
           :icon="['fas', 'message']"
@@ -55,9 +57,11 @@
           >3</span
         >
       </div>
+     </RouterLink>
+    
 
       <div
-        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-green-600 text-white"
       >
         <font-awesome-icon
           :icon="['fas', 'bell']"
@@ -73,7 +77,7 @@
       </div>
 
       <div
-        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-green-600 text-white"
       >
         <font-awesome-icon
           :icon="['fas', 'right-from-bracket']"
@@ -87,7 +91,7 @@
     <!-- END OF SIDEBAR -->
     <!-- DASHBOARD -->
 
-    <div class="p-4 sm:ml-64 bg-gray-100 h-screen">
+    <div class="p-4 sm:ml-64 bg-gray-100 h-screen ">
       <div class="p-4 rounded-lg">
         <Search />
         <Chart />
@@ -131,7 +135,7 @@ import Loading from "@/components/Loading.vue";
 import { ref } from "vue";
 import { socket } from "../../socket";
 
-const isMenuOpen = ref(true);
+const isMenuOpen = ref(false);
 
 const openMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
