@@ -6,17 +6,16 @@
         class="absolute text-white text-4xl top-5 left-4 cursor-pointer"
         @click="openMenu"
       >
-        <font-awesome-icon
-          :icon="['fas', 'bars']"
-          class="px-2 text-gray-800"
-        />
+        <font-awesome-icon :icon="['fas', 'bars']" class="px-2 text-gray-800" />
       </span>
       <Profile />
     </div>
 
     <!-- SIDEBAR -->
-    <div v-if="isMenuOpen"
-      class="fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900 transition-transform -translate-x-full sm:translate-x-0"
+   <transition name="slide">
+    <div
+      v-if="isMenuOpen"
+      class="fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900 sm:translate-x-0 z-50"
     >
       <div class="text-gray-100 text-xl">
         <div class="p-2.5 mt-1 flex items-center">
@@ -43,22 +42,21 @@
         <span class="text-[15px] ml-4 text-gray-200 font-bold">Dashboard</span>
       </div>
 
-     <RouterLink to="/chat-body">
-      <div
-        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-green-600 text-white"
-      >
-        <font-awesome-icon
-          :icon="['fas', 'message']"
-          class="flex-shrink-0 text-gray-300 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white"
-        />
-        <span class="text-[15px] ml-4 text-gray-200 font-bold">Messages</span>
-        <span
-          class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-gray-200 bg-[#07d884] rounded-full"
-          >3</span
+      <RouterLink to="/chat-body">
+        <div
+          class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-green-600 text-white"
         >
-      </div>
-     </RouterLink>
-    
+          <font-awesome-icon
+            :icon="['fas', 'message']"
+            class="flex-shrink-0 text-gray-300 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white"
+          />
+          <span class="text-[15px] ml-4 text-gray-200 font-bold">Messages</span>
+          <span
+            class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-gray-200 bg-[#07d884] rounded-full"
+            >3</span
+          >
+        </div>
+      </RouterLink>
 
       <div
         class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-green-600 text-white"
@@ -83,15 +81,14 @@
           :icon="['fas', 'right-from-bracket']"
           class="flex-shrink-0 text-gray-300 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
         />
-        <span class="text-[15px] ml-4 text-gray-200 font-bold"
-          >Logout</span
-        >
+        <span class="text-[15px] ml-4 text-gray-200 font-bold">Logout</span>
       </div>
     </div>
+   </transition>
     <!-- END OF SIDEBAR -->
     <!-- DASHBOARD -->
 
-    <div class="p-4 sm:ml-64 bg-gray-100 h-screen ">
+    <div class="p-4 sm:ml-64 bg-gray-100 h-screen">
       <div class="p-4 rounded-lg">
         <Search />
         <Chart />
@@ -176,5 +173,21 @@ socket.on("users", (joinusers) => {
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+}
+
+
+.slide-enter {
+  transform: translateX(-300px);
+}
+
+.slide-enter-active {
+  transition: all .3s ease-in;
+}
+
+.slide-leave-active {
+  transition: all .3s ease-in;
+}
+.slide-leave-to {
+  transform: translateX(-300px);
 }
 </style>
