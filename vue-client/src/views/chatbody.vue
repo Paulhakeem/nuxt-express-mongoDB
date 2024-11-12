@@ -3,10 +3,7 @@
     <!-- component -->
     <div class="flex h-screen antialiased text-gray-800">
       <div class="flex flex-row h-full w-full overflow-x-hidden">
-
-        <aside
-          class="flex flex-col py-8 pl-6 pr-2 w-64 bg-white flex-shrink-0"
-        >
+        <aside class="flex flex-col py-8 pl-6 pr-2 w-64 bg-white flex-shrink-0">
           <!-- USER PROFILE -->
           <div
             class="flex flex-col items-center bg-green-200 border border-gray-200 mt-4 w-full py-6 px-4 rounded-lg"
@@ -44,13 +41,23 @@
               >
             </div>
             <div v-for="users in users" :key="users.id" class="mt-4">
-              <div class="flex gap-4">
+              <div class="flex gap-4 relative">
                 <div>
                   <img
                     :src="users.imageURL"
                     alt="profile-image"
                     class="size-8 rounded-full object-cover hover:size-9 cursor-pointer"
                   />
+                  
+                    <div
+                      v-if="connected === true"
+                      class="size-2 bg-[#07d884] rounded-full mr-1 absolute top-0"
+                    ></div>
+                    <div
+                      v-else
+                      class="size-2 bg-red-500 rounded-full mr-1"
+                    ></div>
+                  
                 </div>
               </div>
             </div>
@@ -72,36 +79,32 @@
                 class="scroll-auto pt-10"
               >
                 <!-- sender -->
-                <transition name="slide-fade" >
+                <transition name="slide-fade">
                   <div
-                  v-if="profile.user._id === profile.user._id"
-                  class="w-96 bg-white h-auto rounded-lg"
-                >
-                  <div class="p-3">
-                    <h5 class="capitalize font-medium text-[#07d884]">
-                      {{ profile.user.name }}
-                    </h5>
-                    <p class="first-letter:uppercase text-gray-700">
-                      {{ chats.text }}
-                    </p>
-                    <span class="text-xs text-gray-400">{{
-                      chats.timestamp
-                    }}</span>
+                    v-if="profile.user._id === profile.user._id"
+                    class="w-96 bg-white h-auto rounded-lg"
+                  >
+                    <div class="p-3">
+                      <h5 class="capitalize font-medium text-[#07d884]">
+                        {{ profile.user.name }}
+                      </h5>
+                      <p class="first-letter:uppercase text-gray-700">
+                        {{ chats.text }}
+                      </p>
+                      <span class="text-xs text-gray-400">{{
+                        chats.timestamp
+                      }}</span>
+                    </div>
                   </div>
-                </div>
                 </transition>
                 <!-- reciver -->
                 <div class="w-96 bg-white h-auto rounded-lg bt-2 float-right">
                   <div class="p-3">
-                    <h5 class="capitalize font-medium text-[#07d884]">
-                      Admin
-                    </h5>
+                    <h5 class="capitalize font-medium text-[#07d884]">Admin</h5>
                     <p class="first-letter:uppercase text-gray-700">
-                     Sorry! System is under maintainace
+                      Sorry! System is under maintainace
                     </p>
-                    <span class="text-xs text-gray-400">
-                      .. : ..
-                    </span>
+                    <span class="text-xs text-gray-400"> .. : .. </span>
                   </div>
                 </div>
               </div>
@@ -203,7 +206,6 @@ socket.on("users", (joinusers) => {
 
 <style>
 @media only screen and (max-width: 600px) {
-
 }
 .slide-fade-enter-active {
   transition: all 0.3s ease-out;
