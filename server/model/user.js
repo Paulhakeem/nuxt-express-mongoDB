@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
   },
   date: { type: Date, default: Date.now },
   imageURL: { type: String },
+  active: {
+    type: Boolean,
+    default: true
+  },
 });
 
 // encrypt

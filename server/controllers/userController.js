@@ -75,7 +75,7 @@ exports.updateUser = async (req, res) => {
 exports.deleteUser = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const user = await Users.findByIdAndDelete(id);
+    const user = await Users.findByIdAndDelete(id, { active: false });
     if (!user) {
       res.status(404).json({
         status: "fail",
