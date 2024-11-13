@@ -1,9 +1,25 @@
 <template>
   <div>
+    <div  v-if="isMenuOpen === false" class="pt-4 pb-4 px-2">
+      <span
+        class="absolute text-white text-4xl left-4 cursor-pointer"
+        @click="openMenu"
+      >
+        <font-awesome-icon :icon="['fas', 'bars']" class="px-2 text-gray-500" />
+      </span>
+    </div>
     <!-- component -->
     <div class="flex h-screen antialiased text-gray-800">
       <div class="flex flex-row h-full w-full overflow-x-hidden">
-        <aside class="flex flex-col py-8 pl-6 pr-2 w-64 bg-white flex-shrink-0">
+        <aside
+          v-if="isMenuOpen"
+          class="flex flex-col py-8 pl-6 pr-2 w-64 bg-white flex-shrink-0 overflow-y-auto z-50"
+        >
+          <font-awesome-icon
+            @click="openMenu"
+            :icon="['fas', 'xmark']"
+            class="text-gray-500 text-2xl cursor-pointer ml-28 lg:hidden"
+          />
           <!-- USER PROFILE -->
           <div
             class="flex flex-col items-center bg-green-200 border border-gray-200 mt-4 w-full py-6 px-4 rounded-lg"
@@ -48,16 +64,12 @@
                     alt="profile-image"
                     class="size-8 rounded-full object-cover hover:size-9 cursor-pointer"
                   />
-                  
-                    <div
-                      v-if="connected === true"
-                      class="size-2 bg-[#07d884] rounded-full mr-1 absolute top-0"
-                    ></div>
-                    <div
-                      v-else
-                      class="size-2 bg-red-500 rounded-full mr-1"
-                    ></div>
-                  
+
+                  <div
+                    v-if="connected === true"
+                    class="size-2 bg-[#07d884] rounded-full mr-1 absolute top-0"
+                  ></div>
+                  <div v-else class="size-2 bg-red-500 rounded-full mr-1"></div>
                 </div>
               </div>
             </div>
@@ -67,10 +79,13 @@
         <!-- GROUP CHAT -->
         <div class="flex flex-col flex-auto h-full p-6">
           <div
-            class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4"
+            id="chat-body"
+            class="bg-[url('../assets/images/bg.jpg')] flex flex-col flex-auto flex-shrink-0 rounded-2xl h-full p-4"
           >
-            <div class="text-center pt-4 text-[#07d884] font-semibold">
-              <h3 class="capitalize">group Chat🥳🤗</h3>
+            <div class="text-center pt-4 font-semibold">
+              <h3 id="group-chat" class="capitalize text-white">
+                group Chat🥳🤗
+              </h3>
             </div>
             <div class="h-full overflow-x-auto">
               <div
@@ -169,6 +184,13 @@ const connected = computed(() => {
   return state.connected;
 });
 
+const isMenuOpen = ref(true);
+
+const openMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+  console.log("hello");
+};
+
 const text = ref("");
 
 const inbox = ref([]);
@@ -206,7 +228,58 @@ socket.on("users", (joinusers) => {
 
 <style>
 @media only screen and (max-width: 600px) {
+  .group-chat {
+    text-align: center;
+  }
+  form {
+    width: 100%;
+  }
+  input {
+    width: 100%;
+  }
+  .chat-body {
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+  }
 }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .group-chat {
+    text-align: center;
+  }
+  form {
+    width: 100%;
+  }
+  input {
+    width: 100%;
+  }
+  .chat-body {
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .group-chat {
+    text-align: center;
+  }
+  form {
+    width: 100%;
+  }
+  input {
+    width: 100%;
+  }
+  .chat-body {
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+  }
+}
+
+/* animation sidebar */
 .slide-fade-enter-active {
   transition: all 0.3s ease-out;
 }

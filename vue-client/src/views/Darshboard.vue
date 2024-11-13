@@ -136,7 +136,6 @@ const isMenuOpen = ref(true);
 
 const openMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
-  console.log("hello");
 };
 
 const users = ref([]);
