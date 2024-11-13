@@ -226,13 +226,10 @@ socket.on("users", (joinusers) => {
 });
 </script>
 
-<style>
+<style scoped>
 @media only screen and (max-width: 600px) {
   .group-chat {
     text-align: center;
-  }
-  form {
-    width: 100%;
   }
   input {
     width: 100%;
@@ -249,12 +246,6 @@ socket.on("users", (joinusers) => {
   .group-chat {
     text-align: center;
   }
-  form {
-    width: 100%;
-  }
-  input {
-    width: 100%;
-  }
   .chat-body {
     align-items: center;
     justify-content: center;
@@ -265,12 +256,6 @@ socket.on("users", (joinusers) => {
 @media only screen and (min-width: 768px) {
   .group-chat {
     text-align: center;
-  }
-  form {
-    width: 100%;
-  }
-  input {
-    width: 100%;
   }
   .chat-body {
     align-items: center;
