@@ -23,5 +23,7 @@ exports.userProfile = async (req, res, next) => {
         .json({ status: "failed", message: "something went wrong!" });
     }
   }
-  next()
+  next();
 };
+
+

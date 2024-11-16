@@ -73,7 +73,14 @@
                 </div>
               </div>
             </div>
+
+          <RouterLink to="/darshboard">
+            <div class="pt-20">
+              <Button>back to darshboard</Button>
+            </div>
+          </RouterLink>
           </div>
+      
         </aside>
 
         <!-- GROUP CHAT -->
@@ -139,11 +146,12 @@
               </div>
               <div class="flex-grow ml-4">
                 <div class="relative w-full">
-                  <input
+                  <textarea
                     v-model="text"
                     type="text"
+                    rows="4" cols="50"
                     class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
-                  />
+                  ></textarea>
                   <button
                     class="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600"
                   >
@@ -177,8 +185,10 @@ import { state } from "../../socket";
 import { socket } from "../../socket";
 import { useUsersStore } from "@/store/user";
 import { computed, ref, onMounted } from "vue";
+import { Button } from '@/components/ui/button'
 
 const profile = useUsersStore();
+
 
 const connected = computed(() => {
   return state.connected;

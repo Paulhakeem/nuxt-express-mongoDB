@@ -17,6 +17,7 @@ const props = defineProps({
     :as="as"
     :as-child="asChild"
     :class="cn(buttonVariants({ variant, size }), props.class)"
+    class="bg-gray-800 capitalize hover:text-green-600"
   >
     <slot />
   </Primitive>
