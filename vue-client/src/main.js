@@ -1,5 +1,8 @@
 import './assets/index.css'
 
+import ToastPlugin from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-bootstrap.css';
+
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
@@ -19,8 +22,11 @@ const app = createApp(App)
 
 app.component('font-awesome-icon', FontAwesomeIcon)
 
+
 app.use(pinia)
 
 app.use(router)
+
+app.use(ToastPlugin);
 
 app.mount('#app')

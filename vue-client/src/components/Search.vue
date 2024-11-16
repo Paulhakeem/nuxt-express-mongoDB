@@ -37,7 +37,6 @@
     <transition name="pop-fade">
       <div
         v-if="isUserExist"
-        @click="findUserByName"
         class="justify-center max-w-md m-auto bg-gray-800 h-auto mt-3 rounded-md"
       >
         <h1 class="text-md font-medium text-gray-200 pl-4">Search:</h1>
@@ -56,11 +55,12 @@
               <p class="text-xs text-gray-400">{{ user.email }}</p>
             </div>
 
-            <div class="flex gap-4 pl-32 items-center">
+            <div id="chatIcons" class="flex gap-4 pl-32 items-center">
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger>
                     <font-awesome-icon
+                      @click="chatUser"
                       :icon="['fas', 'message']"
                       class="text-lg text-gray-300"
                   /></TooltipTrigger>
@@ -87,6 +87,8 @@
 <script setup>
 import axios from "axios";
 import { ref } from "vue";
+import {useToast} from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
 import {
   Tooltip,
   TooltipContent,
@@ -97,6 +99,7 @@ import {
 const searchName = ref("");
 const user = ref([]);
 const isUserExist = ref(false);
+const $toast = useToast();
 
 const findUserByName = async () => {
   try {
@@ -113,6 +116,16 @@ const findUserByName = async () => {
     isUserExist.value = true;
   }
 };
+
+const chatUser = async () => {
+  try {
+        if (user._id === searchName._id ) { 
+           return $toast.success('message sent')
+        }
+    } catch (error) {
+        console.error(error); 
+    }
+};
 </script>
 
 <style>
@@ -127,5 +140,28 @@ const findUserByName = async () => {
 .pop-fade-leave-to {
   transform: translateX(20px);
   opacity: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .chatIcons{
+    padding-left: 8px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .chatIcons{
+    padding-left: 8px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .chatIcons{
+    padding-left: 8px;
+  }
+
+}
+@media only screen and (min-width: 992px) {
+  .chatIcons{
+    padding-left: 8px;
+  }
 }
 </style>
