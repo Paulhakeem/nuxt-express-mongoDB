@@ -3,11 +3,7 @@
     "version": 2,
     "builds": [
         {
-            "src": "vue-client",
-            "use": "@vercel/vue"
-        },
-        {
-            "src": "server",
+            "src": "*.js",
             "use": "@vercel/node"
           }
     ],
