@@ -34,13 +34,13 @@
       </form>
     </div>
 
+    <!-- SEARCH FOR A USER -->
     <transition name="pop-fade">
       <div
         v-if="isUserExist"
         class="justify-center max-w-md m-auto bg-gray-800 h-auto mt-3 rounded-md"
       >
         <h1 class="text-md font-medium text-gray-200 pl-4">Search:</h1>
-        <!-- user search response -->
         <div class="py-4 pl-4 text-sm cursor-pointer">
           <div class="flex gap-4 items-center">
             <img
@@ -55,15 +55,42 @@
               <p class="text-xs text-gray-400">{{ user.email }}</p>
             </div>
 
+            <!-- SEND MESSAGE TO A SPECIFIC USER -->
             <div id="chatIcons" class="flex gap-4 pl-32 items-center">
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger>
-                    <font-awesome-icon
-                      @click="chatUser"
-                      :icon="['fas', 'message']"
-                      class="text-lg text-gray-300"
-                  /></TooltipTrigger>
+                    <Popover>
+                      <PopoverTrigger>
+                        <font-awesome-icon
+                          @click="chatUser"
+                          :icon="['fas', 'message']"
+                          class="text-lg text-gray-300"
+                      /></PopoverTrigger>
+                      <PopoverContent>
+                        <div class="w-64">
+                          <div class="relative w-full min-w-[200px]">
+                            <textarea
+                              class="peer h-full min-h-[50px] w-full resize-none rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-600 focus:border-t-transparent focus:outline-0 disabled:resize-none disabled:border-0 disabled:bg-blue-gray-50"
+                              placeholder="Write your text "
+                            ></textarea>
+                            <label
+                              class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-gray-900 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-gray-600 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500"
+                            >
+                              Message
+                            </label>
+                          </div>
+
+                          <button
+                            class="rounded-md bg-slate-700 py-2 px-4 capitalize items-right border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                            type="button"
+                          >
+                            send
+                          </button>
+                        </div>
+                      </PopoverContent>
+                    </Popover>
+                  </TooltipTrigger>
                   <TooltipContent>
                     <p>send message</p>
                   </TooltipContent>
@@ -87,14 +114,20 @@
 <script setup>
 import axios from "axios";
 import { ref } from "vue";
-import {useToast} from 'vue-toast-notification';
-import 'vue-toast-notification/dist/theme-sugar.css';
+import { useToast } from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-sugar.css";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 const searchName = ref("");
 const user = ref([]);
@@ -119,12 +152,12 @@ const findUserByName = async () => {
 
 const chatUser = async () => {
   try {
-        if (user._id === searchName._id ) { 
-           return $toast.success('message sent')
-        }
-    } catch (error) {
-        console.error(error); 
+    if (user._id === searchName._id) {
+      return $toast.success("message sent");
     }
+  } catch (error) {
+    console.error(error);
+  }
 };
 </script>
 
@@ -143,24 +176,23 @@ const chatUser = async () => {
 }
 
 @media only screen and (max-width: 600px) {
-  .chatIcons{
+  .chatIcons {
     padding-left: 8px;
   }
 }
 
 @media only screen and (min-width: 600px) {
-  .chatIcons{
+  .chatIcons {
     padding-left: 8px;
   }
 }
 @media only screen and (min-width: 768px) {
-  .chatIcons{
+  .chatIcons {
     padding-left: 8px;
   }
-
 }
 @media only screen and (min-width: 992px) {
-  .chatIcons{
+  .chatIcons {
     padding-left: 8px;
   }
 }
