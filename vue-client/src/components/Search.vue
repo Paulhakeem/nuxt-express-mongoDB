@@ -69,11 +69,7 @@
                           class="text-lg text-gray-300"
                       /></PopoverTrigger>
                       <PopoverContent>
-                        <form
-                          @submit.prevent="chatUser"
-                          @keyup="chatUser"
-                          class="w-64"
-                        >
+                        <form @submit.prevent="chatUser" class="w-64">
                           <div class="relative w-full min-w-[200px]">
                             <textarea
                               v-model="message"
@@ -88,9 +84,7 @@
                           </div>
 
                           <button
-                            @click="chatUser"
                             class="rounded-md bg-slate-700 py-2 px-4 capitalize items-right border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                            type="button"
                           >
                             send
                           </button>
@@ -165,9 +159,10 @@ const chatUser = async () => {
   try {
     if (user._id === searchName._id) {
       socket.emit("private-text", { message: message.value });
+      message.value = "";
       return $toast.success("Message sent!");
     }
-    message.value = "";
+   
   } catch (error) {
     return $toast.error("Message Not Sent!");
   }

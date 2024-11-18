@@ -73,7 +73,7 @@ io.on("connection", (socket) => {
   socket.on("private-text", async(message)=>{
     const text = new Chat(message)
     await text.save().then(()=>{
-      console.log(message, userId);
+      console.log(message);
       
     })
     
