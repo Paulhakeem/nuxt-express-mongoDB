@@ -44,7 +44,7 @@
               80%
             </span>
           </div>
-            <p class="ml-10 text-gray-600 sm:text-xl">Performance</p>
+            <p class="ml-10 text-gray-600 sm:text-xl">Insights</p>
 
             <span
               class="ml-auto text-xl font-medium text-[#07d884] sm:block"

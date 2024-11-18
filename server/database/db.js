@@ -11,12 +11,13 @@ const helmet = require("helmet");
 const socketio = require("socket.io");
 const Message = require("../model/messages");
 const users = require("../model/user");
+const Chat = require("../model/private-chat")
 
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
   cors: {
-    origin: "https://mevn-client-chat.vercel.app/",
+    origin: "http://localhost:5173",
     methods: ['GET', 'POST', 'PATCH', 'DELETE']
   },
 });
@@ -64,6 +65,20 @@ io.on("connection", (socket) => {
         return err.message;
       });
   });
+
+
+
+
+  // PRIVATE CHATING
+  socket.on("private-text", async(message)=>{
+    const text = new Chat(message)
+    await text.save().then(()=>{
+      console.log(message, userId);
+      
+    })
+    
+  })
+
 
   // DISCONNECTED
   socket.on("disconnect", () => {

@@ -57,20 +57,20 @@
               >
             </div>
             <div v-for="users in users" :key="users.id" class="mt-4">
-              <div class="flex gap-4 relative">
-                <div>
+              <div class="relative">
+                 <div class="flex flex-row gap-4 justify-between">
                   <img
                     :src="users.imageURL"
                     alt="profile-image"
-                    class="size-8 rounded-full object-cover hover:size-9 cursor-pointer"
+                    class="flex size-8 rounded-full object-cover hover:size-9 cursor-pointer"
                   />
-
+                 </div>
                   <div
                     v-if="connected === true"
                     class="size-2 bg-[#07d884] rounded-full mr-1 absolute top-0"
                   ></div>
                   <div v-else class="size-2 bg-red-500 rounded-full mr-1"></div>
-                </div>
+            
               </div>
             </div>
 

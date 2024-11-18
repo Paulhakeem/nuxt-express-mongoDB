@@ -1,9 +1,8 @@
 const Messages = require("../model/messages");
-const User = require("../model/user");
 
 // SEND MESSAGE
 exports.sendMessage = async (req, res) => {
-  const { text, user } = req.body;
+  const { text } = req.body;
   if (!text) {
     return res.status(400).json({
       status: "fail",
@@ -11,7 +10,10 @@ exports.sendMessage = async (req, res) => {
     });
   }
 
-  const newMessage = await Messages.create({ user: User._id, text: text });
+  const newMessage = await Messages.create({
+    userId: req.ser?._id,
+    text: req?.body?.text,
+  });
 
   if (newMessage) {
     return res.status(201).json({
@@ -23,19 +25,7 @@ exports.sendMessage = async (req, res) => {
 
 // GETING MESSAGES
 exports.getMessages = async (req, res, next) => {
-  await Messages.aggregate([
-    {
-      $lookup: {
-        from: "users",
-        localField: "userName",
-        foreignField: "name",
-        as: "userInfor",
-      },
-    },
-    {
-      $unwind: "$userInfor",
-    },
-  ])
+  await Messages.find()
     .then((result) => {
       res.status(200).json({ status: "sucess", result });
     })
@@ -55,16 +45,6 @@ exports.deleteMessage = async (req, res) => {
     return res.status(200).json({
       status: "success",
       message: "message deleted",
-    });
-  }
-};
-
-exports.joinCollection = async (req, res) => {
-  const respond = await Messages.find().populate("text").exec();
-  if (respond) {
-    res.status(200).json({
-      status: "success",
-      respond,
     });
   }
 };

@@ -37,6 +37,7 @@
     <!-- SEARCH FOR A USER -->
     <transition name="pop-fade">
       <div
+        id="search-container"
         v-if="isUserExist"
         class="justify-center max-w-md m-auto bg-gray-800 h-auto mt-3 rounded-md"
       >
@@ -44,6 +45,7 @@
         <div class="py-4 pl-4 text-sm cursor-pointer">
           <div class="flex gap-4 items-center">
             <img
+              id="img"
               :src="user.imageURL"
               alt="profile-image"
               class="size-10 rounded-full object-cover"
@@ -63,14 +65,18 @@
                     <Popover>
                       <PopoverTrigger>
                         <font-awesome-icon
-                          @click="chatUser"
                           :icon="['fas', 'message']"
                           class="text-lg text-gray-300"
                       /></PopoverTrigger>
                       <PopoverContent>
-                        <div class="w-64">
+                        <form
+                          @submit.prevent="chatUser"
+                          @keyup="chatUser"
+                          class="w-64"
+                        >
                           <div class="relative w-full min-w-[200px]">
                             <textarea
+                              v-model="message"
                               class="peer h-full min-h-[50px] w-full resize-none rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-600 focus:border-t-transparent focus:outline-0 disabled:resize-none disabled:border-0 disabled:bg-blue-gray-50"
                               placeholder="Write your text "
                             ></textarea>
@@ -82,12 +88,13 @@
                           </div>
 
                           <button
+                            @click="chatUser"
                             class="rounded-md bg-slate-700 py-2 px-4 capitalize items-right border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                             type="button"
                           >
                             send
                           </button>
-                        </div>
+                        </form>
                       </PopoverContent>
                     </Popover>
                   </TooltipTrigger>
@@ -112,6 +119,7 @@
 </template>
 
 <script setup>
+import { socket } from "../../socket";
 import axios from "axios";
 import { ref } from "vue";
 import { useToast } from "vue-toast-notification";
@@ -133,7 +141,9 @@ const searchName = ref("");
 const user = ref([]);
 const isUserExist = ref(false);
 const $toast = useToast();
+const message = ref("");
 
+// SEARCH USER
 const findUserByName = async () => {
   try {
     const searchUser = await axios.get(
@@ -150,18 +160,21 @@ const findUserByName = async () => {
   }
 };
 
+// PRIVATE CHAT
 const chatUser = async () => {
   try {
     if (user._id === searchName._id) {
-      return $toast.success("message sent");
+      socket.emit("private-text", { message: message.value });
+      return $toast.success("Message sent!");
     }
+    message.value = "";
   } catch (error) {
-    console.error(error);
+    return $toast.error("Message Not Sent!");
   }
 };
 </script>
 
-<style>
+<style scoped>
 .pop-fade-enter-active {
   transition: all 0.3s ease-out;
 }
@@ -176,24 +189,52 @@ const chatUser = async () => {
 }
 
 @media only screen and (max-width: 600px) {
+  .search-container {
+    width: 100%;
+  }
+  .img {
+    object-fit: cover;
+    border-radius: 9999px;
+    height: 50%;
+    width: 50%;
+  }
   .chatIcons {
-    padding-left: 8px;
+    padding-left: 5px;
   }
 }
 
 @media only screen and (min-width: 600px) {
+  .search-container {
+    width: 100%;
+    background-color: aquamarine;
+  }
+  .img {
+    object-fit: cover;
+    border-radius: 9999px;
+    height: 50%;
+    width: 50%;
+  }
   .chatIcons {
-    padding-left: 8px;
+    padding-left: 5px;
   }
 }
 @media only screen and (min-width: 768px) {
+  .search-container {
+    width: 100%;
+  }
+  .img {
+    object-fit: cover;
+    border-radius: 9999px;
+    height: 50%;
+    width: 50%;
+  }
   .chatIcons {
-    padding-left: 8px;
+    padding-left: 5px;
   }
 }
 @media only screen and (min-width: 992px) {
   .chatIcons {
-    padding-left: 8px;
+    padding-left: 5px;
   }
 }
 </style>
