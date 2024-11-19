@@ -11,7 +11,7 @@ exports.sendMessage = async (req, res) => {
   }
 
   const newMessage = await Messages.create({
-    userId: req.ser?._id,
+    userId: req.user._id,
     text: req?.body?.text,
   });
 
