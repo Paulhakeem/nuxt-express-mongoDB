@@ -88,7 +88,7 @@
     <!-- END OF SIDEBAR -->
     <!-- DASHBOARD -->
 
-    <div class="p-4 sm:ml-64 bg-gray-100 h-screen">
+    <div class="p-4 sm:ml-64 bg-gray-100 h-auto">
       <div class="p-4 rounded-lg">
         <Search />
         <Chart />
