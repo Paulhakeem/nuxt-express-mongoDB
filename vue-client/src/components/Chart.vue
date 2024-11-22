@@ -1,110 +1,56 @@
 <template>
-  <div>
-    <!-- component -->
-    <div class="py-16 px-10">
-      <div id="chart" class="grid grid-cols-1 gap-20 lg:grid-cols-2 lg:gap-10">
-        <div
-          id="performance"
-          class="flex items-center flex-wrap max-w-md px-10 bg-white shadow-xl rounded-2xl h-20"
-        >
-          <div
-            class="flex items-center justify-center -m-6 overflow-hidden bg-white rounded-full"
-          >
-            <svg
-              class="w-32 h-32 transform translate-x-1 translate-y-1"
-              x-cloak
-              aria-hidden="true"
-            >
-              <circle
-                class="text-gray-300"
-                stroke-width="10"
-                stroke="currentColor"
-                fill="transparent"
-                r="50"
-                cx="60"
-                cy="60"
-              />
-              <circle
-                class="text-[#07d884]"
-                stroke-width="10"
-                :stroke-dasharray="circumference"
-                :stroke-dashoffset="(10 / 100) * circumference"
-                stroke-linecap="round"
-                stroke="currentColor"
-                fill="transparent"
-                r="50"
-                cx="60"
-                cy="60"
-              />
-            </svg>
-            <span
-              class="absolute text-2xl text-[#07d884]"
-              x-text="`${percent}%`"
-            >
-              80%
-            </span>
-          </div>
-            <p class="ml-10 text-gray-600 sm:text-xl">Insights</p>
-
-            <span
-              class="ml-auto text-xl font-medium text-[#07d884] sm:block"
-              >+20%</span
-            >
+  <!---===================== FIRST ROW CONTAINING THE  STATS CARD STARTS HERE =============================-->
+  <div class="flex justify-center bg-gray-100 py-10 p-14">
+    <!---== Second Stats Container ====--->
+    <div class="container mx-auto pr-2">
+      <div
+        class="w-64 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer"
+      >
+        <div class="h-10 bg-[#07d884] flex items-center justify-between">
+          <p class="mr-0 text-white text-lg pl-5 uppercase">users joined</p>
         </div>
-        <!-- messages -->
-        <div
-          id="performance"
-          class="flex items-center flex-wrap max-w-md px-10 bg-white shadow-xl rounded-2xl h-20"
-          x-data="{ circumference: 50 * 2 * Math.PI, percent: 90 }"
-        >
-          <div
-            class="flex items-center justify-center -m-6 overflow-hidden bg-white rounded-full"
-          >
-            <svg
-              class="w-32 h-32 transform translate-x-1 translate-y-1"
-              x-cloak
-              aria-hidden="true"
-            >
-              <circle
-                class="text-gray-300"
-                stroke-width="10"
-                stroke="currentColor"
-                fill="transparent"
-                r="50"
-                cx="60"
-                cy="60"
-              />
-              <circle
-                class="text-gray-800"
-                stroke-width="10"
-                :stroke-dasharray="circumference"
-                :stroke-dashoffset="(90 / 100) * circumference"
-                stroke-linecap="round"
-                stroke="currentColor"
-                fill="transparent"
-                r="50"
-                cx="60"
-                cy="60"
-              />
-            </svg>
-            <span class="absolute text-2xl text-gray-800" x-text="${percent}%"
-              >60%</span
-            >
-          </div>
-          <p class="ml-10 text-gray-600 sm:text-xl">Messages</p>
-
-          <span
-            class="ml-auto text-xl font-medium text-gray-800 sm:block"
-            >+10%</span
-          >
+        <div class="flex justify-between px-5 pt-6 mb-2 text-sm text-gray-600">
+          <p>TOTAL</p>
         </div>
+        <p class="py-4 text-3xl ml-5">19,694</p>
       </div>
     </div>
+
+    <!---== Third Stats Container ====--->
+    <div class="container mx-auto pr-2">
+      <div
+        class="w-64 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer"
+      >
+        <div class="h-10 bg-gray-700 flex items-center justify-between">
+          <p class="mr-0 text-white text-lg pl-5 uppercase">users online</p>
+        </div>
+        <div class="flex justify-between pt-6 px-5 mb-2 text-sm text-gray-600">
+          <p>TOTAL</p>
+        </div>
+        <p class="py-4 text-3xl ml-5">711</p>
+      </div>
+    </div>
+    <!---== Third Stats Container ====--->
+
+    <!---== Fourth Stats Container ====--->
+    <div class="container mx-auto pr-2">
+      <div
+        class="w-64 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer"
+      >
+        <div class="h-10 bg-gray-800 flex items-center justify-between">
+          <p class="mr-0 text-white text-lg pl-5 uppercase">total messages</p>
+        </div>
+        <div class="flex justify-between pt-6 px-5 mb-2 text-sm text-gray-600">
+          <p>TOTAL</p>
+        </div>
+        <p class="py-4 text-3xl ml-5">0</p>
+      </div>
+    </div>
+    <!---== Fourth Stats Container ====--->
   </div>
 </template>
 
 <script setup></script>
-
 
 <style>
 /* Extra small devices (phones, 600px and down) */

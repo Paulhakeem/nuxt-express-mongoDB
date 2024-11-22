@@ -109,6 +109,8 @@
         </div>
       </div>
     </transition>
+
+    
   </main>
 </template>
 
@@ -145,7 +147,6 @@ const findUserByName = async () => {
     );
     if (searchUser) {
       user.value = searchUser.data.data.user;
-      console.log(searchUser.data.data.user);
     }
   } catch (error) {
     console.error("Error searching users:", error.message);
