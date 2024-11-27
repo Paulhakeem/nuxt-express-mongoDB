@@ -103,8 +103,8 @@
                 <!-- sender -->
                 <transition name="slide-fade">
                   <div
-                    v-if="profile.user._id === profile.user._id"
-                    class="w-96 bg-white h-auto rounded-lg"
+                    v-if="profile.user._id === chats.userId"
+                    class="w-96 bg-black h-auto rounded-lg"
                   >
                     <div class="p-3">
                       <h5 class="capitalize font-medium text-[#07d884]">
@@ -221,7 +221,7 @@ socket.on("chats", (messages) => {
 // send message
 const sendMessage = async () => {
   if (text.value === "") return;
-  socket.emit("createMessage", { text: text.value });
+  socket.emit("createMessage", {userId: profile.user._id, text: text.value });
   text.value = "";
 };
 
