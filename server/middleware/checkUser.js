@@ -1,11 +1,10 @@
 const Users = require("../model/user");
 const jwt = require("jsonwebtoken");
 const env = require("dotenv");
-const Message = require("../model/messages")
 
 env.config({ path: "./config.env" });
 
-exports.userProfile = async (req, res, next) => {
+exports.user = async (req, res, next) => {
   const userToken = req.headers.authorization;
 
   if (userToken) {
@@ -17,6 +16,8 @@ exports.userProfile = async (req, res, next) => {
 
       if (userExist) {
         res.status(200).json({ status: "sucess", userExist });
+        console.log(userExist);
+        
       }
     } catch (error) {
       res

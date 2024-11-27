@@ -36,6 +36,7 @@ app.use("/api", usersRouter);
 app.use("/api", messageRouter);
 app.use("/api", user);
 
+
 // RUN WHEN CLIENT CONNECTED
 io.on("connection", (socket) => {
   console.log("A user with ID: " + socket.id + " connected");
@@ -54,6 +55,7 @@ io.on("connection", (socket) => {
   }); 
 
   // Listen for new messages from the client
+  
   socket.on("createMessage", async (msg) => {
     const message = new Message(msg);
     await message
