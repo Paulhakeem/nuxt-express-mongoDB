@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div  v-if="isMenuOpen === false" class="pt-4 pb-4 px-2">
+    <div v-if="isMenuOpen === false" class="pt-4 pb-4 px-2">
       <span
         class="absolute text-white text-4xl left-4 cursor-pointer"
         @click="openMenu"
@@ -58,29 +58,27 @@
             </div>
             <div v-for="users in users" :key="users.id" class="mt-4">
               <div class="relative">
-                 <div class="flex flex-row gap-4 justify-between">
+                <div class="flex flex-row gap-4 justify-between">
                   <img
                     :src="users.imageURL"
                     alt="profile-image"
                     class="flex size-8 rounded-full object-cover hover:size-9 cursor-pointer"
                   />
-                 </div>
-                  <div
-                    v-if="connected === true"
-                    class="size-2 bg-[#07d884] rounded-full mr-1 absolute top-0"
-                  ></div>
-                  <div v-else class="size-2 bg-red-500 rounded-full mr-1"></div>
-            
+                </div>
+                <div
+                  v-if="connected === true"
+                  class="size-2 bg-[#07d884] rounded-full mr-1 absolute top-0"
+                ></div>
+                <div v-else class="size-2 bg-red-500 rounded-full mr-1"></div>
               </div>
             </div>
 
-          <RouterLink to="/darshboard">
-            <div class="pt-20">
-              <Button>back to darshboard</Button>
-            </div>
-          </RouterLink>
+            <RouterLink to="/darshboard">
+              <div class="pt-20">
+                <Button>back to darshboard</Button>
+              </div>
+            </RouterLink>
           </div>
-      
         </aside>
 
         <!-- GROUP CHAT -->
@@ -103,32 +101,29 @@
                 <!-- sender -->
                 <transition name="slide-fade">
                   <div
-                    v-if="profile.user._id === chats.userId"
-                    class="w-96 bg-black h-auto rounded-lg"
+                    :class="[
+                      chats.userId !== profile.user._id
+                        ? 'bg-gray-200 '
+                        : 'bg-green-200',
+                      'rounded-lg p-4 m-2',
+                    ]"
+                    class="w-96 h-auto rounded-lg"
                   >
                     <div class="p-3">
                       <h5 class="capitalize font-medium text-[#07d884]">
-                        {{ profile.user.name }}
+                        {{ chats.name }}
                       </h5>
                       <p class="first-letter:uppercase text-gray-700">
                         {{ chats.text }}
                       </p>
                       <span class="text-xs text-gray-400">{{
                         chats.timestamp
-                      }}</span>
+                      }}
+                    
+                    </span>
                     </div>
                   </div>
                 </transition>
-                <!-- reciver -->
-                <div class="w-96 bg-white h-auto rounded-lg bt-2 float-right">
-                  <div class="p-3">
-                    <h5 class="capitalize font-medium text-[#07d884]">Admin</h5>
-                    <p class="first-letter:uppercase text-gray-700">
-                      Sorry! System is under maintainace
-                    </p>
-                    <span class="text-xs text-gray-400"> .. : .. </span>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -149,7 +144,8 @@
                   <textarea
                     v-model="text"
                     type="text"
-                    rows="4" cols="50"
+                    rows="4"
+                    cols="50"
                     class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
                   ></textarea>
                   <button
@@ -185,10 +181,9 @@ import { state } from "../../socket";
 import { socket } from "../../socket";
 import { useUsersStore } from "@/store/user";
 import { computed, ref, onMounted } from "vue";
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button";
 
 const profile = useUsersStore();
-
 
 const connected = computed(() => {
   return state.connected;
@@ -221,7 +216,13 @@ socket.on("chats", (messages) => {
 // send message
 const sendMessage = async () => {
   if (text.value === "") return;
-  socket.emit("createMessage", {userId: profile.user._id, text: text.value });
+  console.log(profile.user.name);
+  
+  socket.emit("createMessage", {
+    userId: profile.user._id,
+    name: profile.user.name,
+    text: text.value,
+  });
   text.value = "";
 };
 
@@ -234,6 +235,7 @@ socket.on("users", (joinusers) => {
     console.log(error);
   }
 });
+
 </script>
 
 <style scoped>
