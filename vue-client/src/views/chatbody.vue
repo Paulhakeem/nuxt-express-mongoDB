@@ -111,7 +111,7 @@
                   >
                     <div class="p-3">
                       <h5 class="capitalize font-medium text-[#07d884]">
-                        {{ chats.name }}
+                        {{ chats.senderName }}
                       </h5>
                       <p class="first-letter:uppercase text-gray-700">
                         {{ chats.text }}
@@ -220,7 +220,7 @@ const sendMessage = async () => {
   
   socket.emit("createMessage", {
     userId: profile.user._id,
-    name: profile.user.name,
+    senderName: profile.user.name,
     text: text.value,
   });
   text.value = "";
