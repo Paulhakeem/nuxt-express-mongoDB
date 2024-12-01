@@ -12,28 +12,10 @@
 
     <UserModal :modalActive="modalActive" @close-modal="toggleModal">
       <div class="flex items-center justify-center">
-        <div class="relative">
-          <img
-            class="rounded-full size-28 object-cover"
-            id="profileImage"
-            :src="profile.user.imageURL"
-            alt="Profile Image"
-          />
-          <div
-            class="absolute inset-0 bg-gray-500 rounded-full opacity-50"
-          ></div>
-          <div class="absolute inset-0 flex items-center justify-center">
-            <label for="profileImageInput" class="cursor-pointer">
-              <font-awesome-icon :icon="['fas', 'image']" />
-            </label>
-            <input
-              type="file"
-              id="profileImageInput"
-              class="hidden"
-              accept="image/*"
-            />
-          </div>
-        </div>
+        <form>
+          <input :file="file" type="file"/>
+          <button @click="uploadProfile" type="submit">Upload Image</button>
+        </form>
       </div>
       <!--  -->
       <div>
@@ -78,8 +60,10 @@ import { ref, onMounted } from "vue";
 
 import UserModal from "./UserModal.vue";
 import { useUsersStore } from "@/store/user";
+import { socket } from "../../socket";
 
 const modalActive = ref(null);
+const file = ref(null)
 
 const toggleModal = () => {
   modalActive.value = !modalActive.value;
@@ -87,11 +71,15 @@ const toggleModal = () => {
 
 const profile = useUsersStore();
 
-
 onMounted(async () => {
   await profile.getProfile();
 });
 
+const uploadProfile = async()=> {
+  socket.emit("uploadImage", {
+    imageURL: file.value
+  })
+}
 </script>
 
 <style lang="scss" scoped></style>
