@@ -12,8 +12,8 @@
 
     <UserModal :modalActive="modalActive" @close-modal="toggleModal">
       <div class="flex items-center justify-center">
-        <form>
-          <input :file="file" type="file"/>
+        <form method="POST">
+          <input type="file" />
           <button @click="uploadProfile" type="submit">Upload Image</button>
         </form>
       </div>
@@ -63,7 +63,9 @@ import { useUsersStore } from "@/store/user";
 import { socket } from "../../socket";
 
 const modalActive = ref(null);
-const file = ref(null)
+const profileImage = ref(
+  "https://img.freepik.com/free-photo/african-american-student-walking-street_1303-12700.jpg?t=st=1733058626~exp=1733062226~hmac=26ed34dc1f08e424f3c36c0623b7e1f516d9cb1ee2668ec435bb862a04c3d62d&w=826"
+);
 
 const toggleModal = () => {
   modalActive.value = !modalActive.value;
@@ -75,11 +77,15 @@ onMounted(async () => {
   await profile.getProfile();
 });
 
-const uploadProfile = async()=> {
-  socket.emit("uploadImage", {
-    imageURL: file.value
-  })
-}
+const uploadProfile = async () => {
+  socket.emit("profileImageUpdated", { _id: profile.user._id });
+  socket.on("updateSuccess", (data) => {
+    profileImage.value = data.profileImage;
+  });
+  socket.on("updateImageError", (error) => {
+    console.error("Error updating profile image:", error);
+  });
+};
 </script>
 
 <style lang="scss" scoped></style>

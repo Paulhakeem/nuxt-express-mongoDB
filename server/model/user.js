@@ -22,10 +22,10 @@ const userSchema = new mongoose.Schema({
     select: false,
   },
   date: { type: Date, default: Date.now },
-  imageURL: { type: String },
+  profileImage: { data: Buffer, type: String },
   active: {
     type: Boolean,
-    default: true
+    default: true,
   },
 });
 

@@ -11,15 +11,15 @@ const helmet = require("helmet");
 const socketio = require("socket.io");
 const Message = require("../model/messages");
 const users = require("../model/user");
-const Chat = require("../model/private-chat")
-const upload = require("../controllers/upload")
+const Chat = require("../model/private-chat");
+const upload = require("../controllers/upload");
 
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
   cors: {
     origin: "http://localhost:5173",
-    methods: ['GET', 'POST', 'PATCH', 'DELETE']
+    methods: ["GET", "POST", "PATCH", "DELETE"],
   },
 });
 
@@ -37,22 +37,27 @@ app.use("/api", usersRouter);
 app.use("/api", messageRouter);
 app.use("/api", user);
 
-app.post('/upload', upload.single('file'), (req, res) => {
-  
-  res.json({ message: 'File uploaded successfully!' });
+app.post("/upload", upload.single("file"), (req, res) => {
+  res.json({ message: "File uploaded successfully!" });
 });
-
 
 // RUN WHEN CLIENT CONNECTED
 io.on("connection", (socket) => {
   console.log("A user with ID: " + socket.id + " connected");
 
-
   // Handle the uploaded file
-  socket.on("uploadImage", async(file) => {
-    console.log("server says:",file);
-    
-  })
+  socket.on("profileImageUpdated", async (data) => {
+    await users
+      .findByIdAndUpdate({ _id: data._id }, { profileImage: data.profileImage })
+      .then((user) => {
+        // Emit an event to all connected clients
+        io.emit("updateSuccess", user);
+      })
+      .catch((err) => {
+        io.emit("updateImageError", err.message);
+        
+      });
+  });
 
   // Send existing messages to the connected client
   Message.find()
@@ -65,10 +70,10 @@ io.on("connection", (socket) => {
   // geting users
   users.find().then((joinusers) => {
     socket.emit("users", joinusers);
-  }); 
+  });
 
   // Listen for new messages from the client
-  
+
   socket.on("createMessage", async (msg) => {
     const message = new Message(msg);
     await message
@@ -81,19 +86,13 @@ io.on("connection", (socket) => {
       });
   });
 
-
-
-
   // PRIVATE CHATING
-  socket.on("private-text", async(message)=>{
-    const text = new Chat(message)
-    await text.save().then(()=>{
+  socket.on("private-text", async (message) => {
+    const text = new Chat(message);
+    await text.save().then(() => {
       console.log(message);
-      
-    })
-    
-  })
-
+    });
+  });
 
   // DISCONNECTED
   socket.on("disconnect", () => {
