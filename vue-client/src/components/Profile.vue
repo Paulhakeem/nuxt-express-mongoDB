@@ -4,7 +4,7 @@
       <button @click="toggleModal">
         <img
           class="rounded-full size-10 object-cover"
-          :src="profile.user.imageURL"
+          :src="profile.user.profileImage"
           alt="profile"
         />
       </button>
@@ -12,9 +12,9 @@
 
     <UserModal :modalActive="modalActive" @close-modal="toggleModal">
       <div class="flex items-center justify-center">
-        <form method="POST">
+        <form @submit.prevent="uploadProfile" method="POST">
           <input type="file" />
-          <button @click="uploadProfile" type="submit">Upload Image</button>
+          <button type="submit">Upload Image</button>
         </form>
       </div>
       <!--  -->
@@ -57,10 +57,14 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-
+import { useToast } from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-sugar.css";
 import UserModal from "./UserModal.vue";
 import { useUsersStore } from "@/store/user";
 import { socket } from "../../socket";
+
+
+let toast = useToast();
 
 const modalActive = ref(null);
 const profileImage = ref(
@@ -78,14 +82,13 @@ onMounted(async () => {
 });
 
 const uploadProfile = async () => {
-  socket.emit("profileImageUpdated", { _id: profile.user._id });
-  socket.on("updateSuccess", (data) => {
-    profileImage.value = data.profileImage;
-  });
-  socket.on("updateImageError", (error) => {
-    console.error("Error updating profile image:", error);
-  });
+  socket.emit("profileImageUpdated", profile.user._id, profileImage.value);
 };
+
+socket.on("userUpdated", (updatedUser) => {
+  console.log( updatedUser);
+  return toast.success("Profile picture updated!");
+});
 </script>
 
 <style lang="scss" scoped></style>

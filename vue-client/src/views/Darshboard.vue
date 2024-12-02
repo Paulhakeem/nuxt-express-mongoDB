@@ -104,7 +104,7 @@
                 class="flex gap-2 items-center bg-white w-full rounded-md mt-6 h-auto p-4 cursor-pointer"
               >
                 <img
-                  :src="users.imageURL"
+                  :src="users.profileImage"
                   alt="profile-image"
                   class="size-10 rounded-full object-cover border border-1 border-[#07d884]"
                 />

@@ -12,7 +12,6 @@ const socketio = require("socket.io");
 const Message = require("../model/messages");
 const users = require("../model/user");
 const Chat = require("../model/private-chat");
-const upload = require("../controllers/upload");
 
 const app = express();
 const server = http.createServer(app);
@@ -37,26 +36,23 @@ app.use("/api", usersRouter);
 app.use("/api", messageRouter);
 app.use("/api", user);
 
-app.post("/upload", upload.single("file"), (req, res) => {
-  res.json({ message: "File uploaded successfully!" });
-});
 
 // RUN WHEN CLIENT CONNECTED
 io.on("connection", (socket) => {
   console.log("A user with ID: " + socket.id + " connected");
 
   // Handle the uploaded file
-  socket.on("profileImageUpdated", async (data) => {
-    await users
-      .findByIdAndUpdate({ _id: data._id }, { profileImage: data.profileImage })
-      .then((user) => {
-        // Emit an event to all connected clients
-        io.emit("updateSuccess", user);
-      })
-      .catch((err) => {
-        io.emit("updateImageError", err.message);
-        
-      });
+  socket.on("profileImageUpdated", async (data, img) => {
+    
+    const user = await users.findByIdAndUpdate(data, {
+      runValidators: true,
+      new: true,
+    });
+    if (user) {
+      user.profileImage = img;
+      io.emit("userUpdated", user);
+    }
+   
   });
 
   // Send existing messages to the connected client
