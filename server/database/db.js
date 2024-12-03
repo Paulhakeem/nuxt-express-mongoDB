@@ -36,23 +36,25 @@ app.use("/api", usersRouter);
 app.use("/api", messageRouter);
 app.use("/api", user);
 
-
 // RUN WHEN CLIENT CONNECTED
 io.on("connection", (socket) => {
   console.log("A user with ID: " + socket.id + " connected");
 
   // Handle the uploaded file
   socket.on("profileImageUpdated", async (data, img) => {
-    
-    const user = await users.findByIdAndUpdate(data, {
-      runValidators: true,
-      new: true,
-    });
+    const user = await users.findByIdAndUpdate(
+      data,
+      { profileImage: img },
+      {
+        runValidators: true,
+        new: true,
+      }
+    );
     if (user) {
-      user.profileImage = img;
+      // user.profileImage = img;
+
       io.emit("userUpdated", user);
     }
-   
   });
 
   // Send existing messages to the connected client
