@@ -21,7 +21,7 @@
           />
           <label
             for="profileImageInput"
-            class="w-24 h-24 rounded-full border-2 border-dashed border-gray-300 flex justify-center items-center cursor-pointer bg-no-repeat bg-center bg-cover"
+            class="size-24 rounded-full border-2 border-dashed border-gray-300 flex justify-center items-center cursor-pointer bg-no-repeat bg-center bg-cover"
           >
             <img
               :src="profile.user.profileImage"
