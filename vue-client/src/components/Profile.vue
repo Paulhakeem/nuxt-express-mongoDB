@@ -13,8 +13,22 @@
     <UserModal :modalActive="modalActive" @close-modal="toggleModal">
       <div class="flex items-center justify-center">
         <form @submit.prevent="uploadProfile" method="POST">
-          <input type="file" />
-          <button type="submit">Upload Image</button>
+          <input
+            type="file"
+            id="profileImageInput"
+            accept="image/*"
+            class="hidden"
+          />
+          <label
+            for="profileImageInput"
+            class="w-24 h-24 rounded-full border-2 border-dashed border-gray-300 flex justify-center items-center cursor-pointer bg-no-repeat bg-center bg-cover"
+          >
+            <img
+              :src="profile.user.profileImage"
+              alt="profile-image"
+              class="size-20 object-cover rounded-full"
+            />
+          </label>
         </form>
       </div>
       <!--  -->
@@ -63,7 +77,6 @@ import UserModal from "./UserModal.vue";
 import { useUsersStore } from "@/store/user";
 import { socket } from "../../socket";
 
-
 let toast = useToast();
 
 const modalActive = ref(null);
@@ -86,7 +99,7 @@ const uploadProfile = async () => {
 };
 
 socket.on("userUpdated", (updatedUser) => {
-  console.log( updatedUser);
+  console.log(updatedUser);
   return toast.success("Profile picture updated!");
 });
 </script>
