@@ -29,11 +29,12 @@
               class="size-20 object-cover rounded-full"
             />
           </label>
+          <button class="text-center text-gray-300 w-full pt-2">upload</button>
         </form>
       </div>
       <!--  -->
       <div>
-        <div class="text-center pt-3">
+        <div class="text-center">
           <h3 class="text-xl font-semibold text-gray-800 capitalize">
             {{ profile.user.name }}
           </h3>

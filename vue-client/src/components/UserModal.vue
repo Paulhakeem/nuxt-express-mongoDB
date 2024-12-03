@@ -10,11 +10,6 @@
             class="w-[20em] bg-white self-start mt-28 p-4 rounded-md"
           >
             <div class="flex justify-between">
-              <button
-                class="text-center text-md font-medium text-slate-800 transition-all focus:text-[#07d884] active:text-[#07d884] ml-2"
-              >
-                Edit
-              </button>
               <font-awesome-icon
                 @click="$emit('close-modal')"
                 :icon="['fas', 'xmark']"
