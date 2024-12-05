@@ -6,8 +6,10 @@ const messageSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  timestamp: { type: Date, default: Date.now },
-  senderName: {type: String}
+  timestamp: { type: Date},
+  senderName: {type: String},
+  photo: {type: String}
+
 });
 
 const Messages = mongoose.model("Messages", messageSchema);

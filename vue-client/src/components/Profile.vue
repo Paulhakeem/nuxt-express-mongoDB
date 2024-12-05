@@ -11,8 +11,9 @@
     </div>
 
     <UserModal :modalActive="modalActive" @close-modal="toggleModal">
+      <form @submit.prevent="uploadProfile" method="POST">
       <div class="flex items-center justify-center">
-        <form @submit.prevent="uploadProfile" method="POST">
+       
           <input
             type="file"
             id="profileImageInput"
@@ -29,8 +30,7 @@
               class="size-20 object-cover rounded-full"
             />
           </label>
-          <button class="text-center text-gray-300 w-full pt-2">upload</button>
-        </form>
+       
       </div>
       <!--  -->
       <div>
@@ -66,6 +66,7 @@
           </div>
         </div>
       </div>
+    </form>
     </UserModal>
   </div>
 </template>

@@ -26,7 +26,7 @@
           >
             <div class="h-20 w-20 rounded-full border overflow-hidden">
               <img
-                :src="profile.user.imageURL"
+                :src="profile.user.profileImage"
                 alt="Avatar"
                 class="h-full w-full object-cover"
               />
@@ -60,7 +60,7 @@
               <div class="relative">
                 <div class="flex flex-row gap-4 justify-between">
                   <img
-                    :src="users.imageURL"
+                    :src="users.profileImage"
                     alt="profile-image"
                     class="flex size-8 rounded-full object-cover hover:size-9 cursor-pointer"
                   />
@@ -100,12 +100,21 @@
               >
                 <!-- sender -->
                 <transition name="slide-fade">
+                  <div class="flex flex-col space-y-4">
+                    <div class="flex gap-4">
+                    <div class="flex-shrink-0">
+                    <img
+                      :src="chats.photo"
+                      alt="User Avatar"
+                      class="size-10 rounded-full object-cover"
+                    />
+                  </div>
                   <div
                     :class="[
                       chats.userId !== profile.user._id
-                        ? 'bg-gray-200 '
+                        ? 'bg-gray-200 items-end'
                         : 'bg-green-200',
-                      'rounded-lg p-4 m-2',
+                      'rounded-xl p-4 m-2 rounded-tl-none',
                     ]"
                     class="w-96 h-auto rounded-lg"
                   >
@@ -116,13 +125,15 @@
                       <p class="first-letter:uppercase text-gray-700">
                         {{ chats.text }}
                       </p>
-                      <span class="text-xs text-gray-400">{{
-                        chats.timestamp
-                      }}
-                    
-                    </span>
+                      <span class="text-xs text-gray-400"
+                        >{{ chats.timestamp }}
+                      </span>
                     </div>
                   </div>
+                  </div>
+               
+                  </div>
+                  
                 </transition>
               </div>
             </div>
@@ -217,11 +228,12 @@ socket.on("chats", (messages) => {
 const sendMessage = async () => {
   if (text.value === "") return;
   console.log(profile.user.name);
-  
+
   socket.emit("createMessage", {
     userId: profile.user._id,
     senderName: profile.user.name,
-    text: text.value,
+    photo: profile.user.profileImage,
+    text: text.value
   });
   text.value = "";
 };
@@ -235,7 +247,6 @@ socket.on("users", (joinusers) => {
     console.log(error);
   }
 });
-
 </script>
 
 <style scoped>
