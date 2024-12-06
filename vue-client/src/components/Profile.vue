@@ -12,8 +12,7 @@
 
     <UserModal :modalActive="modalActive" @close-modal="toggleModal">
       <form @submit.prevent="uploadProfile" method="POST">
-      <div class="flex items-center justify-center">
-       
+        <div class="flex items-center justify-center">
           <input
             type="file"
             id="profileImageInput"
@@ -24,49 +23,52 @@
             for="profileImageInput"
             class="size-24 rounded-full border-2 border-dashed border-gray-300 flex justify-center items-center cursor-pointer bg-no-repeat bg-center bg-cover"
           >
+            <font-awesome-icon :icon="['fas', 'user']" v-if="!profile.user.profileImage"  class="text-3xl text-gray-600"/>
             <img
               :src="profile.user.profileImage"
               alt="profile-image"
               class="size-20 object-cover rounded-full"
             />
           </label>
-       
-      </div>
-      <!--  -->
-      <div>
-        <div class="text-center">
-          <h3 class="text-xl font-semibold text-gray-800 capitalize">
-            {{ profile.user.name }}
-          </h3>
-          <p class="text-sm text-gray-500">{{ profile.user.email }}</p>
         </div>
-
-        <div class="pt-5">
-          <div class="flex gap-2 items-center pb-2 cursor-pointer">
-            <font-awesome-icon
-              :icon="['fas', 'message']"
-              class="text-[#07d884]"
-            />
-            <p class="text-gray-800">Inbox</p>
-            <div class="items-center font-medium">0</div>
+        <!--  -->
+        <div>
+          <div class="text-center">
+            <h3 class="text-xl font-semibold text-gray-800 capitalize">
+              {{ profile.user.name }}
+            </h3>
+            <p class="text-sm text-gray-500">{{ profile.user.email }}</p>
           </div>
 
-          <div class="flex gap-2 items-center pb-2 cursor-pointer">
-            <font-awesome-icon :icon="['fas', 'bell']" class="text-[#07d884]" />
-            <p class="text-gray-800">Notifications</p>
-            <div class="items-center font-medium">0</div>
-          </div>
+          <div class="pt-5">
+            <div class="flex gap-2 items-center pb-2 cursor-pointer">
+              <font-awesome-icon
+                :icon="['fas', 'message']"
+                class="text-[#07d884]"
+              />
+              <p class="text-gray-800">Inbox</p>
+              <div class="items-center font-medium">0</div>
+            </div>
 
-          <div class="text-center pt-6">
-            <button
-              class="rounded-md bg-slate-800 py-2 px-8 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
-            >
-              Save
-            </button>
+            <div class="flex gap-2 items-center pb-2 cursor-pointer">
+              <font-awesome-icon
+                :icon="['fas', 'bell']"
+                class="text-[#07d884]"
+              />
+              <p class="text-gray-800">Notifications</p>
+              <div class="items-center font-medium">0</div>
+            </div>
+
+            <div class="text-center pt-6">
+              <button
+                class="rounded-md bg-slate-800 py-2 px-8 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
+              >
+                Save
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
     </UserModal>
   </div>
 </template>

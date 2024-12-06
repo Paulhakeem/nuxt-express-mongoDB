@@ -103,7 +103,8 @@
               <div
                 class="flex gap-2 items-center bg-white w-full rounded-md mt-6 h-auto p-4 cursor-pointer"
               >
-                <img
+              <font-awesome-icon :icon="['fas', 'user']" v-if="!users.profileImage"  class="text-3xl text-gray-600"/>
+                <img v-else
                   :src="users.profileImage"
                   alt="profile-image"
                   class="size-10 rounded-full object-cover border border-1 border-[#07d884]"

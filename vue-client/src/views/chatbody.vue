@@ -119,6 +119,7 @@
                     class="w-96 h-auto rounded-lg"
                   >
                     <div class="p-3">
+                     
                       <h5 class="capitalize font-medium text-[#07d884]">
                         {{ chats.senderName }}
                       </h5>
