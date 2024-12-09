@@ -26,7 +26,7 @@
             <font-awesome-icon :icon="['fas', 'user']" v-if="!profile.user.profileImage"  class="text-3xl text-gray-600"/>
             <img
               :src="profile.user.profileImage"
-              alt="profile-image"
+              alt=""
               class="size-20 object-cover rounded-full"
             />
           </label>

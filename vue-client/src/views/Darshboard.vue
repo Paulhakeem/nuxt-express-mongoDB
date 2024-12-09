@@ -53,7 +53,7 @@
           <span class="text-[15px] ml-4 text-gray-200 font-bold">Messages</span>
           <span
             class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-gray-200 bg-[#07d884] rounded-full"
-            >3</span
+            >{{ inbox.length }}</span
           >
         </div>
       </RouterLink>
@@ -152,6 +152,14 @@ socket.on("users", (joinusers) => {
     loadUsers.value = false;
   }
 });
+
+
+const inbox = ref([])
+socket.on("chats", (messages) => {
+  inbox.value = messages;
+  console.log(messages);
+  
+})
 </script>
 
 <style>
