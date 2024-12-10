@@ -194,6 +194,7 @@ socket.on("chats", (messages) => {
 
 .slide-leave-active {
   transition: all .3s ease-in;
+  transition-timing-function:cubic-bezier(0.25,0.1,0.25,1)
 }
 .slide-leave-to {
   transform: translateX(-300px);

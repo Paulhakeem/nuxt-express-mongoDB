@@ -234,7 +234,7 @@ const sendMessage = async () => {
     userId: profile.user._id,
     senderName: profile.user.name,
     photo: profile.user.profileImage,
-    text: text.value
+    text: text.value,
   });
   text.value = "";
 };
