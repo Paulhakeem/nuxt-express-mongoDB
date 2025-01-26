@@ -147,6 +147,8 @@ const findUserByName = async () => {
     );
     if (searchUser) {
       user.value = searchUser.data.data.user;
+      
+      
     }
   } catch (error) {
     console.error("Error searching users:", error.message);
@@ -158,8 +160,8 @@ const findUserByName = async () => {
 // PRIVATE CHAT
 const chatUser = async () => {
   try {
-    if (user._id === searchName._id) {
-      socket.emit("private-text", { message: message.value });
+    if (user._id === searchName._id ) {
+      socket.emit("private-text", { message: message.value, receiverId: user._id });
       message.value = "";
       return $toast.success("Message sent!");
     }
